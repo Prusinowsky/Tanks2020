@@ -1,4 +1,6 @@
 # Edytor
+.idea/
+.idea/*
 .idea/**
 
 # Java
