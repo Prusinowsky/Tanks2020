@@ -14,4 +14,4 @@ Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od któreg
 
 
 
-![](./projekt_wygladu.png)
+![](./mockup.png)
