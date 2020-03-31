@@ -1,14 +1,17 @@
-package com.game;
+package app.windows;
+import app.actions.ExitWindowAction;
+import app.windows.interfaces.WindowInterface;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class ScoreFrame extends JFrame implements ActionListener
+public class ScoreWindow extends JFrame implements WindowInterface
 {
     private JLabel lList;
     private JButton bOkey;
 
-    public ScoreFrame()
+    public ScoreWindow()
     {
         setSize(400,300);
         setTitle("Najlepsze wyniki");
@@ -21,10 +24,10 @@ public class ScoreFrame extends JFrame implements ActionListener
         bOkey = new JButton("OK");
         bOkey.setBounds(110,80,80,20);
         add(bOkey);
-        bOkey.addActionListener(this);
+        bOkey.addActionListener(new ExitWindowAction(this));
     }
 
-    public void run()
+    public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -35,13 +38,4 @@ public class ScoreFrame extends JFrame implements ActionListener
         dispose();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        Object source = e.getSource();
-        if(source==bOkey)
-        {
-            close();
-        }
-    }
 }

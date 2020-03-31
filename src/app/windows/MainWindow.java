@@ -1,21 +1,25 @@
-package com.game;
+package app.windows;
+
+import app.actions.ExitWindowAction;
+import app.actions.OpenWindowAction;
+import app.windows.interfaces.WindowInterface;
+
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.*;
 
 
-public class MainFrame extends JFrame implements ActionListener
+public class MainWindow extends JFrame implements WindowInterface
 {
     private JMenu menuFile, menuHelp;
     private JMenuItem mStart, mMap, mScore, mExit, mAbout;
     private JMenuBar menuBar;
 
-    ScoreFrame scoreFrame = new ScoreFrame();
-    MapFrame mapFrame = new MapFrame();
-    HelpFrame helpFrame = new HelpFrame();
-    NickFrame nickFrame = new NickFrame();
+    ScoreWindow scoreFrame = new ScoreWindow();
+    MapWindow mapFrame = new MapWindow();
+    HelpWindow helpFrame = new HelpWindow();
+    NickWindow nickFrame = new NickWindow();
 
-    public MainFrame()
+    public MainWindow()
     {
         setSize(800,800);
         setTitle("Moje okienko");
@@ -33,20 +37,20 @@ public class MainFrame extends JFrame implements ActionListener
         menuFile.add(mMap);
         menuFile.add(mScore);
         menuFile.add(mExit);
-        mStart.addActionListener(this);
-        mMap.addActionListener(this);
-        mScore.addActionListener(this);
-        mExit.addActionListener(this);
-
         menuBar.add(Box.createHorizontalGlue());
         menuHelp = new JMenu("Pomoc");
         mAbout = new JMenuItem("O Programie");
         menuBar.add(menuHelp);
         menuHelp.add(mAbout);
-        mAbout.addActionListener(this);
+
+        mStart.addActionListener(new OpenWindowAction(nickFrame));
+        mMap.addActionListener(new OpenWindowAction(mapFrame));
+        mScore.addActionListener(new OpenWindowAction(scoreFrame));
+        mAbout.addActionListener(new OpenWindowAction(helpFrame));
+        mExit.addActionListener(new ExitWindowAction(this));
     }
 
-    public void run()
+    public void open()
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -57,29 +61,4 @@ public class MainFrame extends JFrame implements ActionListener
         dispose();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        Object source = e.getSource();
-        if(source==mStart)
-        {
-            nickFrame.run();
-        }
-        else if(source==mMap)
-        {
-            mapFrame.run();
-        }
-        else if(source==mScore)
-        {
-            scoreFrame.run();
-        }
-        else if(source==mExit)
-        {
-            close();
-        }
-        else if(source==mAbout)
-        {
-            helpFrame.run();
-        }
-    }
 }

@@ -1,14 +1,17 @@
-package com.game;
+package app.windows;
+
+import app.actions.ExitWindowAction;
+import app.windows.interfaces.WindowInterface;
+
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.*;
 
-public class EndGameFrame extends JFrame implements ActionListener, Window
+public class EndGameWindow extends JFrame implements WindowInterface
 {
     private JLabel lInfo;
     private JButton bOkey;
 
-    public EndGameFrame()
+    public EndGameWindow()
     {
         setSize(400,300);
         setTitle("Przegrałeś");
@@ -21,10 +24,10 @@ public class EndGameFrame extends JFrame implements ActionListener, Window
         bOkey = new JButton("OK");
         bOkey.setBounds(110,80,80,20);
         add(bOkey);
-        bOkey.addActionListener(this);
+        bOkey.addActionListener(new ExitWindowAction(this));
     }
 
-    public void run()
+    public void open()
     {
         //EndGameFrame frame = new EndGameFrame();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -34,15 +37,5 @@ public class EndGameFrame extends JFrame implements ActionListener, Window
     public void close()
     {
         dispose();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        Object source = e.getSource();
-        if(source==bOkey)
-        {
-            close();
-        }
     }
 }

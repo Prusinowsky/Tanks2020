@@ -1,14 +1,18 @@
-package com.game;
+package app.windows;
+
+import app.actions.ExitWindowAction;
+import app.actions.OpenWindowAction;
+import app.windows.interfaces.WindowInterface;
+
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.*;
 
-public class MapFrame extends JFrame implements ActionListener
+public class MapWindow extends JFrame implements WindowInterface
 {
     private JLabel lSelectMap;
     private JButton bOkey, bCancel;
 
-    public MapFrame()
+    public MapWindow()
     {
         setSize(400,300);
         setTitle("Wybierz mapę");
@@ -21,15 +25,15 @@ public class MapFrame extends JFrame implements ActionListener
         bOkey = new JButton("OK");
         bOkey.setBounds(50,120,80,20);
         add(bOkey);
-        bOkey.addActionListener(this);
+        bOkey.addActionListener(new ExitWindowAction(this));
 
         bCancel = new JButton("Anuluj");
         bCancel.setBounds(150,120,80,20);
         add(bCancel);
-        bCancel.addActionListener(this);
+        bCancel.addActionListener(new OpenWindowAction(this));
     }
 
-    public void run()
+    public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -40,18 +44,4 @@ public class MapFrame extends JFrame implements ActionListener
         dispose();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        Object source = e.getSource();
-        if(source==bOkey)
-        {
-            close();
-            /*Zmieni sie mapa*/
-        }
-        else if(source==bCancel)
-        {
-            close();
-        }
-    }
 }

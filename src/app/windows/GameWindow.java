@@ -1,18 +1,20 @@
-package com.game;
+package app.windows;
+import app.windows.interfaces.WindowInterface;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame implements ActionListener
+public class GameWindow extends JFrame implements WindowInterface
 {
-    public GameFrame()
+    public GameWindow()
     {
         setSize(800,800);
         setTitle("Okno gry");
         setLayout(null);
     }
 
-    public void run()
+    public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -23,9 +25,4 @@ public class GameFrame extends JFrame implements ActionListener
         dispose();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-
-    }
 }

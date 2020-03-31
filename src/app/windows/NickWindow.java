@@ -1,17 +1,20 @@
-package com.game;
+package app.windows;
+import app.actions.ExitWindowAction;
+import app.actions.OpenWindowAction;
+import app.windows.interfaces.WindowInterface;
+
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
 
-public class NickFrame extends JFrame implements ActionListener
+public class NickWindow extends JFrame implements WindowInterface
 {
     private JLabel lNickTitle;
     private JTextField tNickname;
     private JButton bOk, bCancel;
 
-    GameFrame gameFrame = new GameFrame();
+    GameWindow gameFrame = new GameWindow();
 
-    public NickFrame()
+    public NickWindow()
     {
         setSize(300,250);
         setTitle("Nick");
@@ -29,15 +32,16 @@ public class NickFrame extends JFrame implements ActionListener
         bOk = new JButton("OK");
         bOk.setBounds(50,130,80,20);
         add(bOk);
-        bOk.addActionListener(this);
+        bOk.addActionListener(new ExitWindowAction(this));
+        bOk.addActionListener(new OpenWindowAction(gameFrame));
 
         bCancel = new JButton("Anuluj");
         bCancel.setBounds(150,130,80,20);
         add(bCancel);
-        bCancel.addActionListener(this);
+        bCancel.addActionListener(new ExitWindowAction(this));
     }
 
-    public void run()
+    public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -48,18 +52,4 @@ public class NickFrame extends JFrame implements ActionListener
         dispose();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        Object source = e.getSource();
-        if(source==bOk)
-        {
-            gameFrame.run();
-            close();
-        }
-        else if(source==bCancel)
-        {
-            close();
-        }
-    }
 }
