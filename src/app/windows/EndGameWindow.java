@@ -1,6 +1,7 @@
 package app.windows;
 
 import app.actions.ExitWindowAction;
+import app.config.Config;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
@@ -13,15 +14,17 @@ public class EndGameWindow extends JFrame implements WindowInterface
 
     public EndGameWindow()
     {
+        Config config = Config.getInstance();
+
         setSize(400,300);
-        setTitle("Przegrałeś");
+        setTitle(config.getProperty("you_lost"));
         setLayout(null);
 
-        lInfo = new JLabel("Przegrałeś twój wynik to: *jakaś wartość*");
+        lInfo = new JLabel(config.getProperty("you_lost_your_score_is"));
         lInfo.setBounds(50,50,200,20);
         add(lInfo);
 
-        bOkey = new JButton("OK");
+        bOkey = new JButton(config.getProperty("ok"));
         bOkey.setBounds(110,80,80,20);
         add(bOkey);
         bOkey.addActionListener(new ExitWindowAction(this));

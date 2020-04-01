@@ -1,5 +1,6 @@
 package app.windows;
 import app.actions.ExitWindowAction;
+import app.config.Config;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
@@ -13,15 +14,17 @@ public class HelpWindow extends JFrame implements WindowInterface
 
     public HelpWindow()
     {
+        Config config = Config.getInstance();
+
         setSize(400,300);
-        setTitle("O programie");
+        setTitle(config.getProperty("about"));
         setLayout(null);
 
-        lAbout = new JLabel("Tu będzie opis gry, itp");
+        lAbout = new JLabel(config.getProperty("game_description"));
         lAbout.setBounds(50,50,200,20);
         add(lAbout);
 
-        bOkey = new JButton("OK");
+        bOkey = new JButton(config.getProperty("ok"));
         bOkey.setBounds(110,80,80,20);
         add(bOkey);
         bOkey.addActionListener(new ExitWindowAction(this));

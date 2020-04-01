@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -34,6 +34,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="app.config" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="app.actions" />
     </key>
@@ -78,6 +81,8 @@
       <updated>1585587944922</updated>
       <workItem from="1585587954312" duration="639000" />
       <workItem from="1585662844058" duration="3932000" />
+      <workItem from="1585673736714" duration="193000" />
+      <workItem from="1585769486878" duration="4182000" />
     </task>
     <servers />
   </component>
@@ -89,7 +94,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

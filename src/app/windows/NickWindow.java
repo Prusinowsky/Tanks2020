@@ -1,6 +1,7 @@
 package app.windows;
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
+import app.config.Config;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
@@ -16,11 +17,13 @@ public class NickWindow extends JFrame implements WindowInterface
 
     public NickWindow()
     {
+        Config config = Config.getInstance();
+
         setSize(300,250);
-        setTitle("Nick");
+        setTitle(config.getProperty("nick_window_title"));
         setLayout(null);
 
-        lNickTitle = new JLabel("Podaj swój nick");
+        lNickTitle = new JLabel(config.getProperty("set_nick"));
         lNickTitle.setBounds(70,30,160,40);
         lNickTitle.setFont(new Font("SansSerif",Font.BOLD,18));
         add(lNickTitle);
@@ -29,13 +32,13 @@ public class NickWindow extends JFrame implements WindowInterface
         tNickname.setBounds(50,80,180,20);
         add(tNickname);
 
-        bOk = new JButton("OK");
+        bOk = new JButton(config.getProperty("ok"));
         bOk.setBounds(50,130,80,20);
         add(bOk);
         bOk.addActionListener(new ExitWindowAction(this));
         bOk.addActionListener(new OpenWindowAction(gameFrame));
 
-        bCancel = new JButton("Anuluj");
+        bCancel = new JButton(config.getProperty("cancel"));
         bCancel.setBounds(150,130,80,20);
         add(bCancel);
         bCancel.addActionListener(new ExitWindowAction(this));

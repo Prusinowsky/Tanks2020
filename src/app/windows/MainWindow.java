@@ -2,10 +2,10 @@ package app.windows;
 
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
+import app.config.Config;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
-import java.awt.event.*;
 
 
 public class MainWindow extends JFrame implements WindowInterface
@@ -21,25 +21,27 @@ public class MainWindow extends JFrame implements WindowInterface
 
     public MainWindow()
     {
+        Config config = Config.getInstance();
+
         setSize(800,800);
-        setTitle("Moje okienko");
+        setTitle(config.getProperty("title"));
         setLayout(null);
 
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        menuFile = new JMenu("Gra");
-        mStart = new JMenuItem("Start");
-        mMap = new JMenuItem("Wybierz mapę");
-        mScore = new JMenuItem("Najlepsze wyniki");
-        mExit = new JMenuItem("Koniec");
+        menuFile = new JMenu(config.getProperty("game"));
+        mStart = new JMenuItem(config.getProperty("start"));
+        mMap = new JMenuItem(config.getProperty("choose_map"));
+        mScore = new JMenuItem(config.getProperty("best_scores"));
+        mExit = new JMenuItem(config.getProperty("exit"));
         menuBar.add(menuFile);
         menuFile.add(mStart);
         menuFile.add(mMap);
         menuFile.add(mScore);
         menuFile.add(mExit);
         menuBar.add(Box.createHorizontalGlue());
-        menuHelp = new JMenu("Pomoc");
-        mAbout = new JMenuItem("O Programie");
+        menuHelp = new JMenu(config.getProperty("help"));
+        mAbout = new JMenuItem(config.getProperty("about"));
         menuBar.add(menuHelp);
         menuHelp.add(mAbout);
 
