@@ -15,3 +15,12 @@ Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od któreg
 
 
 ![](./mockup.png)
+
+## Tworzenie dokumentacji
+
+Komenda potrzebna do wygenerowania dokumentacji
+
+```
+javadoc -sourcepath D:\Programowanie\proze-tanks\src -d D:\Programowanie\proze-tanks\docs -subpackages .
+```
+
