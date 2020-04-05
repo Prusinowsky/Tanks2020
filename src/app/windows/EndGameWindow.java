@@ -7,11 +7,17 @@ import app.windows.interfaces.WindowInterface;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Okno końca gry
+ */
 public class EndGameWindow extends JFrame implements WindowInterface
 {
     private JLabel lInfo;
     private JButton bOkey;
 
+    /**
+     * Kontruktor inicjalizujący okno końca gry
+     */
     public EndGameWindow()
     {
         Config config = Config.getInstance();
@@ -30,6 +36,9 @@ public class EndGameWindow extends JFrame implements WindowInterface
         bOkey.addActionListener(new ExitWindowAction(this));
     }
 
+    /**
+     * Metoda implementująca otwarcie okna
+     */
     public void open()
     {
         //EndGameFrame frame = new EndGameFrame();
@@ -37,6 +46,9 @@ public class EndGameWindow extends JFrame implements WindowInterface
         this.setVisible(true);
     }
 
+    /**
+     * Metoda implementująca zamknięcie okna
+     */
     public void close()
     {
         dispose();

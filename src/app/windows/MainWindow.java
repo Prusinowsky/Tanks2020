@@ -7,7 +7,9 @@ import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
 
-
+/**
+ * Główne okno aplikacji - STARTOWE (MENU)
+ */
 public class MainWindow extends JFrame implements WindowInterface
 {
     private JMenu menuFile, menuHelp;
@@ -19,6 +21,9 @@ public class MainWindow extends JFrame implements WindowInterface
     HelpWindow helpFrame = new HelpWindow();
     NickWindow nickFrame = new NickWindow();
 
+    /**
+     * Kontruktor inicjalizujący główne okno apliakcji
+     */
     public MainWindow()
     {
         Config config = Config.getInstance();
@@ -52,12 +57,18 @@ public class MainWindow extends JFrame implements WindowInterface
         mExit.addActionListener(new ExitWindowAction(this));
     }
 
+    /**
+     * Metoda implementująca otwarcie okna
+     */
     public void open()
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
+    /**
+     * Metoda implementująca zamknięcie okna
+     */
     public void close()
     {
         dispose();

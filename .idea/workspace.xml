@@ -55,7 +55,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="app.main.Main" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Tanks" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
@@ -82,8 +82,8 @@
       <workItem from="1585587954312" duration="639000" />
       <workItem from="1585662844058" duration="3932000" />
       <workItem from="1585673736714" duration="193000" />
-      <workItem from="1585769486878" duration="4182000" />
-      <workItem from="1586081364817" duration="634000" />
+      <workItem from="1585769486878" duration="5675000" />
+      <workItem from="1585859398764" duration="459000" />
     </task>
     <servers />
   </component>

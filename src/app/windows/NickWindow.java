@@ -7,6 +7,9 @@ import app.windows.interfaces.WindowInterface;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Okno wybory Nicku
+ */
 public class NickWindow extends JFrame implements WindowInterface
 {
     private JLabel lNickTitle;
@@ -15,6 +18,9 @@ public class NickWindow extends JFrame implements WindowInterface
 
     GameWindow gameFrame = new GameWindow();
 
+    /**
+     * Konstrukor odpowiadający za inicjalizację okna wyboru Nicku
+     */
     public NickWindow()
     {
         Config config = Config.getInstance();
@@ -44,12 +50,18 @@ public class NickWindow extends JFrame implements WindowInterface
         bCancel.addActionListener(new ExitWindowAction(this));
     }
 
+    /**
+     * Metoda implementująca otwarcie okna
+     */
     public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
+    /**
+     * Metoda implementująca zamknięcie okna
+     */
     public void close()
     {
         dispose();

@@ -8,11 +8,17 @@ import app.windows.interfaces.WindowInterface;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Klasa wyboru mapy
+ */
 public class MapWindow extends JFrame implements WindowInterface
 {
     private JLabel lSelectMap;
     private JButton bOkey, bCancel;
 
+    /**
+     * Konstruktor odpowiadający za inicjalizację okna mapy
+     */
     public MapWindow()
     {
         Config config = Config.getInstance();
@@ -36,12 +42,18 @@ public class MapWindow extends JFrame implements WindowInterface
         bCancel.addActionListener(new OpenWindowAction(this));
     }
 
+    /**
+     * Metoda implementująca otwarcie okna
+     */
     public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
+    /**
+     * Metoda implementująca zamknięcie okna
+     */
     public void close()
     {
         dispose();

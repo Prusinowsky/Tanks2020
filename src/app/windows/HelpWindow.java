@@ -1,17 +1,22 @@
 package app.windows;
+
 import app.actions.ExitWindowAction;
 import app.config.Config;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
 
+/**
+ * Okno pomocy
+ */
 public class HelpWindow extends JFrame implements WindowInterface
 {
     private JLabel lAbout;
     private JButton bOkey;
 
+    /**
+     * Konstruktor inicjalizujący okno pomocy
+     */
     public HelpWindow()
     {
         Config config = Config.getInstance();
@@ -30,12 +35,18 @@ public class HelpWindow extends JFrame implements WindowInterface
         bOkey.addActionListener(new ExitWindowAction(this));
     }
 
+    /**
+     * Metoda implementująca otwarcie okna
+     */
     public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
+    /**
+     * Metoda implementująca zamknięcie okna
+     */
     public void close()
     {
         dispose();

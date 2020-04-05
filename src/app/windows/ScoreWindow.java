@@ -7,11 +7,17 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+/**
+ * Okno zawierający najlepsze wyniki
+ */
 public class ScoreWindow extends JFrame implements WindowInterface
 {
     private JLabel lList;
     private JButton bOkey;
 
+    /**
+     * Kontruktor odpowiadajacy za inicjalizację okna z najlepszymi wynikami
+     */
     public ScoreWindow()
     {
         Config config = Config.getInstance();
@@ -30,12 +36,18 @@ public class ScoreWindow extends JFrame implements WindowInterface
         bOkey.addActionListener(new ExitWindowAction(this));
     }
 
+    /**
+     * Metoda implementująca otwarcie okna
+     */
     public void open()
     {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
+    /**
+     * Metoda implementująca zamknięcie okna
+     */
     public void close()
     {
         dispose();
