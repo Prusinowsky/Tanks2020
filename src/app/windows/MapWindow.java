@@ -30,6 +30,7 @@ public class MapWindow extends JFrame implements WindowInterface
 
         cbMaps = new JComboBox(mapsList);
         cbMaps.setBounds(50,50,200,50);
+        cbMaps.setSize(180,23);
         add(cbMaps);
 
         bOkey = new JButton(config.getProperty("ok"));
