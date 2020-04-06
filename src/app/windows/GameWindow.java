@@ -21,6 +21,19 @@ public class GameWindow extends JFrame implements WindowInterface
         setSize(800,800);
         setTitle(config.getProperty("game_window_title"));
         setLayout(null);
+
+        centreWindow(this);
+    }
+
+    /**
+     * Metoda centrująca położenie okna
+     * @param frame Zawiera przekazane okno
+     */
+    public static void centreWindow(GameWindow frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
     /**

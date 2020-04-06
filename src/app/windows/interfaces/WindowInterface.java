@@ -14,4 +14,5 @@ public interface WindowInterface {
      * Metoda odpowiedzialna za zakmnięcie okna
      */
     public void close();
+
 }

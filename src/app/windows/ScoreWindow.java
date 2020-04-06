@@ -34,6 +34,19 @@ public class ScoreWindow extends JFrame implements WindowInterface
         bOkey.setBounds(110,80,80,20);
         add(bOkey);
         bOkey.addActionListener(new ExitWindowAction(this));
+
+        centreWindow(this);
+    }
+
+    /**
+     * Metoda centrująca położenie okna
+     * @param frame Zawiera przekazane okno
+     */
+    public static void centreWindow(ScoreWindow frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
     /**
