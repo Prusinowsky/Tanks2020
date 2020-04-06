@@ -6,6 +6,7 @@ import app.config.Config;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -13,9 +14,9 @@ import java.awt.event.*;
  */
 public class MapWindow extends JFrame implements WindowInterface
 {
-    private JLabel lSelectMap;
     private JButton bOkey, bCancel;
-
+    private JComboBox cbMaps;
+    private String[] mapsList = {"Polana","Pustynia","Wulkan"};
     /**
      * Konstruktor odpowiadający za inicjalizację okna mapy
      */
@@ -27,9 +28,9 @@ public class MapWindow extends JFrame implements WindowInterface
         setTitle(config.getProperty("choose_map"));
         setLayout(null);
 
-        lSelectMap = new JLabel(config.getProperty("map_select"));
-        lSelectMap.setBounds(50,50,200,50);
-        add(lSelectMap);
+        cbMaps = new JComboBox(mapsList);
+        cbMaps.setBounds(50,50,200,50);
+        add(cbMaps);
 
         bOkey = new JButton(config.getProperty("ok"));
         bOkey.setBounds(50,120,80,20);
@@ -40,6 +41,19 @@ public class MapWindow extends JFrame implements WindowInterface
         bCancel.setBounds(150,120,80,20);
         add(bCancel);
         bCancel.addActionListener(new OpenWindowAction(this));
+
+        centreWindow(this);
+    }
+
+    /**
+     * Metoda centrująca położenie okna
+     * @param frame Zawiera przekazane okno
+     */
+    public static void centreWindow(MapWindow frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
     /**

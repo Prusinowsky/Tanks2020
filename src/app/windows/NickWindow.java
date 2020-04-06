@@ -48,6 +48,19 @@ public class NickWindow extends JFrame implements WindowInterface
         bCancel.setBounds(150,130,80,20);
         add(bCancel);
         bCancel.addActionListener(new ExitWindowAction(this));
+
+        centreWindow(this);
+    }
+
+    /**
+     * Metoda centrująca położenie okna
+     * @param frame Zawiera przekazane okno
+     */
+    public static void centreWindow(NickWindow frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
     /**
