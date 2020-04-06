@@ -1,5 +1,6 @@
 package app.windows;
 import app.config.Config;
+import app.windows.abstracts.AbstractWindow;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.*;
 /**
  * Okno Gry
  */
-public class GameWindow extends JFrame implements WindowInterface
+public class GameWindow extends AbstractWindow
 {
     /**
      * Kontruktor inicjalizujący okno gry
@@ -23,17 +24,6 @@ public class GameWindow extends JFrame implements WindowInterface
         setLayout(null);
 
         centreWindow(this);
-    }
-
-    /**
-     * Metoda centrująca położenie okna
-     * @param frame Zawiera przekazane okno
-     */
-    public static void centreWindow(GameWindow frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
     }
 
     /**

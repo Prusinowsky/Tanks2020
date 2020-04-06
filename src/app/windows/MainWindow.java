@@ -3,6 +3,7 @@ package app.windows;
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
+import app.windows.abstracts.AbstractWindow;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.awt.*;
 /**
  * Główne okno aplikacji - STARTOWE (MENU)
  */
-public class MainWindow extends JFrame implements WindowInterface
+public class MainWindow extends AbstractWindow
 {
     private JMenu menuFile, menuHelp;
     private JMenuItem mStart, mMap, mScore, mExit, mAbout;
@@ -58,17 +59,6 @@ public class MainWindow extends JFrame implements WindowInterface
         mExit.addActionListener(new ExitWindowAction(this));
 
         centreWindow(this);
-    }
-
-    /**
-     * Metoda centrująca położenie okna
-     * @param frame Zawiera przekazane okno
-     */
-    public static void centreWindow(MainWindow frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
     }
 
     /**

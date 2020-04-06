@@ -2,6 +2,7 @@ package app.windows;
 
 import app.actions.ExitWindowAction;
 import app.config.Config;
+import app.windows.abstracts.AbstractWindow;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.awt.event.*;
 /**
  * Okno końca gry
  */
-public class EndGameWindow extends JFrame implements WindowInterface
+public class EndGameWindow extends AbstractWindow
 {
     private JLabel lInfo;
     private JButton bOkey;
@@ -37,17 +38,6 @@ public class EndGameWindow extends JFrame implements WindowInterface
         bOkey.addActionListener(new ExitWindowAction(this));
 
         centreWindow(this);
-    }
-
-    /**
-     * Metoda centrująca położenie okna
-     * @param frame Zawiera przekazane okno
-     */
-    public static void centreWindow(EndGameWindow frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
     }
 
     /**

@@ -2,15 +2,17 @@ package app.windows;
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
+import app.windows.abstracts.AbstractWindow;
 import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Okno wybory Nicku
  */
-public class NickWindow extends JFrame implements WindowInterface
+public class NickWindow extends AbstractWindow
 {
     private JLabel lNickTitle;
     private JTextField tNickname;
@@ -27,40 +29,102 @@ public class NickWindow extends JFrame implements WindowInterface
 
         setSize(300,250);
         setTitle(config.getProperty("nick_window_title"));
-        setLayout(null);
 
-        lNickTitle = new JLabel(config.getProperty("set_nick"));
-        lNickTitle.setBounds(70,30,160,40);
-        lNickTitle.setFont(new Font("SansSerif",Font.BOLD,18));
-        add(lNickTitle);
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        gridbag.columnWidths = new int[]{120,120};
+        gridbag.rowHeights = new int[]{35, 35};
+        setLayout(gridbag);
 
-        tNickname = new JTextField("");
-        tNickname.setBounds(50,80,180,20);
-        add(tNickname);
+        c.insets = new Insets(5,5,5,5);
+        c.fill = GridBagConstraints.BOTH;
 
-        bOk = new JButton(config.getProperty("ok"));
-        bOk.setBounds(50,130,80,20);
-        add(bOk);
-        bOk.addActionListener(new ExitWindowAction(this));
-        bOk.addActionListener(new OpenWindowAction(gameFrame));
-
-        bCancel = new JButton(config.getProperty("cancel"));
-        bCancel.setBounds(150,130,80,20);
-        add(bCancel);
-        bCancel.addActionListener(new ExitWindowAction(this));
+        addNickLabel(config.getProperty("set_nick"), c,null);
+        addNickInput("", c,null);
+        addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
+        addOkBtn(config.getProperty("ok"), c, null);
 
         centreWindow(this);
     }
 
     /**
-     * Metoda centrująca położenie okna
-     * @param frame Zawiera przekazane okno
+     * Metoda dodająca etykietę wyboru pseudonimu
+     * @param name Tutuł etykiety
+     * @param constraints
+     * @param action
      */
-    public static void centreWindow(NickWindow frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
+    private void addNickLabel(
+            String name,
+            GridBagConstraints constraints,
+            ActionListener action
+    ){
+        lNickTitle = new JLabel(name);
+        //lNickTitle.setBounds(70,30,160,40);
+        lNickTitle.setFont(new Font("SansSerif",Font.BOLD,16));
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        add(lNickTitle, constraints);
+    }
+
+    /**
+     * Metoda dodająca pole tekstowe
+     * @param name Nazwa Inputa
+     * @param constraints
+     * @param action
+     */
+    private void addNickInput(
+            String name,
+            GridBagConstraints constraints,
+            ActionListener action
+    ){
+        tNickname = new JTextField("");
+        //tNickname.setBounds(50,80,180,20);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        add(tNickname, constraints);
+    }
+
+    /**
+     * Metoda dodająca przycisk anuluj
+     * @param name Tytuł przycisku
+     * @param constraints
+     * @param action
+     */
+    private void addCancelBtn(
+            String name,
+            GridBagConstraints constraints,
+            ActionListener action
+    ){
+        bCancel = new JButton(name);
+        //bCancel.setBounds(150,130,80,20);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 1;
+        add(bCancel, constraints);
+        bCancel.addActionListener(action);
+    }
+
+    /**
+     * Metoda dodająca przycisk ok
+     * @param name Tytuł przycisku
+     * @param constraints
+     * @param action
+     */
+    private void addOkBtn(
+            String name,
+            GridBagConstraints constraints,
+            ActionListener action
+    ){
+        bOk = new JButton(name);
+        //bOk.setBounds(50,130,80,20);
+        constraints.gridx = 1;
+        constraints.gridy = 2;
+        constraints.gridwidth = 1;
+        add(bOk, constraints);
+        bOk.addActionListener(new ExitWindowAction(this));
+        bOk.addActionListener(new OpenWindowAction(gameFrame));
     }
 
     /**
