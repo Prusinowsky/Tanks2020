@@ -4,7 +4,6 @@ import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
 import java.awt.*;

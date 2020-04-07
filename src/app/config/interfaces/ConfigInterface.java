@@ -20,4 +20,11 @@ public interface ConfigInterface {
      * @return Properties Zwraca obiekt zawierający daną konfiguracyjną klucz-wartość
      */
     public Properties getProps();
+
+    /**
+     * Metoda zwaraca wartość dla danego klucza
+     * @param key Określa klucz dla jakiego ma zostać zwrócona wartość
+     * @return String
+     */
+    public String getProperty(String key);
 }

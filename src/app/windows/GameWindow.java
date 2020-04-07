@@ -1,6 +1,7 @@
 package app.windows;
 
 import app.config.Config;
+import app.loaders.texture.TextureLoader;
 import app.windows.abstracts.AbstractWindow;
 
 import javax.swing.*;
@@ -41,8 +42,10 @@ public class GameWindow extends AbstractWindow
 //        GridLayout grid = new GridLayout(16,16);
 //        setLayout(grid);
 
+        TextureLoader textureLoader = new TextureLoader();
+        textureLoader.loadAll();
 
-        icon = new ImageIcon("assets/textures/maps/plain/grass.png");
+        icon = new ImageIcon(textureLoader.get("Magma").image);
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {
                 if(resize) {
@@ -54,6 +57,8 @@ public class GameWindow extends AbstractWindow
             }
         });
 
+        this.setResizable(false);
+
         centreWindow();
     }
 
@@ -64,8 +69,8 @@ public class GameWindow extends AbstractWindow
     {
         Integer gridX = 16;
         Integer gridY = 16;
-        Integer width = getWidth();
-        Integer height = getHeight() - 39;
+        Integer width = (int)(getWidth()*0.9);
+        Integer height = (int)((getHeight() - 39)*0.9);
         width = height = Math.min(width,height);
         Integer sWidth = width/gridX;
         Integer sHeight = height/gridY;
@@ -94,6 +99,7 @@ public class GameWindow extends AbstractWindow
         getContentPane().repaint();
     }
     /*(new ImageIcon("assets/textures/maps/plain/grass.png").getImage().getScaledInstance(getWidth()/gridX, getHeight()/gridY, Image.SCALE_DEFAULT))*/
+
     /**
      * Metoda implementująca otwarcie okna
      */

@@ -1,7 +1,7 @@
-package app.loaders.interfaces;
+package app.loaders.map;
 
 import app.config.interfaces.ConfigInterface;
-import app.map.interfaces.MapInterface;
+import app.entities.MapEntity;
 
 /**
  * Interfejs ladowania map
@@ -15,15 +15,9 @@ public interface MapLoaderInterface {
     public void load(ConfigInterface config);
 
     /**
-     * Przekształcająca mapę
-     * @return
-     */
-    public MapInterface[] convertToMaps();
-
-    /**
      * Przekształcająca wybraną mapę
      * @return
      */
-    public MapInterface convertToMap(String name);
+    public MapEntity convertToMapEntity(String name, String path);
 
 }

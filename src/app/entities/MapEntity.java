@@ -6,9 +6,15 @@ import java.awt.*;
  * Obiekt rezprezentujący encję mapy
  */
 public class MapEntity {
-    protected String name;
-    protected String path;
-    protected TextureEntity texture;
+    /**
+     * Nazwa mapy
+     */
+    public String name;
+
+    /**
+     * Bloki mapy
+     */
+    public TextureEntity[][] blocks;
 
     /**
      * Konstrukor domyślny
@@ -18,18 +24,10 @@ public class MapEntity {
     /**
      * Konstrukotr inicjalizujący z parametrami
      * @param name
-     * @param path
+     * @param blocks
      */
-    public MapEntity(String name, String path){
-        // TODO: 07.04.2020
-    }
-
-    /**
-     *
-     * @param name nazwa encji
-     * @param path ścieżka do pliku
-     */
-    public void load(String name, String path) {
-        // TODO: 07.04.2020
+    public MapEntity(String name, TextureEntity[][] blocks){
+        this.name = name;
+        this.blocks = blocks;
     }
 }

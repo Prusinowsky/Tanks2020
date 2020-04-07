@@ -1,4 +1,5 @@
 import app.config.Config;
+import app.loaders.texture.TextureLoader;
 import app.windows.MainWindow;
 
 /**
@@ -14,6 +15,7 @@ public class Main {
     {
         Config config = Config.getInstance();
         config.load();
+
         MainWindow app = new MainWindow();
         app.open();
     }

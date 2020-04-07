@@ -2,30 +2,65 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>Game properties</comment>
+
+    <!--   Grid size -->
     <entry key="map_height">16</entry>
     <entry key="map_width">16</entry>
 
+    <!--  Maps  -->
     <entry key="map_numbers">3</entry>
 
     <entry key="map_name_0">Dolina</entry>
     <entry key="map_path_0">plain.map</entry>
-    <entry key="map_texture_ground_0">plain/grass.png</entry>
-    <entry key="map_texture_destructible_0">plain/hay_block_side.png</entry>
-    <entry key="map_texture_destructible_destroyed_0">plain/hay_block_side_destroyed.png</entry>
-    <entry key="map_texture_indestructible_0">plain/cobblestone.png</entry>
+    <entry key="map_texture_ground_0">Grass</entry>
+    <entry key="map_texture_destructible_0">HayBlockSide</entry>
+    <entry key="map_texture_destructible_destroyed_0">HayBlockSideDestroyed</entry>
+    <entry key="map_texture_indestructible_0">Cobblestone</entry>
 
     <entry key="map_name_1">Pustynia</entry>
     <entry key="map_path_1">desert.map</entry>
-    <entry key="map_texture_ground_1">desert/sand.png</entry>
-    <entry key="map_texture_destructible_1">desert/cactus_top.png</entry>
-    <entry key="map_texture_destructible_destroyed_1">desert/cactus_destroyed.png</entry>
-    <entry key="map_texture_indestructible_1">desert/re_sandstone_normal.png</entry>
+    <entry key="map_texture_ground_1">Sand</entry>
+    <entry key="map_texture_destructible_1">CactusTop</entry>
+    <entry key="map_texture_destructible_destroyed_1">CactusDestroyed</entry>
+    <entry key="map_texture_indestructible_1">RedStoneNormal</entry>
 
     <entry key="map_name_2">Wulkan</entry>
     <entry key="map_path_2">volcano.map</entry>
-    <entry key="map_texture_ground_2">volcano/stone.png</entry>
-    <entry key="map_texture_destructible_2">volcano/magma.png</entry>
-    <entry key="map_texture_destructible_destroyed_2">volcano/magma_destroyed.png</entry>
-    <entry key="map_texture_indestructible_2">volcano/obsidian.png</entry>
+    <entry key="map_texture_ground_2">Stone</entry>
+    <entry key="map_texture_destructible_2">Magma</entry>
+    <entry key="map_texture_destructible_destroyed_2">MagmaDestroyed</entry>
+    <entry key="map_texture_indestructible_2">Obsidian</entry>
+
+    <!--  Textures  -->
+    <entry key="texture_number">12</entry>
+    <entry key="texture_name_0">EnemyTank</entry>
+    <entry key="texture_path_0">entities/enemy_tank.png</entry>
+    <entry key="texture_name_1">PlayerTank</entry>
+    <entry key="texture_path_1">entities/player_tank.png</entry>
+    <entry key="texture_name_2">CactusDestroyed</entry>
+    <entry key="texture_path_2">maps/desert/cactus_destroyed.png</entry>
+    <entry key="texture_name_3">CactusTop</entry>
+    <entry key="texture_path_3">maps/desert/cactus_top.png</entry>
+    <entry key="texture_name_4">RedStoneNormal</entry>
+    <entry key="texture_path_4">maps/desert/red_sandstone_normal.png</entry>
+    <entry key="texture_name_5">Sand</entry>
+    <entry key="texture_path_5">maps/desert/sand.png</entry>
+    <entry key="texture_name_6">Cobblestone</entry>
+    <entry key="texture_path_6">maps/plain/cobblestone.png</entry>
+    <entry key="texture_name_7">Grass</entry>
+    <entry key="texture_path_7">maps/plain/grass.png</entry>
+    <entry key="texture_name_8">HayBlockSide</entry>
+    <entry key="texture_path_8">maps/plain/hay_block_side.png</entry>
+    <entry key="texture_name_8">HayBlockSideDestroyed</entry>
+    <entry key="texture_path_8">maps/plain/hay_block_side_destroyed.png</entry>
+    <entry key="texture_name_9">Magma</entry>
+    <entry key="texture_path_9">maps/volcano/magma.png</entry>
+    <entry key="texture_name_10">MagmaDestroyed</entry>
+    <entry key="texture_path_10">maps/volcano/magma_destroyed.png</entry>
+    <entry key="texture_name_11">Obsidian</entry>
+    <entry key="texture_path_11">maps/volcano/obsidian.png</entry>
+    <entry key="texture_name_11">Stone</entry>
+    <entry key="texture_path_11">maps/volcano/stone.png</entry>
+
 
 </properties>
