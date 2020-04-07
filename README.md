@@ -2,6 +2,8 @@
 
 
 
+[TOC]
+
 #### Opis gry
 
 W oknie otwierającym aplikacji jest pasek menu (1). Opcje do wyboru to Gra (2), która jest rozsuwanym menu i Pomoc (7), która jest wyskakującym okienkiem z instrukcją jak grać. W menu Gra są do wyboru opcje: Start, Wybierz mapę (4) , Najlepsze wyniki (3) i Koniec. Start powoduje pojawienie się okienka Nick (5), które wymaga od gracza wpisania swojego nicku. Gdy nie będziemy chcieli wpisać nicku, gra wróci nas do ekranu startowego. Następnie otworzy się nowe okno z grą (8).
