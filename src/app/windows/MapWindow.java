@@ -74,8 +74,12 @@ public class MapWindow extends AbstractWindow
             ActionListener action,
             Config config
     ){
-        String[] mapsList = {config.getProperty("map_name_0"), config.getProperty("map_name_1"), config.getProperty("map_name_2")};
-        cbMaps = new JComboBox(mapsList);
+        Integer number = Integer.parseInt(config.getProperty("map_numbers"));
+        String[] mapList = new String[number];
+        for(Integer i = 0; i < number; i++){
+            mapList[i] = config.getProperty("map_name_"+i);
+        }
+        cbMaps = new JComboBox(mapList);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 2;
