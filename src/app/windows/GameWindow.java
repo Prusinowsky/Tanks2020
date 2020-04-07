@@ -6,6 +6,8 @@ import app.windows.interfaces.WindowInterface;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 /**
  * Okno Gry
@@ -21,11 +23,17 @@ public class GameWindow extends AbstractWindow
     {
         Config config = Config.getInstance();
 
-        setSize(800,800);
+        setSize(900,900);
         setTitle(config.getProperty("game_window_title"));
-        setLayout(null);
 
-        renderMap();
+        GridLayout grid = new GridLayout(16,16);
+        setLayout(grid);
+
+        this.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent componentEvent) {
+                renderMap();
+            }
+        });
 
         centreWindow();
     }
@@ -37,17 +45,33 @@ public class GameWindow extends AbstractWindow
     {
         Integer gridX = 16;
         Integer gridY = 16;
+        Integer width = getWidth();
+        Integer height = getHeight() - 39;
+        width = height = Math.min(width,height);
+        Integer sWidth = width/gridX;
+        Integer sHeight = height/gridY;
+        ImageIcon icon = new ImageIcon("assets/textures/maps/plain/grass.png");
+        Image imageScaled = icon
+                .getImage()
+                .getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
+        ImageIcon iconScaled = new ImageIcon(imageScaled);
+        pic = null;
         pic = new JLabel[gridX][gridY];
-        for(int i=0; i<gridX; i++)
+
+        getContentPane().removeAll();
+
+        for(Integer i=0; i<gridX; i++)
         {
-            for(int j=0; j<gridY; j++)
+            for(Integer j=0; j<gridY; j++)
             {
-                pic[i][j] = new JLabel(new ImageIcon("assets/textures/maps/plain/grass.png"));
-                pic[i][j].setBounds(30 + 32*i,30 + 32*j,32,32);
+                pic[i][j] = new JLabel(iconScaled);
+                pic[i][j].setBounds(sWidth*i,sHeight*j, sWidth, sHeight);
                 add(pic[i][j]);
             }
         }
+        getContentPane().repaint();
     }
+    /*(new ImageIcon("assets/textures/maps/plain/grass.png").getImage().getScaledInstance(getWidth()/gridX, getHeight()/gridY, Image.SCALE_DEFAULT))*/
     /**
      * Metoda implementująca otwarcie okna
      */
