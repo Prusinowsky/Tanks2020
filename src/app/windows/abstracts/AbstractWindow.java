@@ -23,12 +23,11 @@ abstract public class AbstractWindow extends JFrame implements WindowInterface {
 
     /**
      * Metoda centrująca położenie okna
-     * @param frame Zawiera przekazane okno
      */
-    public static void centreWindow(JFrame frame) {
+    public void centreWindow() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 }

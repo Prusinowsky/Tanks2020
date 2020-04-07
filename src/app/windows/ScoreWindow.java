@@ -38,7 +38,7 @@ public class ScoreWindow extends AbstractWindow
         addScoreList("Tu będzie kiedyś lista wyników", c, null);
         addOkBtn(config.getProperty("ok"), c, new ExitWindowAction(this));
 
-        centreWindow(this);
+        centreWindow();
     }
 
     /**

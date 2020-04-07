@@ -43,7 +43,7 @@ public class MapWindow extends AbstractWindow
         addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
         addOkBtn(config.getProperty("ok"), c, new OpenWindowAction(this));
 
-        centreWindow(this);
+        centreWindow();
     }
 
     /**
