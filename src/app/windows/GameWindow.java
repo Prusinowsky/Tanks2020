@@ -39,8 +39,6 @@ public class GameWindow extends AbstractWindow
         setTitle(config.getProperty("game_window_title"));
 
         setLayout(null);
-//        GridLayout grid = new GridLayout(16,16);
-//        setLayout(grid);
 
         TextureLoader textureLoader = new TextureLoader();
         textureLoader.loadAll();
@@ -63,7 +61,7 @@ public class GameWindow extends AbstractWindow
     }
 
     /**
-     * Metoda renderująca mapę
+     * Funkcja renderująca mapę
      */
     private void renderMap()
     {
@@ -76,8 +74,6 @@ public class GameWindow extends AbstractWindow
         Integer sHeight = height/gridY;
         Integer offsetX = (getWidth() - gridX*sWidth)/2;
         Integer offsetY = (getHeight() - gridY*sHeight)/2;
-        //System.out.println(offsetX);
-        //System.out.println(offsetY);
         Image imageScaled = icon
                 .getImage()
                 .getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
@@ -98,7 +94,7 @@ public class GameWindow extends AbstractWindow
         }
         getContentPane().repaint();
     }
-    /*(new ImageIcon("assets/textures/maps/plain/grass.png").getImage().getScaledInstance(getWidth()/gridX, getHeight()/gridY, Image.SCALE_DEFAULT))*/
+
 
     /**
      * Metoda implementująca otwarcie okna

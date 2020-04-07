@@ -16,7 +16,8 @@ public class MapWindow extends AbstractWindow
 {
     private JButton bOkey, bCancel;
     private JComboBox cbMaps;
-    private String[] mapsList = {"Polana","Pustynia","Wulkan"};
+    //private String[] mapsList = {"Polana","Pustynia","Wulkan"};
+
 
     /**
      * Konstruktor odpowiadający za inicjalizację okna mapy
@@ -38,7 +39,7 @@ public class MapWindow extends AbstractWindow
         c.fill = GridBagConstraints.BOTH;
 
         addChooseMapLabel(config.getProperty("choose_map"), c, null);
-        addChooseMapComboBox("", c, null);
+        addChooseMapComboBox(c, null, config);
         addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
         addOkBtn(config.getProperty("ok"), c, new OpenWindowAction(this));
 
@@ -57,8 +58,6 @@ public class MapWindow extends AbstractWindow
             ActionListener action
     ){
         JLabel label = new JLabel(name);
-        //cbMaps.setBounds(50,50,200,50);
-        //cbMaps.setSize(180,23);
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
@@ -67,18 +66,16 @@ public class MapWindow extends AbstractWindow
 
     /**
      * Metoda dodająca pole wybóru map
-     * @param name Tu to nie ma znaczenia
      * @param constraints
      * @param action
      */
     private void addChooseMapComboBox(
-            String name,
             GridBagConstraints constraints,
-            ActionListener action
+            ActionListener action,
+            Config config
     ){
+        String[] mapsList = {config.getProperty("map_name_0"), config.getProperty("map_name_1"), config.getProperty("map_name_2")};
         cbMaps = new JComboBox(mapsList);
-        //cbMaps.setBounds(50,50,200,50);
-        //cbMaps.setSize(180,23);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 2;
@@ -97,7 +94,6 @@ public class MapWindow extends AbstractWindow
             ActionListener action
     ){
         bOkey = new JButton(name);
-        //bOkey.setBounds(50,120,80,20);
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.gridwidth = 1;
@@ -118,7 +114,6 @@ public class MapWindow extends AbstractWindow
             ActionListener action
     ){
         bCancel = new JButton(name);
-        //bCancel.setBounds(150,120,80,20);
         constraints.gridx = 1;
         constraints.gridy = 2;
         constraints.gridwidth = 1;
