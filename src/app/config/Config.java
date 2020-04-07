@@ -42,7 +42,7 @@ public class Config implements ConfigInterface {
      * jeżeli taki nie istnieje, to metoda go stworzy.
      * @return Config Zwraca obiekt Konifguracyjny
      */
-    public static Config getInstance(){
+    public static ConfigInterface getInstance(){
         if(_instance == null)
             _instance = new Config();
         return _instance;
@@ -54,7 +54,7 @@ public class Config implements ConfigInterface {
      */
     public void load() {
         try {
-            FileReader reader = new FileReader("config.properties");
+            FileReader reader = new FileReader("config/config.properties");
             props = new Properties();
             props.load(reader);
             reader.close();
