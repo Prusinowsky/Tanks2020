@@ -38,7 +38,7 @@ public class MapWindow extends AbstractWindow
         c.insets = new Insets(5,5,5,5);
         c.fill = GridBagConstraints.BOTH;
 
-        addChooseMapLabel("Wybierz mape", c, null);
+        addChooseMapLabel(config.getProperty("choose_map"), c, null);
         addChooseMapComboBox("", c, null);
         addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
         addOkBtn(config.getProperty("ok"), c, new OpenWindowAction(this));

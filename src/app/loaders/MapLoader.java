@@ -1,6 +1,6 @@
-package app.map.loader;
+package app.loaders;
 
-import app.map.loader.interfaces.MapLoaderInterface;
+import app.loaders.interfaces.MapLoaderInterface;
 
 public class MapLoader implements MapLoaderInterface {
     public void todo() {
