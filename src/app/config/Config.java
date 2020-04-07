@@ -2,10 +2,7 @@ package app.config;
 
 import app.config.interfaces.ConfigInterface;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -54,9 +51,14 @@ public class Config implements ConfigInterface {
      */
     public void load() {
         try {
-            FileReader reader = new FileReader("config/config.properties");
+            FileInputStream reader;
             props = new Properties();
-            props.load(reader);
+            reader = new FileInputStream("config/app.xml");
+            props.loadFromXML(reader);
+            reader = new FileInputStream("config/game.xml");
+            props.loadFromXML(reader);
+            reader = new FileInputStream("config/lang.xml");
+            props.loadFromXML(reader);
             reader.close();
         } catch (FileNotFoundException e) {
             // Do sth please

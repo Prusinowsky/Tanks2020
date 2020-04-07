@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Lang section</comment>
+    <entry key="game">Gra</entry>
+    <entry key="start">Start</entry>
+    <entry key="choose_map">Wybierz mapę</entry>
+    <entry key="best_scores">Najlepsze wyniki</entry>
+    <entry key="exit">Wyjdż</entry>
+    <entry key="help">Pomoc</entry>
+    <entry key="about">O Programie</entry>
+    <entry key="you_lost">Przegraleś</entry>
+    <entry key="you_lost_your_score_isp">Przegrałeś twój wynik to</entry>
+    <entry key="ok">Ok</entry>
+    <entry key="set_nick">Ustaw pseudonim</entry>
+    <entry key="game_window_title">Okno gry</entry>
+    <entry key="nick_window_title">Ustaw pseudonim</entry>
+    <entry key="cancel">Anuluj</entry>
+    <entry key="map_select">Tu będzie wybór mapy, jeszcze nie wiem jak zrobić taki pasek otwierający xD</entry>
+    <entry key="game_description">Tu bedzie opis gry, jeszcze nie wiem jaki</entry>
+</properties>
