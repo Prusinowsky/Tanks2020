@@ -2,4 +2,5 @@ app.actions
 app.config
 app.config.interfaces
 app.windows
+app.windows.abstracts
 app.windows.interfaces

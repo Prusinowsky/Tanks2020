@@ -22,6 +22,6 @@ Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od któreg
 Komenda potrzebna do wygenerowania dokumentacji
 
 ```
-javadoc -sourcepath D:\Programowanie\proze-tanks\src -d D:\Programowanie\proze-tanks\docs -subpackages .
+javadoc -sourcepath /src -d /docs -subpackages .
 ```
 
