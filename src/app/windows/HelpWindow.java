@@ -39,7 +39,7 @@ public class HelpWindow extends AbstractWindow
         addGameDescription(config.getProperty("game_description"),c, null);
         addOkBtn(config.getProperty("ok"), c, new ExitWindowAction(this));
 
-        centreWindow(this);
+        centreWindow();
     }
 
     /**

@@ -44,7 +44,7 @@ public class NickWindow extends AbstractWindow
         addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
         addOkBtn(config.getProperty("ok"), c, null);
 
-        centreWindow(this);
+        centreWindow();
     }
 
     /**

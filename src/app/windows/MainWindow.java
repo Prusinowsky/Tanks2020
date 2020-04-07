@@ -58,7 +58,7 @@ public class MainWindow extends AbstractWindow
         mAbout.addActionListener(new OpenWindowAction(helpFrame));
         mExit.addActionListener(new ExitWindowAction(this));
 
-        centreWindow(this);
+        centreWindow();
     }
 
     /**

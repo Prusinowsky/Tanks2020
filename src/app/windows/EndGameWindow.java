@@ -37,7 +37,7 @@ public class EndGameWindow extends AbstractWindow
         add(bOkey);
         bOkey.addActionListener(new ExitWindowAction(this));
 
-        centreWindow(this);
+        centreWindow();
     }
 
     /**
