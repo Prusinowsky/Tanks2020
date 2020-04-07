@@ -42,7 +42,7 @@ public class Config implements ConfigInterface {
      * jeżeli taki nie istnieje, to metoda go stworzy.
      * @return Config Zwraca obiekt Konifguracyjny
      */
-    public static ConfigInterface getInstance(){
+    public static Config getInstance(){
         if(_instance == null)
             _instance = new Config();
         return _instance;

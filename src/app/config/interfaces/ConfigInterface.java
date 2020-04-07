@@ -9,13 +9,6 @@ import java.util.Properties;
  */
 public interface ConfigInterface {
 
-
-    /**
-     * Metoda odpowiadająca za zwracanie tylko jednej instacji konfiguracji w pliku
-     * @return
-     */
-    public ConfigInterface getInstance();
-
     /**
      * Metoda odpowiedzialna za ładowanie pilku zawierającego
      * dane konfiguracyjnego
