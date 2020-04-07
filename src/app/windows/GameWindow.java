@@ -1,19 +1,21 @@
 package app.windows;
+
 import app.config.Config;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Okno Gry
  */
 public class GameWindow extends AbstractWindow
 {
+    private ImageIcon icon;
+    private Boolean resize;
     private JLabel[][] pic;
 
     /**
@@ -21,17 +23,34 @@ public class GameWindow extends AbstractWindow
      */
     public GameWindow()
     {
+        resize = false;
+        Timer time = new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                resize = true;
+            }
+        }, 0, 500);
+
         Config config = Config.getInstance();
 
         setSize(900,900);
         setTitle(config.getProperty("game_window_title"));
 
-        GridLayout grid = new GridLayout(16,16);
-        setLayout(grid);
+        setLayout(null);
+//        GridLayout grid = new GridLayout(16,16);
+//        setLayout(grid);
 
+
+        icon = new ImageIcon("assets/textures/maps/plain/grass.png");
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {
-                renderMap();
+                if(resize) {
+                    resize = false;
+                    setResizable(false);
+                    renderMap();
+                    setResizable(true);
+                }
             }
         });
 
@@ -50,7 +69,10 @@ public class GameWindow extends AbstractWindow
         width = height = Math.min(width,height);
         Integer sWidth = width/gridX;
         Integer sHeight = height/gridY;
-        ImageIcon icon = new ImageIcon("assets/textures/maps/plain/grass.png");
+        Integer offsetX = (getWidth() - gridX*sWidth)/2;
+        Integer offsetY = (getHeight() - gridY*sHeight)/2;
+        //System.out.println(offsetX);
+        //System.out.println(offsetY);
         Image imageScaled = icon
                 .getImage()
                 .getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
@@ -65,7 +87,7 @@ public class GameWindow extends AbstractWindow
             for(Integer j=0; j<gridY; j++)
             {
                 pic[i][j] = new JLabel(iconScaled);
-                pic[i][j].setBounds(sWidth*i,sHeight*j, sWidth, sHeight);
+                pic[i][j].setBounds(offsetX + sWidth*i,offsetY + sHeight*j, sWidth, sHeight);
                 add(pic[i][j]);
             }
         }
