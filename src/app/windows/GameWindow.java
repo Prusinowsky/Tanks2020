@@ -1,6 +1,8 @@
 package app.windows;
 
 import app.config.Config;
+import app.entities.MapEntity;
+import app.loaders.map.MapLoader;
 import app.loaders.texture.TextureLoader;
 import app.windows.abstracts.AbstractWindow;
 
@@ -15,7 +17,9 @@ import java.util.TimerTask;
  */
 public class GameWindow extends AbstractWindow
 {
-    private ImageIcon icon;
+
+    private MapLoader mapLoader;
+    private MapEntity map;
     private Boolean resize;
     private JLabel[][] pic;
 
@@ -24,26 +28,24 @@ public class GameWindow extends AbstractWindow
      */
     public GameWindow()
     {
-        resize = false;
-        Timer time = new Timer();
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                resize = true;
-            }
-        }, 0, 500);
-
         Config config = Config.getInstance();
 
         setSize(900,900);
         setTitle(config.getProperty("game_window_title"));
-
         setLayout(null);
 
+        setRefreshTime();
+
+        System.out.println("Ladowanie tekstur");
         TextureLoader textureLoader = new TextureLoader();
         textureLoader.loadAll();
 
-        icon = new ImageIcon(textureLoader.get("Magma").image);
+        System.out.println("Ladowanie Map");
+        mapLoader = new MapLoader();
+        mapLoader.load();
+
+        map = mapLoader.getMap("Dolina");
+
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {
                 if(resize) {
@@ -60,13 +62,24 @@ public class GameWindow extends AbstractWindow
         centreWindow();
     }
 
+    private void setRefreshTime(){
+        resize = false;
+        Timer time = new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                resize = true;
+            }
+        }, 0, 500);
+    }
+
     /**
      * Funkcja renderująca mapę
      */
     private void renderMap()
     {
-        Integer gridX = 16;
-        Integer gridY = 16;
+        Integer gridX = map.sizeX;
+        Integer gridY = map.sizeY;
         Integer width = (int)(getWidth()*0.9);
         Integer height = (int)((getHeight() - 39)*0.9);
         width = height = Math.min(width,height);
@@ -74,20 +87,16 @@ public class GameWindow extends AbstractWindow
         Integer sHeight = height/gridY;
         Integer offsetX = (getWidth() - gridX*sWidth)/2;
         Integer offsetY = (getHeight() - gridY*sHeight)/2;
-        Image imageScaled = icon
-                .getImage()
-                .getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
-        ImageIcon iconScaled = new ImageIcon(imageScaled);
-        pic = null;
-        pic = new JLabel[gridX][gridY];
 
+        pic = new JLabel[gridX][gridY];
         getContentPane().removeAll();
 
-        for(Integer i=0; i<gridX; i++)
+        for(Integer j=0; j<gridX; j++)
         {
-            for(Integer j=0; j<gridY; j++)
+            for(Integer i=0; i<gridY; i++)
             {
-                pic[i][j] = new JLabel(iconScaled);
+                Image image = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
+                pic[i][j] = new JLabel(new ImageIcon(image));
                 pic[i][j].setBounds(offsetX + sWidth*i,offsetY + sHeight*j, sWidth, sHeight);
                 add(pic[i][j]);
             }

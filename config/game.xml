@@ -12,27 +12,27 @@
 
     <entry key="map_name_0">Dolina</entry>
     <entry key="map_path_0">plain.map</entry>
-    <entry key="map_texture_ground_0">Grass</entry>
-    <entry key="map_texture_destructible_0">HayBlockSide</entry>
-    <entry key="map_texture_destructible_destroyed_0">HayBlockSideDestroyed</entry>
-    <entry key="map_texture_indestructible_0">Cobblestone</entry>
+    <entry key="map_ground_0">Grass</entry>
+    <entry key="map_destructible_0">HayBlockSide</entry>
+    <entry key="map_destroyed_0">HayBlockSideDestroyed</entry>
+    <entry key="map_indestructible_0">Cobblestone</entry>
 
     <entry key="map_name_1">Pustynia</entry>
     <entry key="map_path_1">desert.map</entry>
-    <entry key="map_texture_ground_1">Sand</entry>
-    <entry key="map_texture_destructible_1">CactusTop</entry>
-    <entry key="map_texture_destructible_destroyed_1">CactusDestroyed</entry>
-    <entry key="map_texture_indestructible_1">RedStoneNormal</entry>
+    <entry key="map_ground_1">Sand</entry>
+    <entry key="map_destructible_1">CactusTop</entry>
+    <entry key="map_destroyed_1">CactusDestroyed</entry>
+    <entry key="map_indestructible_1">RedStoneNormal</entry>
 
     <entry key="map_name_2">Wulkan</entry>
     <entry key="map_path_2">volcano.map</entry>
-    <entry key="map_texture_ground_2">Stone</entry>
-    <entry key="map_texture_destructible_2">Magma</entry>
-    <entry key="map_texture_destructible_destroyed_2">MagmaDestroyed</entry>
-    <entry key="map_texture_indestructible_2">Obsidian</entry>
+    <entry key="map_ground_2">Stone</entry>
+    <entry key="map_destructible_2">Magma</entry>
+    <entry key="map_destroyed_2">MagmaDestroyed</entry>
+    <entry key="map_indestructible_2">Obsidian</entry>
 
     <!--  Textures  -->
-    <entry key="texture_number">12</entry>
+    <entry key="texture_number">15</entry>
     <entry key="texture_name_0">EnemyTank</entry>
     <entry key="texture_path_0">entities/enemy_tank.png</entry>
     <entry key="texture_name_1">PlayerTank</entry>
@@ -51,16 +51,18 @@
     <entry key="texture_path_7">maps/plain/grass.png</entry>
     <entry key="texture_name_8">HayBlockSide</entry>
     <entry key="texture_path_8">maps/plain/hay_block_side.png</entry>
-    <entry key="texture_name_8">HayBlockSideDestroyed</entry>
-    <entry key="texture_path_8">maps/plain/hay_block_side_destroyed.png</entry>
-    <entry key="texture_name_9">Magma</entry>
-    <entry key="texture_path_9">maps/volcano/magma.png</entry>
-    <entry key="texture_name_10">MagmaDestroyed</entry>
-    <entry key="texture_path_10">maps/volcano/magma_destroyed.png</entry>
-    <entry key="texture_name_11">Obsidian</entry>
-    <entry key="texture_path_11">maps/volcano/obsidian.png</entry>
-    <entry key="texture_name_11">Stone</entry>
-    <entry key="texture_path_11">maps/volcano/stone.png</entry>
+    <entry key="texture_name_9">HayBlockSideDestroyed</entry>
+    <entry key="texture_path_9">maps/plain/hay_block_side_destroyed.png</entry>
+    <entry key="texture_name_10">Magma</entry>
+    <entry key="texture_path_10">maps/volcano/magma.png</entry>
+    <entry key="texture_name_11">MagmaDestroyed</entry>
+    <entry key="texture_path_11">maps/volcano/magma_destroyed.png</entry>
+    <entry key="texture_name_12">Obsidian</entry>
+    <entry key="texture_path_12">maps/volcano/obsidian.png</entry>
+    <entry key="texture_name_13">Stone</entry>
+    <entry key="texture_path_13">maps/volcano/stone.png</entry>
+    <entry key="texture_name_14">Portal</entry>
+    <entry key="texture_path_14">maps/portal.png</entry>
 
 
 </properties>

@@ -17,6 +17,12 @@ public class MapEntity {
     public TextureEntity[][] blocks;
 
     /**
+     * Wymairy planszy
+     */
+    public Integer sizeX;
+    public Integer sizeY;
+
+    /**
      * Konstrukor domyślny
      */
     public MapEntity(){}
