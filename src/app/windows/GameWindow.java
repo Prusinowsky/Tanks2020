@@ -27,7 +27,7 @@ public class GameWindow extends AbstractWindow
         setTitle(config.getProperty("game_window_title"));
         setLayout(new BorderLayout());
 
-        add(new GameMapComponent(config));
+        //add(new GameMapComponent(config));
 
         centreWindow();
     }

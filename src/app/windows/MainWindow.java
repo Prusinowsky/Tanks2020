@@ -4,9 +4,12 @@ import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
 import app.windows.abstracts.AbstractWindow;
+import app.windows.components.GameRunningComponent;
 import app.windows.components.MenuBarComponent;
+import app.windows.components.MenuStartComponent;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Główne okno aplikacji - STARTOWE (MENU)
@@ -29,7 +32,7 @@ public class MainWindow extends AbstractWindow
 
         setSize(800,800);
         setTitle(config.getProperty("title"));
-        setLayout(null);
+        setLayout(new BorderLayout());
 
         MenuBarComponent menuBar = new MenuBarComponent(config);
         menuBar.addStartActionListener(new OpenWindowAction(nickFrame));
@@ -38,6 +41,9 @@ public class MainWindow extends AbstractWindow
         menuBar.addAboutActionListener(new OpenWindowAction(helpFrame));
         menuBar.addExitActionListener(new ExitWindowAction(this));
         setJMenuBar(menuBar.getJMenuBar());
+
+        GameRunningComponent game = new GameRunningComponent(config);
+        add(game);
 
         centreWindow();
     }

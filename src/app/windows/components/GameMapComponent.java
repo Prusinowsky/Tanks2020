@@ -1,5 +1,6 @@
 package app.windows.components;
 
+import app.config.Config;
 import app.config.interfaces.ConfigInterface;
 import app.entities.MapEntity;
 import app.loaders.map.MapLoader;
@@ -17,14 +18,20 @@ import java.util.TimerTask;
  */
 public class GameMapComponent extends JComponent {
 
+    private ConfigInterface config;
+    private Integer width, height;
+
     private MapEntity map;
     private MapLoader mapLoader;
-    private Boolean resize;
+
     private JLabel[][] pic;
 
-    public GameMapComponent(ConfigInterface config){
+    public GameMapComponent(ConfigInterface config, Integer width, Integer height){
         setLayout(null);
-        setRefreshTime();
+        this.width = width;
+        this.height = height;
+
+        setSize(width, height);
 
         TextureLoader textureLoader = new TextureLoader(config);
         textureLoader.load();
@@ -34,36 +41,15 @@ public class GameMapComponent extends JComponent {
 
         map = mapLoader.getMap("Dolina");
 
-        this.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent componentEvent) {
-                if(resize) {
-                    resize = false;
-                    renderMap();
-                }
-            }
-        });
-
-    }
-
-    /**
-     * Ustawia time-delay do odświeżania mapy
-     */
-    protected void setRefreshTime(){
-        resize = false;
-        java.util.Timer time = new Timer();
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                resize = true;
-            }
-        }, 0, 500);
+        render();
     }
 
     /**
      * Funkcja renderująca mapę
      */
-    private void renderMap()
+    public void render()
     {
+
         Integer gridX = map.sizeX;
         Integer gridY = map.sizeY;
         Integer width = (int)(getWidth()*0.95);
@@ -78,7 +64,7 @@ public class GameMapComponent extends JComponent {
         Integer offsetY = (getHeight() - gridY*sHeight)/2;
 
         pic = new JLabel[gridX][gridY];
-        removeAll();
+
 
         for(Integer j=0; j<gridX; j++)
         {
@@ -90,7 +76,7 @@ public class GameMapComponent extends JComponent {
                 add(pic[i][j]);
             }
         }
-       repaint();
+
     }
 
     @Override
