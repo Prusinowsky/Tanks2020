@@ -17,11 +17,40 @@ Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od któreg
 
 ![](./mockup.png)
 
-#### Tworzenie dokumentacji
+#### Instrukcja 
 
-Komenda potrzebna do wygenerowania dokumentacji
+1. ##### Generowanie dokumentacji 
+
+   Dokumentacja programuj znajduje się w folderze `docs`
+
 
 ```
 javadoc -sourcepath /src -d /docs -subpackages .
 ```
+
+
+
+2. ##### Kompilowanie kodu źródłowego
+
+   Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`
+
+```
+javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Main.java
+```
+
+
+
+3. ##### Uruchamianie programu
+
+```
+java -cp ./out Main
+```
+
+
+
+
+
+
+
+
 

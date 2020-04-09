@@ -15,6 +15,7 @@ import java.util.TimerTask;
 /**
  * Okno Gry
  */
+@SuppressWarnings("serial")
 public class GameWindow extends AbstractWindow
 {
 
@@ -26,6 +27,7 @@ public class GameWindow extends AbstractWindow
     /**
      * Kontruktor inicjalizujący okno gry
      */
+
     public GameWindow()
     {
         Config config = Config.getInstance();
@@ -36,15 +38,15 @@ public class GameWindow extends AbstractWindow
 
         setRefreshTime();
 
-        System.out.println("Ladowanie tekstur");
+        //System.out.println("Ladowanie tekstur");
         TextureLoader textureLoader = new TextureLoader();
         textureLoader.loadAll();
 
-        System.out.println("Ladowanie Map");
+        //System.out.println("Ladowanie Map");
         mapLoader = new MapLoader();
         mapLoader.load();
 
-        map = mapLoader.getMap("Dolina");
+        map = mapLoader.getMap("Wulkan");
 
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {

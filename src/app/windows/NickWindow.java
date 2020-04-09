@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Okno wybory Nicku
  */
+@SuppressWarnings("serial")
 public class NickWindow extends AbstractWindow
 {
     private JLabel lNickTitle;

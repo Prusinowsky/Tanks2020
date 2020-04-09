@@ -9,7 +9,8 @@ import java.awt.*;
 /**
  * Klasa abstrakcyjna zawierająca metody pomocnicze
  */
-abstract public class AbstractWindow extends JFrame implements WindowInterface {
+ @SuppressWarnings("serial")
+public abstract class AbstractWindow extends JFrame implements WindowInterface {
 
     /**
      * Metoda odpowiedzialna za otwarcie okna

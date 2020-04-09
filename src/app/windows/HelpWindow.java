@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Okno pomocy
  */
+@SuppressWarnings("serial")
 public class HelpWindow extends AbstractWindow
 {
     private JLabel lAbout;

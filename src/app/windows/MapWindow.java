@@ -12,10 +12,11 @@ import java.awt.event.*;
 /**
  * Klasa wyboru mapy
  */
+@SuppressWarnings("serial")
 public class MapWindow extends AbstractWindow
 {
     private JButton bOkey, bCancel;
-    private JComboBox cbMaps;
+    private JComboBox <String> cbMaps;
     //private String[] mapsList = {"Polana","Pustynia","Wulkan"};
 
 
@@ -79,7 +80,7 @@ public class MapWindow extends AbstractWindow
         for(Integer i = 0; i < number; i++){
             mapList[i] = config.getProperty("map_name_"+i);
         }
-        cbMaps = new JComboBox(mapList);
+        cbMaps = new JComboBox<String>(mapList);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 2;

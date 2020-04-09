@@ -12,6 +12,7 @@ import java.awt.*;
 /**
  * Główne okno aplikacji - STARTOWE (MENU)
  */
+@SuppressWarnings("serial")
 public class MainWindow extends AbstractWindow
 {
     private JMenu menuFile, menuHelp;

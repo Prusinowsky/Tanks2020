@@ -11,6 +11,7 @@ import java.awt.*;
 /**
  * Okno zawierający najlepsze wyniki
  */
+@SuppressWarnings("serial")
 public class ScoreWindow extends AbstractWindow
 {
     private JLabel lList;

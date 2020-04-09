@@ -12,6 +12,7 @@ import java.awt.event.*;
 /**
  * Okno końca gry
  */
+@SuppressWarnings("serial")
 public class EndGameWindow extends AbstractWindow
 {
     private JLabel lInfo;
