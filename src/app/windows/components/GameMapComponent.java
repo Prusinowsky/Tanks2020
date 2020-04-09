@@ -62,7 +62,7 @@ public class GameMapComponent extends JComponent {
     /**
      * Funkcja renderująca mapę
      */
-    private void renderMap()
+    public void renderMap()
     {
         Integer gridX = map.sizeX;
         Integer gridY = map.sizeY;
