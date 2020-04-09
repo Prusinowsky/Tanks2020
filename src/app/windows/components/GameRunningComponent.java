@@ -17,7 +17,7 @@ public class GameRunningComponent extends JComponent {
     public GameRunningComponent(ConfigInterface config){
         super();
         this.config = config;
-        setLayout(null);
+        setLayout(new BorderLayout());
 
         render();
         setRefreshTime();
@@ -42,17 +42,17 @@ public class GameRunningComponent extends JComponent {
             public void run() {
                 resize = true;
             }
-        }, 0, (int)1000/60);
+        }, 0, (int)1000/30);
     }
 
 
     public void render(){
         removeAll();
 
-        GameMapComponent map = new GameMapComponent(config, (int)(getWidth()*0.8), getHeight());
+        GameMapComponent map = new GameMapComponent(config, getWidth(), getHeight(), 0.8);
         add(map);
 
-        GameHudComponent hud = new GameHudComponent(config, (int)(getWidth()*0.2), getHeight());
+        GameHudComponent hud = new GameHudComponent(config, getWidth(), getHeight(), 0.2);
         add(hud);
 
         revalidate();

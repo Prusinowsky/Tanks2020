@@ -26,12 +26,13 @@ public class GameMapComponent extends JComponent {
 
     private JLabel[][] pic;
 
-    public GameMapComponent(ConfigInterface config, Integer width, Integer height){
+    public GameMapComponent(ConfigInterface config, Integer width, Integer height, Double percent){
         setLayout(null);
+        this.config = config;
         this.width = width;
         this.height = height;
 
-        setSize(width, height);
+        setSize((int)(width*percent), height);
 
         TextureLoader textureLoader = new TextureLoader(config);
         textureLoader.load();

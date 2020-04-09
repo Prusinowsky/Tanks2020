@@ -4,9 +4,7 @@ import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.components.GameRunningComponent;
-import app.windows.components.MenuBarComponent;
-import app.windows.components.MenuStartComponent;
+import app.windows.components.*;
 
 import javax.swing.*;
 import java.awt.*;
