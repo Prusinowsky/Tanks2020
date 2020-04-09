@@ -1,6 +1,4 @@
 import app.config.Config;
-import app.loaders.map.MapLoader;
-import app.loaders.texture.TextureLoader;
 import app.windows.MainWindow;
 
 /**
@@ -16,9 +14,6 @@ public class Main {
     {
         Config config = Config.getInstance();
         config.load();
-
-        MapLoader map = new MapLoader();
-        map.load();
 
         MainWindow app = new MainWindow();
         app.open();

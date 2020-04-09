@@ -13,9 +13,8 @@ public interface MapLoaderInterface {
 
     /**
      * Meotda ładująca mapę
-     * @param config
      */
-    public void load(ConfigInterface config);
+    public void load();
 
     /**
      * Przekształcająca wybraną mapę

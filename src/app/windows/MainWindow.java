@@ -4,10 +4,9 @@ import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.interfaces.WindowInterface;
+import app.windows.components.MenuBarComponent;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Główne okno aplikacji - STARTOWE (MENU)
@@ -15,9 +14,6 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class MainWindow extends AbstractWindow
 {
-    private JMenu menuFile, menuHelp;
-    private JMenuItem mStart, mMap, mScore, mExit, mAbout;
-    private JMenuBar menuBar;
 
     ScoreWindow scoreFrame = new ScoreWindow();
     MapWindow mapFrame = new MapWindow();
@@ -35,29 +31,13 @@ public class MainWindow extends AbstractWindow
         setTitle(config.getProperty("title"));
         setLayout(null);
 
-        menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-        menuFile = new JMenu(config.getProperty("game"));
-        mStart = new JMenuItem(config.getProperty("start"));
-        mMap = new JMenuItem(config.getProperty("choose_map"));
-        mScore = new JMenuItem(config.getProperty("best_scores"));
-        mExit = new JMenuItem(config.getProperty("exit"));
-        menuBar.add(menuFile);
-        menuFile.add(mStart);
-        menuFile.add(mMap);
-        menuFile.add(mScore);
-        menuFile.add(mExit);
-        menuBar.add(Box.createHorizontalGlue());
-        menuHelp = new JMenu(config.getProperty("help"));
-        mAbout = new JMenuItem(config.getProperty("about"));
-        menuBar.add(menuHelp);
-        menuHelp.add(mAbout);
-
-        mStart.addActionListener(new OpenWindowAction(nickFrame));
-        mMap.addActionListener(new OpenWindowAction(mapFrame));
-        mScore.addActionListener(new OpenWindowAction(scoreFrame));
-        mAbout.addActionListener(new OpenWindowAction(helpFrame));
-        mExit.addActionListener(new ExitWindowAction(this));
+        MenuBarComponent menuBar = new MenuBarComponent(config);
+        menuBar.addStartActionListener(new OpenWindowAction(nickFrame));
+        menuBar.addMapActionListener(new OpenWindowAction(mapFrame));
+        menuBar.addScoreActionListener(new OpenWindowAction(scoreFrame));
+        menuBar.addAboutActionListener(new OpenWindowAction(helpFrame));
+        menuBar.addExitActionListener(new ExitWindowAction(this));
+        setJMenuBar(menuBar.getJMenuBar());
 
         centreWindow();
     }

@@ -16,8 +16,8 @@ import java.util.Scanner;
  * go na obiekt Map
  */
 public class MapLoader implements MapLoaderInterface {
-    private ConfigInterface config = null;
-    private TextureLoaderInterface textureLoader = null;
+    private ConfigInterface config;
+    private TextureLoaderInterface textureLoader;
 
     /**
      * Zawiera wszystkie mapy gry
@@ -29,37 +29,33 @@ public class MapLoader implements MapLoaderInterface {
      */
     public MapLoader(){
         TextureLoaderInterface textureLoader = new TextureLoader();
-        textureLoader.loadAll();
-        setTextureLoader(textureLoader);
+        textureLoader.load();
+        this.textureLoader = textureLoader;
+        ConfigInterface config = Config.getInstance();
+        config.load();
+        this.config = config;
     };
 
     /**
      * Konstruktor domsylny
      */
     public MapLoader(TextureLoaderInterface textureLoader){
-        setTextureLoader(textureLoader);
+        this.config = textureLoader.getConfig();
+        this.textureLoader = textureLoader;
+    }
+
+    /**
+     * Konstruktor domsylny
+     */
+    public MapLoader(ConfigInterface config, TextureLoaderInterface textureLoader){
+        this.config = config;
+        this.textureLoader = textureLoader;
     }
 
     /**
      * Laduje mapę
      */
     public void load(){
-        this.config = Config.getInstance();
-        load(this.config);
-    };
-
-    /**
-     * Ustawia texture loader
-     */
-    public void setTextureLoader(TextureLoaderInterface textureLoader){
-        this.textureLoader = textureLoader;
-    }
-
-    /**
-     * Laduje mapę
-     * @param config
-     */
-    public void load(ConfigInterface config){
         Integer number = Integer.parseInt(config.getProperty("map_numbers"));
         maps = new HashMap<String, MapEntity>();
         String pathToMap = config.getProperty("maps_path");
@@ -73,8 +69,10 @@ public class MapLoader implements MapLoaderInterface {
     };
 
     /**
-     * Zwraca obiekt mapy
+     * Zwraca encję mapy
      * @param name
+     * @param path
+     * @param mapPattern
      * @return
      */
     public MapEntity convertToMapEntity(String name, String path, HashMap<Integer, TextureEntity> mapPattern){
@@ -112,11 +110,11 @@ public class MapLoader implements MapLoaderInterface {
      */
     public HashMap<Integer, TextureEntity> loadMapPattern(Integer i){
         HashMap <Integer, TextureEntity> pattern =  new HashMap<Integer, TextureEntity>();
-        pattern.put(0, textureLoader.get(config.getProperty("map_ground_" + i)));
-        pattern.put(1, textureLoader.get(config.getProperty("map_destructible_" + i)));
-        pattern.put(2, textureLoader.get(config.getProperty("map_destroyed_" + i)));
-        pattern.put(3, textureLoader.get(config.getProperty("map_indestructible_" + i)));
-        pattern.put(4, textureLoader.get("Portal"));
+        pattern.put(0, textureLoader.getTexture(config.getProperty("map_ground_" + i)));
+        pattern.put(1, textureLoader.getTexture(config.getProperty("map_destructible_" + i)));
+        pattern.put(2, textureLoader.getTexture(config.getProperty("map_destroyed_" + i)));
+        pattern.put(3, textureLoader.getTexture(config.getProperty("map_indestructible_" + i)));
+        pattern.put(4, textureLoader.getTexture("Portal"));
         return pattern;
     }
 
