@@ -35,7 +35,7 @@ javadoc -sourcepath /src -d /docs -subpackages .
    Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`
 
 ```
-javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Main.java
+javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Bootstrap.java
 ```
 
 
@@ -43,7 +43,7 @@ javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Main.java
 3. ##### Uruchamianie programu
 
 ```
-java -cp ./out Main
+java -cp ./out Bootstrap
 ```
 
 
