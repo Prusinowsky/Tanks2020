@@ -1,10 +1,10 @@
 import app.config.Config;
-import app.windows.MainWindow;
+import app.windows.GameWindow;
 
 /**
  * Główna class, ładująca aplikację
  */
-public class Boostrap {
+public class Bootstrap {
 
     /**
      * Główna metoda, uruchamiana podczas uruchamiania aplikacji
@@ -15,7 +15,7 @@ public class Boostrap {
         Config config = Config.getInstance();
         config.load();
 
-        MainWindow app = new MainWindow();
+        GameWindow app = new GameWindow();
         app.open();
     }
 

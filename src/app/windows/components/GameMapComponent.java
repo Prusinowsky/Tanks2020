@@ -1,38 +1,35 @@
 package app.windows.components;
 
-import app.config.Config;
 import app.config.interfaces.ConfigInterface;
 import app.entities.MapEntity;
 import app.loaders.map.MapLoader;
 import app.loaders.texture.TextureLoader;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Komponent zawierajacy renderujacy mapę
  */
-public class GameMapComponent extends JComponent {
+public class GameMapComponent extends JPanel {
 
     private ConfigInterface config;
-    private Integer width, height;
 
     private MapEntity map;
     private MapLoader mapLoader;
 
     private JLabel[][] pic;
 
-    public GameMapComponent(ConfigInterface config, Integer width, Integer height, Double percent){
-        setLayout(null);
+    /**
+     * Konstrukor Domyslny
+     * @param config
+     */
+    public GameMapComponent(ConfigInterface config){
         this.config = config;
-        this.width = width;
-        this.height = height;
+        setLayout(null);
 
-        setSize((int)(width*percent), height);
+        setSize(new Dimension(500, 500));
 
         TextureLoader textureLoader = new TextureLoader(config);
         textureLoader.load();
@@ -40,9 +37,9 @@ public class GameMapComponent extends JComponent {
         mapLoader = new MapLoader(textureLoader);
         mapLoader.load();
 
-        map = mapLoader.getMap("Dolina");
+        map = mapLoader.getMap("Pustynia");
 
-        render();
+        setVisible(true);
     }
 
     /**
@@ -50,6 +47,7 @@ public class GameMapComponent extends JComponent {
      */
     public void render()
     {
+        removeAll();
 
         Integer gridX = map.sizeX;
         Integer gridY = map.sizeY;
@@ -66,7 +64,6 @@ public class GameMapComponent extends JComponent {
 
         pic = new JLabel[gridX][gridY];
 
-
         for(Integer j=0; j<gridX; j++)
         {
             for(Integer i=0; i<gridY; i++)
@@ -78,6 +75,7 @@ public class GameMapComponent extends JComponent {
             }
         }
 
+        repaint();
     }
 
     @Override

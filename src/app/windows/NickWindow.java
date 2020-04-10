@@ -1,4 +1,5 @@
 package app.windows;
+import app.actions.ChangeStateAction;
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
@@ -19,12 +20,10 @@ public class NickWindow extends AbstractWindow
     private JTextField tNickname;
     private JButton bOk, bCancel;
 
-    GameWindow gameFrame = new GameWindow();
-
     /**
      * Konstrukor odpowiadający za inicjalizację okna wyboru Nicku
      */
-    public NickWindow()
+    public NickWindow(GameWindow gameWindow)
     {
         Config config = Config.getInstance();
 
@@ -43,7 +42,7 @@ public class NickWindow extends AbstractWindow
         addNickLabel(config.getProperty("set_nick"), c,null);
         addNickInput("", c,null);
         addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
-        addOkBtn(config.getProperty("ok"), c, null);
+        addOkBtn(config.getProperty("ok"), c, new ChangeStateAction(gameWindow, "running"));
 
         centreWindow();
     }
@@ -125,7 +124,7 @@ public class NickWindow extends AbstractWindow
         constraints.gridwidth = 1;
         add(bOk, constraints);
         bOk.addActionListener(new ExitWindowAction(this));
-        bOk.addActionListener(new OpenWindowAction(gameFrame));
+        bOk.addActionListener(action);
     }
 
     /**

@@ -3,27 +3,27 @@ package app.windows.components;
 import app.config.interfaces.ConfigInterface;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class GameHudComponent extends JComponent {
-
-    private Integer anchorPointX, anchorPointY;
+/**
+ * Komponent odpowiadający za renderowanie HUD-a
+ */
+public class GameHudComponent extends JPanel {
 
     private JLabel lTime, lHeart[], lLogo;
     private JButton bPause, bExit;
 
-    public GameHudComponent(ConfigInterface config, Integer width, Integer height, Double percent){
+    /**
+     * Konstrukotr dymyślny
+     * @param config
+     */
+    public GameHudComponent(ConfigInterface config){
         setLayout(null);
-
-        setSize((int)(width*percent), height);
-        this.anchorPointX = (int)(width*(1-percent));
-        this.anchorPointY = 0;
-
-        render();
+        setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+        setSize(new Dimension(200, 500));
+        setVisible(true);
     }
 
     /**
@@ -35,11 +35,11 @@ public class GameHudComponent extends JComponent {
         removeAll();
 
         lLogo = new JLabel("TANK 2020");
-        lLogo.setBounds(anchorPointX + 25,20,50,50);
+        lLogo.setBounds( 25,20,50,50);
         add(lLogo);
 
         lTime = new JLabel("0:01:34");           //czas do końca gry będzie ustalany przez silnik
-        lTime.setBounds(anchorPointX + 25,80, 80,20);
+        lTime.setBounds( 25,80, 80,20);
         add(lTime);
 
         Integer numberOfLifes = 3; //będzie pobierana z opcji
@@ -49,18 +49,18 @@ public class GameHudComponent extends JComponent {
         for (Integer i=0; i<numberOfLifes; i++)
         {
             lHeart[i] = new JLabel(picHeart);
-            lHeart[i].setBounds(anchorPointX + 20 + 20*i,120,20,20);
+            lHeart[i].setBounds( 20 + 20*i,120,20,20);
             add(lHeart[i]);
         }
 
         Integer y = getHeight();
 
         bPause = new JButton("Pause");
-        bPause.setBounds(anchorPointX + 20, y - 150, 80,20);
+        bPause.setBounds( (int)(getWidth()*0.1), y - 120, (int)(getWidth()*0.8),40);
         add(bPause);
 
         bExit = new JButton("Exit");
-        bExit.setBounds(anchorPointX + 20,y - 120,80,20);
+        bExit.setBounds( (int)(getWidth()*0.1),y - 60,(int)(getWidth()*0.8),40);
         add(bExit);
 
         repaint();

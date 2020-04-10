@@ -20,7 +20,7 @@
     <entry key="map_name_1">Pustynia</entry>
     <entry key="map_path_1">desert.map</entry>
     <entry key="map_ground_1">Sand</entry>
-    <entry key="map_destructible_1">Cactus</entry>
+    <entry key="map_destructible_1">CactusTop</entry>
     <entry key="map_destroyed_1">CactusDestroyed</entry>
     <entry key="map_indestructible_1">RedStoneNormal</entry>
 
