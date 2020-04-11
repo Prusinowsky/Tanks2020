@@ -1,7 +1,5 @@
 package app.config;
 
-import app.config.interfaces.ConfigInterface;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -30,19 +28,8 @@ public class Config implements ConfigInterface {
      * tego projektu ułatwia dostęp do danych konfiguracyjnych.
      * Używając go mamy tego świadomość.
      */
-    private Config(){
+    public Config(){
 
-    }
-
-    /**
-     * Metoda zwracająca instancję obiektu Konfiguracyjnego,
-     * jeżeli taki nie istnieje, to metoda go stworzy.
-     * @return Config Zwraca obiekt Konifguracyjny
-     */
-    public static Config getInstance(){
-        if(_instance == null)
-            _instance = new Config();
-        return _instance;
     }
 
     /**

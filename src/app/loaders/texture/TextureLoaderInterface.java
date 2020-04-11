@@ -1,6 +1,6 @@
 package app.loaders.texture;
 
-import app.config.interfaces.ConfigInterface;
+import app.config.ConfigInterface;
 import app.entities.TextureEntity;
 
 /**
@@ -29,5 +29,4 @@ public interface TextureLoaderInterface {
      * Mtoda opowiedzialna za zwracanie obiektu konfiguracyjnego
      */
     public ConfigInterface getConfig();
-
 }

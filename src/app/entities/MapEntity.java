@@ -1,11 +1,9 @@
 package app.entities;
 
-import java.awt.*;
-
 /**
  * Obiekt rezprezentujący encję mapy
  */
-public class MapEntity {
+public class MapEntity implements Cloneable {
     /**
      * Nazwa mapy
      */
@@ -35,5 +33,11 @@ public class MapEntity {
     public MapEntity(String name, TextureEntity[][] blocks){
         this.name = name;
         this.blocks = blocks;
+    }
+
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

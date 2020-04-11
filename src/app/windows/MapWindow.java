@@ -1,8 +1,12 @@
 package app.windows;
 
+import app.Container;
+import app.actions.ChangeMapAction;
+import app.actions.ChangeStateAction;
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.config.Config;
+import app.config.ConfigInterface;
 import app.windows.abstracts.AbstractWindow;
 
 import javax.swing.*;
@@ -15,115 +19,93 @@ import java.awt.event.*;
 @SuppressWarnings("serial")
 public class MapWindow extends AbstractWindow
 {
+    private ConfigInterface config;
+    private GameWindow gameWindow;
+    private GridBagConstraints gbc = new GridBagConstraints();
+
     private JButton bOkey, bCancel;
     private JComboBox <String> cbMaps;
-    //private String[] mapsList = {"Polana","Pustynia","Wulkan"};
-
 
     /**
      * Konstruktor odpowiadający za inicjalizację okna mapy
      */
-    public MapWindow()
+    public MapWindow(GameWindow gameWindow)
     {
-        Config config = Config.getInstance();
+        this.gameWindow = gameWindow;
+        this.config = Container.getInstance().provideConfig();
 
         setSize(400,300);
         setTitle(config.getProperty("choose_map"));
 
         GridBagLayout gridbag = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
+
         gridbag.columnWidths = new int[]{120,120};
         gridbag.rowHeights = new int[]{35, 35};
         setLayout(gridbag);
 
-        c.insets = new Insets(5,5,5,5);
-        c.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(5,5,5,5);
+        gbc.fill = GridBagConstraints.BOTH;
 
-        addChooseMapLabel(config.getProperty("choose_map"), c, null);
-        addChooseMapComboBox(c, null, config);
-        addCancelBtn(config.getProperty("cancel"), c, new ExitWindowAction(this));
-        addOkBtn(config.getProperty("ok"), c, new OpenWindowAction(this));
+        addChooseMapLabel();
+        addChooseMapComboBox();
+        addCancelBtn();
+        addOkBtn();
 
         centreWindow();
     }
 
     /**
      * Metoda dodająca etykietę wyboru mapy
-     * @param name Tytuł etykiety
-     * @param constraints
-     * @param action
      */
-    private void addChooseMapLabel(
-            String name,
-            GridBagConstraints constraints,
-            ActionListener action
-    ){
-        JLabel label = new JLabel(name);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 2;
-        add(label, constraints);
+    private void addChooseMapLabel(){
+        JLabel label = new JLabel(config.getProperty("choose_map"));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        add(label, gbc);
     };
 
     /**
      * Metoda dodająca pole wybóru map
-     * @param constraints
-     * @param action
      */
-    private void addChooseMapComboBox(
-            GridBagConstraints constraints,
-            ActionListener action,
-            Config config
-    ){
+    private void addChooseMapComboBox(){
         Integer number = Integer.parseInt(config.getProperty("map_numbers"));
         String[] mapList = new String[number];
         for(Integer i = 0; i < number; i++){
             mapList[i] = config.getProperty("map_name_"+i);
         }
         cbMaps = new JComboBox<String>(mapList);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = 2;
-        add(cbMaps, constraints);
+        cbMaps.addActionListener(new ChangeMapAction());
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        add(cbMaps, gbc);
     };
 
     /**
      * Metoda dodajaca przycisk anuluj
-     * @param name
-     * @param constraints
-     * @param action
      */
-    private void addCancelBtn(
-            String name,
-            GridBagConstraints constraints,
-            ActionListener action
-    ){
-        bOkey = new JButton(name);
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.gridwidth = 1;
-        add(bOkey, constraints);
-        bOkey.addActionListener(action);
+    private void addCancelBtn(){
+        bOkey = new JButton(config.getProperty("cancel"));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        add(bOkey, gbc);
+        bOkey.addActionListener(new ExitWindowAction(this));
     };
 
 
     /**
      * Metoda dodajaca przycisk Ok
-     * @param name
-     * @param constraints
-     * @param action
      */
-    private void addOkBtn(
-            String name,
-            GridBagConstraints constraints,
-            ActionListener action
-    ){
-        bCancel = new JButton(name);
-        constraints.gridx = 1;
-        constraints.gridy = 2;
-        constraints.gridwidth = 1;
-        add(bCancel, constraints);
-        bCancel.addActionListener(action);
+    private void addOkBtn(){
+        bCancel = new JButton(config.getProperty("ok"));
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        add(bCancel, gbc);
+        bCancel.addActionListener(new ExitWindowAction(this));
+        bCancel.addActionListener(new ChangeStateAction(gameWindow, "running"));
     };
 
     /**

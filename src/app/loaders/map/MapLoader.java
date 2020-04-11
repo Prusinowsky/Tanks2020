@@ -1,7 +1,8 @@
 package app.loaders.map;
 
+import app.Container;
 import app.config.Config;
-import app.config.interfaces.ConfigInterface;
+import app.config.ConfigInterface;
 import app.entities.MapEntity;
 import app.entities.TextureEntity;
 import app.loaders.texture.TextureLoader;
@@ -28,12 +29,8 @@ public class MapLoader implements MapLoaderInterface {
      * Konstruktor domyslny
      */
     public MapLoader(){
-        TextureLoaderInterface textureLoader = new TextureLoader();
-        textureLoader.load();
-        this.textureLoader = textureLoader;
-        ConfigInterface config = Config.getInstance();
-        config.load();
-        this.config = config;
+        this.config = Container.getInstance().provideConfig();
+        this.textureLoader = Container.getInstance().provideTextureLoader();
     };
 
     /**

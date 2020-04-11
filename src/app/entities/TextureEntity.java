@@ -1,11 +1,12 @@
 package app.entities;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  * Encja tekstury
  */
-public class TextureEntity {
+public class TextureEntity implements Cloneable {
     /**
      * Nazwa
      */
@@ -22,6 +23,11 @@ public class TextureEntity {
     public Image image;
 
     /**
+     * Obraz
+     */
+    public ImageIcon imageIcon;
+
+    /**
      * Konstrukor domyślny
      */
     public TextureEntity(){}
@@ -35,5 +41,12 @@ public class TextureEntity {
         this.name = name;
         this.path = path;
         this.image = image;
+        this.imageIcon = new ImageIcon(image);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        TextureEntity copied = (TextureEntity)super.clone();
+        return copied;
     }
 }

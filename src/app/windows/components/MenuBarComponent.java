@@ -1,8 +1,6 @@
 package app.windows.components;
 
-import app.actions.ExitWindowAction;
-import app.actions.OpenWindowAction;
-import app.config.interfaces.ConfigInterface;
+import app.config.ConfigInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

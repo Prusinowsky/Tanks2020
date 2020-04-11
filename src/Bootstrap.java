@@ -1,3 +1,4 @@
+import app.Container;
 import app.config.Config;
 import app.windows.GameWindow;
 
@@ -12,8 +13,7 @@ public class Bootstrap {
      */
     public static void main(String[] args)
     {
-        Config config = Config.getInstance();
-        config.load();
+        Container.getInstance();
 
         GameWindow app = new GameWindow();
         app.open();

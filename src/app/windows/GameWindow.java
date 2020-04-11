@@ -1,13 +1,14 @@
 package app.windows;
 
+import app.Container;
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
-import app.config.Config;
+import app.config.ConfigInterface;
+import app.windows.abstracts.AbstractStateComponent;
 import app.windows.abstracts.AbstractWindow;
 import app.windows.components.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.util.HashMap;
 
@@ -17,8 +18,10 @@ import java.util.HashMap;
 @SuppressWarnings("serial")
 public class GameWindow extends AbstractWindow
 {
+    private ConfigInterface config;
+
     private String currentState;
-    private HashMap <String, JComponent> states = new HashMap<String, JComponent>();
+    private HashMap <String, AbstractStateComponent> states = new HashMap<String, AbstractStateComponent>();
 
     private ScoreWindow scoreFrame;
     private MapWindow mapFrame;
@@ -30,7 +33,7 @@ public class GameWindow extends AbstractWindow
      */
     public GameWindow()
     {
-        Config config = Config.getInstance();
+        config = Container.getInstance().provideConfig();
 
         setSize(1000,700);
         setTitle(config.getProperty("title"));
@@ -54,28 +57,39 @@ public class GameWindow extends AbstractWindow
     }
 
 
+    /**
+     * Metoda inicjalizujaca
+     */
     public void init(){
         scoreFrame = new ScoreWindow();
-        mapFrame = new MapWindow();
+        mapFrame = new MapWindow(this);
         helpFrame = new HelpWindow();
         nickFrame = new NickWindow(this);
     }
 
+    /**
+     * Metoda inicjalizująca stany
+     */
     public void initStates(){
-        Config config = Config.getInstance();
-
         states.put("menu", new MenuStartComponent(this, nickFrame));
-        states.put("running", new GameRunningComponent(config));
-
+        states.put("running", new GameRunningComponent( this, config));
     }
 
+    /**
+     * Meotda odpowiadajaca za renderowanie aktywnego statnu
+     */
     public void render(){
-        JComponent newState = states.get(currentState);
+        AbstractStateComponent newState = states.get(currentState);
         newState.setSize(new Dimension((int)(getWidth() * 0.95), (int)(getHeight()*0.9)));
+        newState.start();
         add(newState);
         repaint();
     }
 
+    /**
+     * Metoda odpowiadajaca za zmiane stanu
+     * @param stateName
+     */
     public void changeState(String stateName){
         remove(states.get(currentState)); // Delete previous state
         this.currentState  = stateName;

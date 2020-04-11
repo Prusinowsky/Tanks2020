@@ -1,9 +1,9 @@
 package app.loaders.texture;
 
+import app.Container;
 import app.config.Config;
-import app.config.interfaces.ConfigInterface;
+import app.config.ConfigInterface;
 import app.entities.TextureEntity;
-import app.loaders.texture.TextureLoaderInterface;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -22,8 +22,8 @@ public class TextureLoader implements TextureLoaderInterface {
      * Konstruktor domyślny
      */
     public TextureLoader(){
-        config = Config.getInstance();
-        config.load();
+        Container container = Container.getInstance();
+        config = container.provideConfig();
     }
 
     /**

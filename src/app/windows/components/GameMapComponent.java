@@ -1,13 +1,14 @@
 package app.windows.components;
 
-import app.config.interfaces.ConfigInterface;
+import app.Container;
+import app.config.ConfigInterface;
 import app.entities.MapEntity;
-import app.loaders.map.MapLoader;
-import app.loaders.texture.TextureLoader;
+import app.loaders.map.MapLoaderInterface;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Komponent zawierajacy renderujacy mapę
@@ -17,9 +18,7 @@ public class GameMapComponent extends JPanel {
     private ConfigInterface config;
 
     private MapEntity map;
-    private MapLoader mapLoader;
-
-    private JLabel[][] pic;
+    private MapLoaderInterface mapLoader;
 
     /**
      * Konstrukor Domyslny
@@ -31,23 +30,34 @@ public class GameMapComponent extends JPanel {
 
         setSize(new Dimension(500, 500));
 
-        TextureLoader textureLoader = new TextureLoader(config);
-        textureLoader.load();
-
-        mapLoader = new MapLoader(textureLoader);
-        mapLoader.load();
-
-        map = mapLoader.getMap("Pustynia");
+        mapLoader = Container.getInstance().provideMapLoader();
+        map = mapLoader.getMap(Container.getInstance().provideOptions().mapName);
 
         setVisible(true);
     }
 
     /**
-     * Funkcja renderująca mapę
+     * Metoda renderujaca mapę co 60 FPS
      */
-    public void render()
-    {
-        removeAll();
+    public void renderPeriodically(){
+        java.util.Timer time = new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                repaint();
+            }
+        }, 0, 1000/60);
+    }
+
+
+    /**
+     * Metoda odpowiadajaca za rysowanie mapy
+     * @param g
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D graphic = (Graphics2D)g;
 
         Integer gridX = map.sizeX;
         Integer gridY = map.sizeY;
@@ -62,24 +72,14 @@ public class GameMapComponent extends JPanel {
         Integer offsetX = (getWidth() - gridX*sWidth)/2;
         Integer offsetY = (getHeight() - gridY*sHeight)/2;
 
-        pic = new JLabel[gridX][gridY];
-
-        for(Integer j=0; j<gridX; j++)
+        for(Integer j=0; j < gridX; j++)
         {
-            for(Integer i=0; i<gridY; i++)
+            for(Integer i=0; i < gridY; i++)
             {
-                Image image = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
-                pic[i][j] = new JLabel(new ImageIcon(image));
-                pic[i][j].setBounds(offsetX + sWidth*i,offsetY + sHeight*j, sWidth, sHeight);
-                add(pic[i][j]);
+                Image scaled = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
+                graphic.drawImage(scaled, offsetX + sWidth*i,offsetY + sHeight*j, null);
             }
         }
 
-        repaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
     }
 }

@@ -4,12 +4,12 @@ import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.windows.GameWindow;
 import app.windows.NickWindow;
+import app.windows.abstracts.AbstractStateComponent;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
-public class MenuStartComponent extends JComponent {
+public class MenuStartComponent extends AbstractStateComponent {
 
     private GameWindow gameWindow;
     private NickWindow nickWindow;
@@ -19,10 +19,13 @@ public class MenuStartComponent extends JComponent {
         this.gameWindow = gameWindow;
         this.nickWindow = nickWindow;
         setLayout(new GridBagLayout());
-        render();
+
     }
 
-    private void render(){
+    /**
+     * Metoda odpowiadająca za inicjalizację stanu
+     */
+    public void start(){
 
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 5, 5);

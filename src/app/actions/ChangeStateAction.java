@@ -8,15 +8,15 @@ import java.awt.event.ActionListener;
 public class ChangeStateAction implements ActionListener {
 
     private GameWindow gameWindow;
-    private String stateName;
+    private String toState;
 
-    public ChangeStateAction(GameWindow gameWindow, String stateName){
+    public ChangeStateAction(GameWindow gameWindow, String toState){
         this.gameWindow = gameWindow;
-        this.stateName = stateName;
+        this.toState = toState;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gameWindow.changeState(stateName);
+        gameWindow.changeState(toState);
     }
 }
