@@ -6,7 +6,9 @@ import app.actions.OpenWindowAction;
 import app.config.ConfigInterface;
 import app.windows.abstracts.AbstractStateComponent;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.components.*;
+import app.windows.views.GameRunningView;
+import app.windows.components.MenuBarComponent;
+import app.windows.views.MenuStartView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,9 +26,9 @@ public class GameWindow extends AbstractWindow
     private HashMap <String, AbstractStateComponent> states = new HashMap<String, AbstractStateComponent>();
 
     private ScoreWindow scoreFrame;
-    private MapWindow mapFrame;
+    private ChooseMapWindow mapFrame;
     private HelpWindow helpFrame;
-    private NickWindow nickFrame;
+    private SetNickWindow nickFrame;
 
     /**
      * Kontruktor inicjalizujący główne okno apliakcji
@@ -62,17 +64,17 @@ public class GameWindow extends AbstractWindow
      */
     public void init(){
         scoreFrame = new ScoreWindow();
-        mapFrame = new MapWindow(this);
+        mapFrame = new ChooseMapWindow(this);
         helpFrame = new HelpWindow();
-        nickFrame = new NickWindow(this);
+        nickFrame = new SetNickWindow(this);
     }
 
     /**
      * Metoda inicjalizująca stany
      */
     public void initStates(){
-        states.put("menu", new MenuStartComponent(this, nickFrame));
-        states.put("running", new GameRunningComponent( this, config));
+        states.put("menu", new MenuStartView(this, nickFrame));
+        states.put("running", new GameRunningView( this, config));
     }
 
     /**

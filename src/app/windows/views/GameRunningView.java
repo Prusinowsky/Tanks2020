@@ -1,10 +1,11 @@
-package app.windows.components;
+package app.windows.views;
 
 import app.config.ConfigInterface;
 import app.windows.GameWindow;
 import app.windows.abstracts.AbstractStateComponent;
+import app.windows.components.GameHudComponent;
+import app.windows.components.GameMapComponent;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -12,7 +13,7 @@ import java.awt.event.ComponentEvent;
 /**
  * Komponent odpowiadajacy za renderowanie gry
  */
-public class GameRunningComponent extends AbstractStateComponent {
+public class GameRunningView extends AbstractStateComponent {
 
     private ConfigInterface config;
     private GameWindow gameWindow;
@@ -21,7 +22,7 @@ public class GameRunningComponent extends AbstractStateComponent {
      * Konstruktor Domyslny
      * @param config
      */
-    public GameRunningComponent(GameWindow gameWindow, ConfigInterface config){
+    public GameRunningView(GameWindow gameWindow, ConfigInterface config){
         super();
         this.config = config;
         this.gameWindow = gameWindow;

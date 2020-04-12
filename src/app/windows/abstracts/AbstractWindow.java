@@ -1,7 +1,6 @@
 package app.windows.abstracts;
 
-import app.windows.NickWindow;
-import app.windows.interfaces.WindowInterface;
+import app.windows.WindowInterface;
 
 import javax.swing.*;
 import java.awt.*;

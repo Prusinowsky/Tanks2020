@@ -17,7 +17,7 @@ import java.awt.event.*;
  * Klasa wyboru mapy
  */
 @SuppressWarnings("serial")
-public class MapWindow extends AbstractWindow
+public class ChooseMapWindow extends AbstractWindow
 {
     private ConfigInterface config;
     private GameWindow gameWindow;
@@ -29,7 +29,7 @@ public class MapWindow extends AbstractWindow
     /**
      * Konstruktor odpowiadający za inicjalizację okna mapy
      */
-    public MapWindow(GameWindow gameWindow)
+    public ChooseMapWindow(GameWindow gameWindow)
     {
         this.gameWindow = gameWindow;
         this.config = Container.getInstance().provideConfig();

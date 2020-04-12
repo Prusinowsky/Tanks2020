@@ -1,6 +1,6 @@
 package app.actions;
 
-import app.windows.interfaces.WindowInterface;
+import app.windows.WindowInterface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

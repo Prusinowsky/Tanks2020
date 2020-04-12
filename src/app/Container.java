@@ -17,7 +17,7 @@ public class Container {
     private TextureLoaderInterface textureLoader;
     private MapLoaderInterface mapLoader;
 
-    public Container(){}
+    private Container(){}
 
     public static Container getInstance(){
         if(instance == null)

@@ -1,20 +1,20 @@
-package app.windows.components;
+package app.windows.views;
 
 import app.actions.ExitWindowAction;
 import app.actions.OpenWindowAction;
 import app.windows.GameWindow;
-import app.windows.NickWindow;
+import app.windows.SetNickWindow;
 import app.windows.abstracts.AbstractStateComponent;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuStartComponent extends AbstractStateComponent {
+public class MenuStartView extends AbstractStateComponent {
 
     private GameWindow gameWindow;
-    private NickWindow nickWindow;
+    private SetNickWindow nickWindow;
 
-    public MenuStartComponent(GameWindow gameWindow, NickWindow nickWindow){
+    public MenuStartView(GameWindow gameWindow, SetNickWindow nickWindow){
         super();
         this.gameWindow = gameWindow;
         this.nickWindow = nickWindow;

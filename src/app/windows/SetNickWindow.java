@@ -2,21 +2,17 @@ package app.windows;
 import app.Container;
 import app.actions.ChangeStateAction;
 import app.actions.ExitWindowAction;
-import app.actions.OpenWindowAction;
-import app.config.Config;
 import app.config.ConfigInterface;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 /**
  * Okno wybory Nicku
  */
 @SuppressWarnings("serial")
-public class NickWindow extends AbstractWindow
+public class SetNickWindow extends AbstractWindow
 {
     private ConfigInterface config;
     private GameWindow gameWindow;
@@ -29,7 +25,7 @@ public class NickWindow extends AbstractWindow
     /**
      * Konstrukor odpowiadający za inicjalizację okna wyboru Nicku
      */
-    public NickWindow(GameWindow gameWindow)
+    public SetNickWindow(GameWindow gameWindow)
     {
         config = Container.getInstance().provideConfig();
         this.gameWindow = gameWindow;

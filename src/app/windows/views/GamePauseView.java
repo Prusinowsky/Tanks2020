@@ -1,16 +1,16 @@
-package app.windows.components;
+package app.windows.views;
 
 import javax.swing.*;
 
 /**
  * Komponent odpowiadajacy za zapauzowanie gry
  */
-public class GamePauseComponent extends JPanel {
+public class GamePauseView extends JPanel {
 
     /**
      * Konstruktor domyslny
      */
-    public GamePauseComponent(){
+    public GamePauseView(){
         super();
     }
 }

@@ -1,16 +1,16 @@
-package app.windows.components;
+package app.windows.views;
 
 import javax.swing.*;
 
 /**
  * Komponent końca gry
  */
-public class GameEndComponent extends JComponent {
+public class GameEndView extends JComponent {
 
     /**
      * Konstruktor domyślny
      */
-    public GameEndComponent(){
+    public GameEndView(){
         super();
     }
 }

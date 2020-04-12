@@ -1,13 +1,10 @@
 package app.windows;
 import app.Container;
 import app.actions.ExitWindowAction;
-import app.config.Config;
 import app.config.ConfigInterface;
 import app.windows.abstracts.AbstractWindow;
-import app.windows.interfaces.WindowInterface;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
 
 /**
