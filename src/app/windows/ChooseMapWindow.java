@@ -1,17 +1,12 @@
 package app.windows;
 
 import app.Container;
-import app.actions.ChangeMapAction;
-import app.actions.ChangeStateAction;
-import app.actions.ExitWindowAction;
-import app.actions.OpenWindowAction;
-import app.config.Config;
 import app.config.ConfigInterface;
 import app.windows.abstracts.AbstractWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 
 /**
  * Klasa wyboru mapy
@@ -20,18 +15,16 @@ import java.awt.event.*;
 public class ChooseMapWindow extends AbstractWindow
 {
     private ConfigInterface config;
-    private GameWindow gameWindow;
     private GridBagConstraints gbc = new GridBagConstraints();
 
-    private JButton bOkey, bCancel;
     private JComboBox <String> cbMaps;
+    private JButton bCancel, bOk;
 
     /**
      * Konstruktor odpowiadający za inicjalizację okna mapy
      */
-    public ChooseMapWindow(GameWindow gameWindow)
+    public ChooseMapWindow()
     {
-        this.gameWindow = gameWindow;
         this.config = Container.getInstance().provideConfig();
 
         setSize(400,300);
@@ -50,6 +43,9 @@ public class ChooseMapWindow extends AbstractWindow
         addChooseMapComboBox();
         addCancelBtn();
         addOkBtn();
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
 
         centreWindow();
     }
@@ -75,7 +71,6 @@ public class ChooseMapWindow extends AbstractWindow
             mapList[i] = config.getProperty("map_name_"+i);
         }
         cbMaps = new JComboBox<String>(mapList);
-        cbMaps.addActionListener(new ChangeMapAction());
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
@@ -86,12 +81,11 @@ public class ChooseMapWindow extends AbstractWindow
      * Metoda dodajaca przycisk anuluj
      */
     private void addCancelBtn(){
-        bOkey = new JButton(config.getProperty("cancel"));
+        bOk = new JButton(config.getProperty("cancel"));
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
-        add(bOkey, gbc);
-        bOkey.addActionListener(new ExitWindowAction(this));
+        add(bOk, gbc);
     };
 
 
@@ -104,25 +98,18 @@ public class ChooseMapWindow extends AbstractWindow
         gbc.gridy = 2;
         gbc.gridwidth = 1;
         add(bCancel, gbc);
-        bCancel.addActionListener(new ExitWindowAction(this));
-        bCancel.addActionListener(new ChangeStateAction(gameWindow, "running"));
     };
 
-    /**
-     * Metoda implementująca otwarcie okna
-     */
-    public void open()
-    {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+    public void addChooseMapActionListener(ActionListener action){
+        cbMaps.addActionListener(action);
     }
 
-    /**
-     * Metoda implementująca zamknięcie okna
-     */
-    public void close()
-    {
-        dispose();
+    public void addCancelActionListener(ActionListener action){
+        bCancel.addActionListener(action);
+    }
+
+    public void addOkActionListener(ActionListener action){
+        bOk.addActionListener(action);
     }
 
 }

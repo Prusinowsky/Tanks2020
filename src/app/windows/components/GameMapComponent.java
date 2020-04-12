@@ -46,7 +46,7 @@ public class GameMapComponent extends JPanel {
             public void run() {
                 repaint();
             }
-        }, 0, 1000/120);
+        }, 0, 1000/30);
     }
 
 

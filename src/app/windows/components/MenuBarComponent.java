@@ -50,7 +50,7 @@ public class MenuBarComponent extends JMenuBar {
         mStart.addActionListener(action);
     }
 
-    public void addMapActionListener(ActionListener action){
+    public void addMapChooseActionListener(ActionListener action){
         mMap.addActionListener(action);
     }
 

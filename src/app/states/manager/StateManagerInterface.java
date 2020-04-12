@@ -11,6 +11,11 @@ public interface StateManagerInterface {
     public void execute();
 
     /**
+     * Zmaina stanu
+     */
+    public void changeStateTo(String toState);
+
+    /**
      * Konczy program
      */
     public void exit();

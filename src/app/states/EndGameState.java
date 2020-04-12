@@ -1,6 +1,6 @@
 package app.states;
 
-public class NewGameState implements StateInterface {
+public class EndGameState implements StateInterface {
 
     @Override
     public void start() {

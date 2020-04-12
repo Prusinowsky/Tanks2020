@@ -1,19 +1,17 @@
 package app.windows.components;
 
-import app.actions.ChangeStateAction;
 import app.config.ConfigInterface;
-import app.windows.GameWindow;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Komponent odpowiadający za renderowanie HUD-a
  */
 public class GameHudComponent extends JPanel {
 
-    private GameWindow gameWindow;
     private JLabel lTime, lHeart[], lLogo;
     private JButton bPause, bExit;
 
@@ -21,13 +19,12 @@ public class GameHudComponent extends JPanel {
      * Konstrukotr dymyślny
      * @param config
      */
-    public GameHudComponent(ConfigInterface config, GameWindow gameWindow){
-        this.gameWindow = gameWindow;
-
+    public GameHudComponent(ConfigInterface config){
         setLayout(null);
         setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         setSize(new Dimension(200, 500));
         setVisible(true);
+        render();
     }
 
     /**
@@ -65,12 +62,18 @@ public class GameHudComponent extends JPanel {
 
         bExit = new JButton("Exit");
         bExit.setBounds( (int)(getWidth()*0.1),y - 60,(int)(getWidth()*0.8),40);
-        bExit.addActionListener(new ChangeStateAction(gameWindow, "menu"));
         add(bExit);
 
         repaint();
     }
 
+    public void addPauseActionListener(ActionListener action){
+        bPause.addActionListener(action);
+    }
+
+    public void addExitActionListener(ActionListener action){
+        bExit.addActionListener(action);
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

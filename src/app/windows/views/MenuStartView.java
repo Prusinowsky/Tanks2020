@@ -1,31 +1,23 @@
 package app.windows.views;
 
-import app.actions.ExitWindowAction;
-import app.actions.OpenWindowAction;
-import app.windows.GameWindow;
-import app.windows.SetNickWindow;
-import app.windows.abstracts.AbstractStateComponent;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class MenuStartView extends AbstractStateComponent {
+public class MenuStartView extends JComponent {
 
-    private GameWindow gameWindow;
-    private SetNickWindow nickWindow;
+    private JButton bStart, bExit;
 
-    public MenuStartView(GameWindow gameWindow, SetNickWindow nickWindow){
+    public MenuStartView(){
         super();
-        this.gameWindow = gameWindow;
-        this.nickWindow = nickWindow;
         setLayout(new GridBagLayout());
-
+        init();
     }
 
     /**
      * Metoda odpowiadająca za inicjalizację stanu
      */
-    public void start(){
+    private void init(){
 
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 5, 5);
@@ -37,17 +29,22 @@ public class MenuStartView extends AbstractStateComponent {
         c.gridy = 0;
         add(welcome, c);
 
-        JButton start = new JButton("Start");
-        start.addActionListener(new OpenWindowAction(nickWindow));
+        bStart = new JButton("Start");
         c.gridx = 0;
         c.gridy = 1;
-        add(start, c);
+        add(bStart, c);
 
-        JButton exit = new JButton("Wyjdź z gry");
-        exit.addActionListener(new ExitWindowAction(gameWindow));
+        bExit = new JButton("Wyjdź z gry");
         c.gridx = 0;
         c.gridy = 2;
-        add(exit, c);
+        add(bExit, c);
+    }
 
+    public void addStartActionListener(ActionListener action){
+        bStart.addActionListener(action);
+    }
+
+    public void addExitActionListener(ActionListener action){
+        bExit.addActionListener(action);
     }
 }

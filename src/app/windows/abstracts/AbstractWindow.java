@@ -1,7 +1,5 @@
 package app.windows.abstracts;
 
-import app.windows.WindowInterface;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,17 +7,7 @@ import java.awt.*;
  * Klasa abstrakcyjna zawierająca metody pomocnicze
  */
  @SuppressWarnings("serial")
-public abstract class AbstractWindow extends JFrame implements WindowInterface {
-
-    /**
-     * Metoda odpowiedzialna za otwarcie okna
-     */
-    abstract public void open();
-
-    /**
-     * Metoda odpowiedzialna za zakmnięcie okna
-     */
-    abstract public void close();
+public abstract class AbstractWindow extends JFrame {
 
     /**
      * Metoda centrująca położenie okna

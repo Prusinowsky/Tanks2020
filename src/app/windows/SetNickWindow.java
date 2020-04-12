@@ -1,12 +1,11 @@
 package app.windows;
 import app.Container;
-import app.actions.ChangeStateAction;
-import app.actions.ExitWindowAction;
 import app.config.ConfigInterface;
 import app.windows.abstracts.AbstractWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Okno wybory Nicku
@@ -15,7 +14,6 @@ import java.awt.*;
 public class SetNickWindow extends AbstractWindow
 {
     private ConfigInterface config;
-    private GameWindow gameWindow;
     private GridBagConstraints gbc = new GridBagConstraints();
 
     private JLabel lNickTitle;
@@ -25,10 +23,9 @@ public class SetNickWindow extends AbstractWindow
     /**
      * Konstrukor odpowiadający za inicjalizację okna wyboru Nicku
      */
-    public SetNickWindow(GameWindow gameWindow)
+    public SetNickWindow()
     {
         config = Container.getInstance().provideConfig();
-        this.gameWindow = gameWindow;
 
         setSize(300,250);
         setTitle(config.getProperty("nick_window_title"));
@@ -81,7 +78,6 @@ public class SetNickWindow extends AbstractWindow
         gbc.gridy = 2;
         gbc.gridwidth = 1;
         add(bCancel, gbc);
-        bCancel.addActionListener(new ExitWindowAction(this));
     }
 
     /**
@@ -93,25 +89,17 @@ public class SetNickWindow extends AbstractWindow
         gbc.gridy = 2;
         gbc.gridwidth = 1;
         add(bOk, gbc);
-        bOk.addActionListener(new ExitWindowAction(this));
-        bOk.addActionListener(new ChangeStateAction(gameWindow, "running"));
     }
 
-    /**
-     * Metoda implementująca otwarcie okna
-     */
-    public void open()
-    {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+    public void addSetNameActionListener(ActionListener action){
+        tNickname.addActionListener(action);
     }
 
-    /**
-     * Metoda implementująca zamknięcie okna
-     */
-    public void close()
-    {
-        dispose();
+    public void addCancelActionListener(ActionListener action){
+        bCancel.addActionListener(action);
     }
 
+    public void addOklActionListener(ActionListener action){
+        bOk.addActionListener(action);
+    }
 }
