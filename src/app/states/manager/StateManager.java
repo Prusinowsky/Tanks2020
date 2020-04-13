@@ -2,10 +2,7 @@ package app.states.manager;
 
 import app.Container;
 import app.states.*;
-import app.windows.ChooseMapWindow;
-import app.windows.GameWindow;
-import app.windows.HelpWindow;
-import app.windows.ScoreWindow;
+import app.windows.*;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -46,7 +43,18 @@ public class StateManager implements StateManagerInterface {
      */
     private void init(){
         game = new GameWindow();
-        game.addMenuStartActionListener(e -> changeStateTo("running-game"));
+        game.addMenuStartActionListener(e -> {
+            SetNickWindow nick = new SetNickWindow();
+            nick.addSetNameActionListener(event -> {
+                Container.getInstance().provideOptions().nickName = nick.getNickInput().getText();
+            });
+            nick.addCancelActionListener(event -> nick.dispose());
+            nick.addOklActionListener(event -> {
+                nick.dispose();
+                Container.getInstance().provideOptions().nickName = nick.getNickInput().getText();
+                changeStateTo("running-game");
+            });
+        });
         game.addMenuMapChooseActionListener(e -> {
             ChooseMapWindow map = new ChooseMapWindow();
             map.addChooseMapActionListener(event -> {
@@ -72,10 +80,7 @@ public class StateManager implements StateManagerInterface {
      */
     private void initStates(){
         states.put("welcome", new WelcomeState(this, game));
-        states.put("new-game", new NewGameState());
         states.put("running-game", new RunningGameState(this, game));
-        states.put("pause-game", new PauseGameState());
-        states.put("end-game", new PauseGameState());
     }
 
     @Override

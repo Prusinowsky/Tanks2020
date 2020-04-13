@@ -44,8 +44,8 @@ public class ChooseMapWindow extends AbstractWindow
         addCancelBtn();
         addOkBtn();
 
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
 
         centreWindow();
     }
@@ -71,6 +71,7 @@ public class ChooseMapWindow extends AbstractWindow
             mapList[i] = config.getProperty("map_name_"+i);
         }
         cbMaps = new JComboBox<String>(mapList);
+        cbMaps.setSelectedItem(Container.getInstance().provideOptions().mapName);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;

@@ -39,7 +39,6 @@ public class GameWindow extends AbstractWindow
         centreWindow();
     }
 
-
     public void addMenuStartActionListener(ActionListener action){
         menuBar.addStartActionListener(action);
     }

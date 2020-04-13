@@ -24,7 +24,35 @@ public class GameHudComponent extends JPanel {
         setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         setSize(new Dimension(200, 500));
         setVisible(true);
+
+        init();
         render();
+    }
+
+    /**
+     * Inicjalizacja elementów
+     */
+    public void init(){
+        lLogo = new JLabel("TANK 2020");
+        add(lLogo);
+
+        lTime = new JLabel("0:01:34");
+        add(lTime);
+
+        Integer numberOfLifes = 3; //będzie pobierana z opcji
+        lHeart = new JLabel[numberOfLifes];
+        for (Integer i=0; i<numberOfLifes; i++)
+        {
+            ImageIcon picHeart = new ImageIcon("assets/textures/hud/life.png");
+            lHeart[i] = new JLabel(picHeart);
+            add(lHeart[i]);
+        }
+
+        bPause = new JButton("Pauza");
+        add(bPause);
+
+        bExit = new JButton("Powrót");
+        add(bExit);
     }
 
     /**
@@ -33,37 +61,22 @@ public class GameHudComponent extends JPanel {
 
     public void render()
     {
-        removeAll();
 
-        lLogo = new JLabel("TANK 2020");
         lLogo.setBounds( 25,20,50,50);
-        add(lLogo);
-
-        lTime = new JLabel("0:01:34");           //czas do końca gry będzie ustalany przez silnik
         lTime.setBounds( 25,80, 80,20);
-        add(lTime);
 
         Integer numberOfLifes = 3; //będzie pobierana z opcji
-        lHeart = new JLabel[numberOfLifes];
-        ImageIcon picHeart = new ImageIcon("assets/textures/hud/life.png");
 
         for (Integer i=0; i<numberOfLifes; i++)
         {
-            lHeart[i] = new JLabel(picHeart);
             lHeart[i].setBounds( 20 + 20*i,120,20,20);
-            add(lHeart[i]);
         }
 
         Integer y = getHeight();
-
-        bPause = new JButton("Pause");
         bPause.setBounds( (int)(getWidth()*0.1), y - 120, (int)(getWidth()*0.8),40);
-        add(bPause);
-
-        bExit = new JButton("Exit");
         bExit.setBounds( (int)(getWidth()*0.1),y - 60,(int)(getWidth()*0.8),40);
-        add(bExit);
 
+        revalidate();
         repaint();
     }
 

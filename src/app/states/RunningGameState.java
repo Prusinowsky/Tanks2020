@@ -19,8 +19,8 @@ public class RunningGameState implements StateInterface {
     @Override
     public void start() {
         runningView = new GameRunningView();
-        runningView.addHudPauseActionListener(e -> System.out.println("Pause"));
-        runningView.addHudExitActionListener(e -> System.out.println("Exit"));
+        runningView.addHudPauseActionListener(e -> System.out.println("Michal zrobisz to co nie? :D"));
+        runningView.addHudExitActionListener(e -> manager.changeStateTo("welcome"));
         game.add(runningView);
         game.revalidate();
         game.repaint();

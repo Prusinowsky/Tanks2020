@@ -1,11 +1,10 @@
 package app.states;
 
+import app.Container;
 import app.states.manager.StateManagerInterface;
 import app.windows.GameWindow;
+import app.windows.SetNickWindow;
 import app.windows.views.MenuStartView;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Stan początku gry
@@ -24,7 +23,18 @@ public class WelcomeState implements StateInterface {
     @Override
     public void start() {
         menu = new MenuStartView();
-        menu.addStartActionListener(e -> manager.changeStateTo("running-game"));
+        menu.addStartActionListener(e-> {
+            SetNickWindow nick = new SetNickWindow();
+            nick.addSetNameActionListener(event -> {
+                Container.getInstance().provideOptions().nickName = nick.getNickInput().getText();
+            });
+            nick.addCancelActionListener(event -> nick.dispose());
+            nick.addOklActionListener(event -> {
+                nick.dispose();
+                Container.getInstance().provideOptions().nickName = nick.getNickInput().getText();
+                manager.changeStateTo("running-game");
+            });
+        });
         menu.addExitActionListener(e -> manager.exit());
         game.add(menu);
         game.revalidate();

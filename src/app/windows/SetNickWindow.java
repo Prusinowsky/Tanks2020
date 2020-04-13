@@ -43,6 +43,9 @@ public class SetNickWindow extends AbstractWindow
         addCancelBtn();
         addOkBtn();
 
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
+
         centreWindow();
     }
 
@@ -67,6 +70,10 @@ public class SetNickWindow extends AbstractWindow
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         add(tNickname, gbc);
+    }
+
+    public JTextField getNickInput(){
+        return tNickname;
     }
 
     /**
