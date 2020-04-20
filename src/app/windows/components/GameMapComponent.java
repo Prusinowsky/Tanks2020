@@ -26,8 +26,8 @@ public class GameMapComponent extends JPanel {
      */
     public GameMapComponent(ConfigInterface config){
         this.config = config;
-        setLayout(null);
 
+        setLayout(null);
         setSize(new Dimension(500, 500));
 
         mapLoader = Container.getInstance().provideMapLoader();
@@ -61,8 +61,8 @@ public class GameMapComponent extends JPanel {
 
         Integer gridX = map.sizeX;
         Integer gridY = map.sizeY;
-        Integer width = (int)(getWidth()*0.95);
-        Integer height = (int)(getHeight() *0.95);
+        Integer width = (int)(getWidth() * 0.95);
+        Integer height = (int)(getHeight() * 0.95);
 
         if(width < 10 || height < 10) return;
 

@@ -35,11 +35,9 @@ public class MenuStartView extends JPanel {
      */
     private void init(){
         bStart = new JButton("Start");
-        bStart.setBounds(getWidth()/2, getHeight()/2, 150, 25);
         add(bStart);
 
         bExit = new JButton("Wyjdź z gry");
-        bExit.setBounds(getWidth()/2, getHeight()/2 + 40, 150, 25);
         add(bExit);
     }
 

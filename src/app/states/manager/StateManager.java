@@ -1,6 +1,7 @@
 package app.states.manager;
 
 import app.Container;
+import app.engine.EngineInterface;
 import app.states.*;
 import app.windows.*;
 
@@ -16,6 +17,8 @@ public class StateManager implements StateManagerInterface {
 
     private Container container;
 
+    private EngineInterface engine;
+
     private StateInterface current;
     private HashMap<String, StateInterface> states = new HashMap<String, StateInterface>();
 
@@ -23,8 +26,9 @@ public class StateManager implements StateManagerInterface {
      * Konstruktor domyslny
      * @param container
      */
-    public StateManager(Container container){
+    public StateManager(Container container, EngineInterface engine){
         this.container = container;
+        this.engine = engine;
     }
 
     /**

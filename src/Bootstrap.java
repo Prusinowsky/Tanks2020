@@ -1,4 +1,5 @@
 import app.Container;
+import app.engine.Engine;
 import app.states.manager.StateManager;
 import app.states.manager.StateManagerInterface;
 
@@ -14,7 +15,7 @@ public class Bootstrap {
     public static void main(String[] args)
     {
 
-        StateManagerInterface app = new StateManager(Container.getInstance());
+        StateManagerInterface app = new StateManager(Container.getInstance(), new Engine());
         app.execute();
 
     }
