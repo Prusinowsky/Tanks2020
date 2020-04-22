@@ -18,15 +18,18 @@ public class GameRunningView extends JComponent {
 
     private ConfigInterface config;
 
+    private Image imageScreen;
+
     private GameMapComponent map;
     private GameHudComponent hud;
 
     /**
      * Konstruktor Domyslny
      */
-    public GameRunningView(){
+    public GameRunningView(Image imageScreen){
         super();
         this.config = Container.getInstance().provideConfig();
+        this.imageScreen = imageScreen;
 
         setSize(new Dimension(500,700));
         setLayout(null);
@@ -51,7 +54,7 @@ public class GameRunningView extends JComponent {
 
 
     public void init(){
-        map = new GameMapComponent(config);
+        map = new GameMapComponent(config, imageScreen);
         add(map);
 
         hud = new GameHudComponent(config);
@@ -61,6 +64,7 @@ public class GameRunningView extends JComponent {
      * Renderowanie okna
      */
     public void render(){
+
         map.setBounds(0,0,(int)(getWidth()*0.8),getHeight());
         map.setSize(new Dimension((int)(getWidth()*0.8),getHeight()));
         map.renderPeriodically();

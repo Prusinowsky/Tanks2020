@@ -14,9 +14,7 @@ import java.util.HashMap;
 public class StateManager implements StateManagerInterface {
 
     private GameWindow game;
-
     private Container container;
-
     private EngineInterface engine;
 
     private StateInterface current;
@@ -84,7 +82,7 @@ public class StateManager implements StateManagerInterface {
      */
     private void initStates(){
         states.put("welcome", new WelcomeState(this, game));
-        states.put("running-game", new RunningGameState(this, game));
+        states.put("running-game", new RunningGameState(this, game, engine));
     }
 
     @Override

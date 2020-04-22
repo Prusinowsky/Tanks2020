@@ -6,13 +6,15 @@ import app.entities.PlayerEntity;
 import app.loaders.map.MapLoaderInterface;
 import app.loaders.texture.TextureLoader;
 
-import java.util.HashMap;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class Engine implements EngineInterface {
+public class Engine extends Canvas implements EngineInterface {
 
-//    private Time time; // Licznik czasu :)
+    private Image screen;
+
     private Integer score;
-
+    private String playerName;
 
     private PlayerEntity player;
     private EnemyEntity[] enemies;
@@ -21,10 +23,17 @@ public class Engine implements EngineInterface {
     private TextureLoader textureLoader;
     private MapLoaderInterface mapLoader;
 
+    public Engine(){
+        screen = new BufferedImage(16*32, 16*32, BufferedImage.TYPE_INT_ARGB);
+
+        textureLoader = (TextureLoader) app.Container.getInstance().provideTextureLoader();
+        mapLoader = app.Container.getInstance().provideMapLoader();
+    }
 
     @Override
     public void startGame() {
-
+        map = mapLoader.getMap(app.Container.getInstance().provideOptions().mapName);
+        renderMap();
     }
 
     @Override
@@ -37,8 +46,29 @@ public class Engine implements EngineInterface {
 
     }
 
-    @Override
-    public void getGraphics() {
+    public void renderMap(){
+        Integer gridX = 16;
+        Integer gridY = 16;
 
+        Graphics2D g2 = (Graphics2D) screen.getGraphics();
+
+        Integer sWidth = screen.getWidth(null)/gridX;
+        Integer sHeight = screen.getHeight(null)/gridY;
+
+       for(Integer j=0; j < gridX; j++)
+        {
+            for(Integer i=0; i < gridY; i++)
+            {
+                Image scaled = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
+                g2.drawImage(scaled,  sWidth*i, sHeight*j, null);
+            }
+        }
+
+        g2.drawImage(textureLoader.getTexture("EnemyTank").image,  0,0, sWidth, sHeight, null);
     }
+
+    public Image getImageScreen(){
+        return screen;
+    }
+
 }

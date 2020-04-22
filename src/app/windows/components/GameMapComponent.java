@@ -17,6 +17,8 @@ public class GameMapComponent extends JPanel {
 
     private ConfigInterface config;
 
+    private Image imageScreen;
+
     private MapEntity map;
     private MapLoaderInterface mapLoader;
 
@@ -24,8 +26,9 @@ public class GameMapComponent extends JPanel {
      * Konstrukor Domyslny
      * @param config
      */
-    public GameMapComponent(ConfigInterface config){
+    public GameMapComponent(ConfigInterface config, Image imageScreen){
         this.config = config;
+        this.imageScreen = imageScreen;
 
         setLayout(null);
         setSize(new Dimension(500, 500));
@@ -49,7 +52,6 @@ public class GameMapComponent extends JPanel {
         }, 0, 1000/30);
     }
 
-
     /**
      * Metoda odpowiadajaca za rysowanie mapy
      * @param g
@@ -57,29 +59,14 @@ public class GameMapComponent extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D graphic = (Graphics2D)g;
 
-        Integer gridX = map.sizeX;
-        Integer gridY = map.sizeY;
-        Integer width = (int)(getWidth() * 0.95);
-        Integer height = (int)(getHeight() * 0.95);
+        Integer min = (int) (Math.min(getWidth(), getHeight()) * 0.95);
 
-        if(width < 10 || height < 10) return;
+        Image imageScreenScaled = imageScreen.getScaledInstance(min, min, Image.SCALE_DEFAULT);
 
-        width = height = Math.min(width,height);
-        Integer sWidth = width/gridX;
-        Integer sHeight = height/gridY;
-        Integer offsetX = (getWidth() - gridX*sWidth)/2;
-        Integer offsetY = (getHeight() - gridY*sHeight)/2;
+        Integer offsetX = (getWidth() - imageScreenScaled.getWidth(null)) >> 1;
+        Integer offsetY = (getHeight() - imageScreenScaled.getHeight(null)) >> 1;
 
-        for(Integer j=0; j < gridX; j++)
-        {
-            for(Integer i=0; i < gridY; i++)
-            {
-                Image scaled = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
-                graphic.drawImage(scaled, offsetX + sWidth*i,offsetY + sHeight*j, null);
-            }
-        }
-
+        g.drawImage(imageScreenScaled, offsetX, offsetY, imageScreenScaled.getWidth(null) , imageScreenScaled.getWidth(null), null);
     }
 }
