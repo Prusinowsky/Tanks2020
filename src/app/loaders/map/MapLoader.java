@@ -1,11 +1,12 @@
 package app.loaders.map;
 
 import app.Container;
-import app.config.Config;
 import app.config.ConfigInterface;
 import app.entities.MapEntity;
-import app.entities.TextureEntity;
-import app.loaders.texture.TextureLoader;
+import app.entities.map.MapBlockEntity;
+import app.entities.map.MapGroundEntity;
+import app.entities.map.MapObjectInterface;
+import app.entities.map.MapPortalEntity;
 import app.loaders.texture.TextureLoaderInterface;
 
 import java.io.File;
@@ -18,7 +19,6 @@ import java.util.Scanner;
  */
 public class MapLoader implements MapLoaderInterface {
     private ConfigInterface config;
-    private TextureLoaderInterface textureLoader;
 
     /**
      * Zawiera wszystkie mapy gry
@@ -30,23 +30,14 @@ public class MapLoader implements MapLoaderInterface {
      */
     public MapLoader(){
         this.config = Container.getInstance().provideConfig();
-        this.textureLoader = Container.getInstance().provideTextureLoader();
     };
 
-    /**
-     * Konstruktor domsylny
-     */
-    public MapLoader(TextureLoaderInterface textureLoader){
-        this.config = textureLoader.getConfig();
-        this.textureLoader = textureLoader;
-    }
 
     /**
      * Konstruktor domsylny
      */
-    public MapLoader(ConfigInterface config, TextureLoaderInterface textureLoader){
+    public MapLoader(ConfigInterface config){
         this.config = config;
-        this.textureLoader = textureLoader;
     }
 
     /**
@@ -59,7 +50,7 @@ public class MapLoader implements MapLoaderInterface {
         for(Integer i = 0; i < number; i++){
             String name = config.getProperty("map_name_" + i);
             String path = pathToMap + config.getProperty("map_path_" + i);
-            HashMap <Integer, TextureEntity> mapPattern = loadMapPattern(i);
+            HashMap <Integer, MapObjectInterface> mapPattern = loadMapPattern(i);
             MapEntity map = convertToMapEntity(name, path, mapPattern);
             maps.put(name, map);
         }
@@ -72,14 +63,14 @@ public class MapLoader implements MapLoaderInterface {
      * @param mapPattern
      * @return
      */
-    public MapEntity convertToMapEntity(String name, String path, HashMap<Integer, TextureEntity> mapPattern){
+    public MapEntity convertToMapEntity(String name, String path, HashMap<Integer, MapObjectInterface> mapPattern){
         try {
             MapEntity map = new MapEntity();
             map.name = name;
             map.sizeX = Integer.parseInt(config.getProperty("map_width"));
             map.sizeY = Integer.parseInt(config.getProperty("map_height"));
 
-            TextureEntity[][] textures = new TextureEntity[map.sizeX][map.sizeY];
+            MapObjectInterface[][] objectEntities = new MapObjectInterface[map.sizeX][map.sizeY];
 
             File file = new File(path);
             Scanner scanner = new Scanner(file);
@@ -88,10 +79,10 @@ public class MapLoader implements MapLoaderInterface {
                 String line = scanner.nextLine();
                 for (Integer j = 0; j < map.sizeY; j++) {
                     Integer code = Integer.parseInt(String.valueOf(line.charAt(j)));
-                    textures[j][i] = mapPattern.get(code);
+                    objectEntities[j][i] = mapPattern.get(code);
                 }
             }
-            map.blocks = textures;
+            map.blocks = objectEntities;
 
             return map;
         } catch (Exception e){
@@ -105,13 +96,13 @@ public class MapLoader implements MapLoaderInterface {
      * @param i
      * @return
      */
-    public HashMap<Integer, TextureEntity> loadMapPattern(Integer i){
-        HashMap <Integer, TextureEntity> pattern =  new HashMap<Integer, TextureEntity>();
-        pattern.put(0, textureLoader.getTexture(config.getProperty("map_ground_" + i)));
-        pattern.put(1, textureLoader.getTexture(config.getProperty("map_destructible_" + i)));
-        pattern.put(2, textureLoader.getTexture(config.getProperty("map_destroyed_" + i)));
-        pattern.put(3, textureLoader.getTexture(config.getProperty("map_indestructible_" + i)));
-        pattern.put(4, textureLoader.getTexture("Portal"));
+    public HashMap<Integer, MapObjectInterface> loadMapPattern(Integer i){
+        HashMap <Integer, MapObjectInterface> pattern =  new HashMap<Integer, MapObjectInterface>();
+        pattern.put(0, new MapGroundEntity());
+        pattern.put(1, new MapBlockEntity(MapBlockEntity.BlockType.DESTRUCTIBLE));
+        pattern.put(2, new MapBlockEntity(MapBlockEntity.BlockType.DESTROYED));
+        pattern.put(3, new MapBlockEntity(MapBlockEntity.BlockType.UNDESTRUCTIBLE));
+        pattern.put(4, new MapPortalEntity());
         return pattern;
     }
 

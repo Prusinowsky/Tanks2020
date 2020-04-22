@@ -1,7 +1,6 @@
 package app.loaders.texture;
 
 import app.Container;
-import app.config.Config;
 import app.config.ConfigInterface;
 import app.entities.TextureEntity;
 

@@ -1,5 +1,7 @@
 package app.entities;
 
+import app.entities.map.MapObjectInterface;
+
 /**
  * Obiekt rezprezentujący encję mapy
  */
@@ -12,7 +14,7 @@ public class MapEntity implements Cloneable {
     /**
      * Bloki mapy
      */
-    public TextureEntity[][] blocks;
+    public MapObjectInterface[][] blocks;
 
     /**
      * Wymairy planszy
@@ -30,7 +32,7 @@ public class MapEntity implements Cloneable {
      * @param name
      * @param blocks
      */
-    public MapEntity(String name, TextureEntity[][] blocks){
+    public MapEntity(String name, MapObjectInterface[][] blocks){
         this.name = name;
         this.blocks = blocks;
     }

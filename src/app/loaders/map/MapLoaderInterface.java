@@ -1,7 +1,7 @@
 package app.loaders.map;
 
 import app.entities.MapEntity;
-import app.entities.TextureEntity;
+import app.entities.map.MapObjectInterface;
 
 import java.util.HashMap;
 
@@ -19,7 +19,7 @@ public interface MapLoaderInterface {
      * Przekształcająca wybraną mapę
      * @return
      */
-    public MapEntity convertToMapEntity(String name, String path, HashMap<Integer, TextureEntity> mapPattern);
+    public MapEntity convertToMapEntity(String name, String path, HashMap<Integer, MapObjectInterface> mapPattern);
 
     /**
      * Zwaraca mape o danej nazwie

@@ -1,8 +1,8 @@
 package app.engine;
 
-import app.entities.EnemyEntity;
+import app.entities.map.EnemyEntity;
 import app.entities.MapEntity;
-import app.entities.PlayerEntity;
+import app.entities.map.PlayerEntity;
 import app.loaders.map.MapLoaderInterface;
 import app.loaders.texture.TextureLoader;
 
