@@ -10,6 +10,11 @@ public interface EngineInterface {
     public void pauseGame();
     public void endGame();
 
+    public void moveUp();
+    public void moveDown();
+    public void moveRight();
+    public void moveLeft();
+
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent);
     public void setGameHudComponent(GameHudComponent gameHudComponent);
 }

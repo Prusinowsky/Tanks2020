@@ -8,6 +8,8 @@ import app.windows.components.MenuBarComponent;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Główne okno aplikacji - STARTOWE (MENU)

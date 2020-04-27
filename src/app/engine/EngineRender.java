@@ -2,6 +2,7 @@ package app.engine;
 
 import app.entities.map.MapEntity;
 import app.entities.map.MapLayer;
+import app.entities.map.players.Player;
 import app.loaders.texture.TextureLoader;
 import app.windows.components.GameHudComponent;
 import app.windows.components.GameScreenComponent;
@@ -11,15 +12,14 @@ import java.awt.image.BufferedImage;
 
 public class EngineRender {
 
-    private Image offscreen;
+    private Image offscreen, screen;
     private MapEntity mapEntity;
     private TextureLoader textureLoader;
+    private Player player;
 
     private GameScreenComponent gameScreenComponent;
     private GameHudComponent gameHudComponent;
 
-    private Integer x = 0;
-    private Integer y = 0;
 
     public EngineRender(){
         init();
@@ -27,8 +27,8 @@ public class EngineRender {
 
     public void init(){
         this.textureLoader = (TextureLoader) app.Container.getInstance().provideTextureLoader();
+        screen = new BufferedImage(16*32, 16*32, BufferedImage.TYPE_INT_ARGB);
         offscreen = new BufferedImage(16*32, 16*32, BufferedImage.TYPE_INT_ARGB);
-
     }
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){
@@ -44,8 +44,8 @@ public class EngineRender {
         this.mapEntity = map;
     }
 
-    public void setPlayers(){
-
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
     public void setEnemies(){
@@ -54,19 +54,25 @@ public class EngineRender {
 
     public void render(){
         if(offscreen != null && mapEntity != null) {
+            offscreen = new BufferedImage(16*32, 16*32, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = (Graphics2D) offscreen.getGraphics();
             g2d.clearRect(0,0, offscreen.getWidth(null), offscreen.getHeight(null));
-
-            x += 20; x %= 500;
-            y += 20; y %= 500;
-
-            g2d.drawString("Michu zrobisz to?", x, y);
 
             for(Integer i = 0; i < mapEntity.numberOfLayers; i++){
                 renderLayer(g2d, mapEntity.layers[i]);
             }
-
+            renderPlayer(g2d);
         }
+        screen = offscreen;
+    }
+
+    private void renderPlayer(Graphics2D g2d){
+        Image playerImg = this.player.getTexture().image;
+
+        //Graphics2D player2d = (new BufferedImage()).createGraphics();
+        //player2d.rotate(Math.toRadians(this.player.angle), playerImg.getWidth(null)>>1, playerImg.getHeight(null)>>1);
+        //player2d.drawImage(playerImg,0,0,null);
+        g2d.drawImage(playerImg, player.positionX, player.positionY,null);
     }
 
     private void renderLayer(Graphics2D g2d, MapLayer layer){
@@ -79,7 +85,7 @@ public class EngineRender {
     }
 
     public void update(){
-        gameScreenComponent.setScreen(offscreen);
+        gameScreenComponent.setScreen(screen);
         gameScreenComponent.revalidate();
         gameScreenComponent.repaint();
     };

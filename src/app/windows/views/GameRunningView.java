@@ -2,15 +2,14 @@ package app.windows.views;
 
 import app.Container;
 import app.config.ConfigInterface;
+import app.engine.Engine;
 import app.engine.interfaces.Renderable;
 import app.windows.components.GameHudComponent;
 import app.windows.components.GameScreenComponent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 
 /**
  * Komponent odpowiadajacy za renderowanie gry
@@ -36,6 +35,7 @@ public class GameRunningView extends JComponent {
         init();
         handleResizing();
         render();
+
     }
 
     /**
@@ -81,12 +81,41 @@ public class GameRunningView extends JComponent {
         repaint();
     }
 
+    private class MoveAction extends AbstractAction{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("despacito");
+           // if(this.direction=="down")
+        }
+    }
+
     public void addHudPauseActionListener(ActionListener action){
         hud.addPauseActionListener(action);
     }
 
     public void addHudExitActionListener(ActionListener action){
         hud.addExitActionListener(action);
+    }
+
+    public void addUpActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "move up");
+        this.getActionMap().put("move up", action);
+    }
+
+    public void addDownActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "move down");
+        this.getActionMap().put("move down", action);
+    }
+
+    public void addRightActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "move right");
+        this.getActionMap().put("move right", action);
+    }
+
+    public void addLeftActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "move left");
+        this.getActionMap().put("move left", action);
     }
 
 }

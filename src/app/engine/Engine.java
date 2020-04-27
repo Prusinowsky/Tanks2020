@@ -39,10 +39,17 @@ public class Engine implements EngineInterface {
     @Override
     public void startGame() {
         map = mapLoader.getMap(app.Container.getInstance().provideOptions().mapName);
+
+        player = new Player();
+        player.positionX = 0;
+        player.positionY = 0;
+        player.angle = 0;
+        engineRender.setPlayer(player);
+
         engineRender.setMapEntity(map);
 
         timer = new Timer();
-        renderWithFreq(5);
+        renderWithFreq(120);
     }
 
     @Override
@@ -67,6 +74,26 @@ public class Engine implements EngineInterface {
     private void render(){
         engineRender.render();
         engineRender.update();
+    }
+
+    public void moveUp(){
+        player.positionY -= 4;
+        player.angle = 0;
+    }
+
+    public void moveDown(){
+        player.positionY += 4;
+        player.angle = 180;
+    }
+
+    public void moveRight(){
+        player.positionX += 4;
+        player.angle = 90;
+    }
+
+    public void moveLeft(){
+        player.positionX -= 4;
+        player.angle = 270;
     }
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){

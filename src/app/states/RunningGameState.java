@@ -5,6 +5,10 @@ import app.states.manager.StateManagerInterface;
 import app.windows.GameWindow;
 import app.windows.views.GameRunningView;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class RunningGameState implements StateInterface {
 
     private StateManagerInterface manager;
@@ -26,6 +30,34 @@ public class RunningGameState implements StateInterface {
         runningView = new GameRunningView();
         runningView.addHudPauseActionListener(e -> System.out.println("Michal zrobisz to co nie? :D"));
         runningView.addHudExitActionListener(e -> manager.changeStateTo("welcome"));
+        runningView.addUpActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveUp();
+                System.out.println("up");
+            }
+        });
+        runningView.addDownActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveDown();
+                System.out.println("down");
+            }
+        });
+        runningView.addRightActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveRight();
+                System.out.println("right");
+            }
+        });
+        runningView.addLeftActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveLeft();
+                System.out.println("left");
+            }
+        });
 
         engine.setGameScreenComponent(runningView.getGameScreenComponent());
         engine.setGameHudComponent(runningView.getGameHudComponent());
@@ -41,4 +73,5 @@ public class RunningGameState implements StateInterface {
         game.remove(runningView);
         engine.endGame();
     }
+
 }
