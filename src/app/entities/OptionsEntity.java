@@ -13,5 +13,5 @@ public class OptionsEntity {
     /**
      * Nazwa użytkownika
      */
-    public String nickName;
+    public String nickname;
 }

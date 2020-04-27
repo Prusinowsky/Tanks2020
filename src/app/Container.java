@@ -49,7 +49,7 @@ public class Container {
 
     public MapLoaderInterface provideMapLoader(){
         if(mapLoader == null) {
-            mapLoader = new MapLoader(provideConfig(), provideTextureLoader());
+            mapLoader = new MapLoader();
             mapLoader.load();
         }
         return mapLoader;

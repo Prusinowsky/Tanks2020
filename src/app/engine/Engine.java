@@ -1,23 +1,23 @@
 package app.engine;
 
-import app.entities.map.EnemyEntity;
-import app.entities.MapEntity;
-import app.entities.map.PlayerEntity;
+import app.entities.map.players.Enemy;
+import app.entities.map.MapEntity;
+import app.entities.map.players.Player;
 import app.loaders.map.MapLoaderInterface;
 import app.loaders.texture.TextureLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Engine extends Canvas implements EngineInterface {
+public class Engine implements EngineInterface {
 
     private Image screen;
 
     private Integer score;
     private String playerName;
 
-    private PlayerEntity player;
-    private EnemyEntity[] enemies;
+    private Player player;
+    private Enemy[] enemies;
     private MapEntity map;
 
     private TextureLoader textureLoader;
@@ -59,8 +59,8 @@ public class Engine extends Canvas implements EngineInterface {
         {
             for(Integer i=0; i < gridY; i++)
             {
-                Image scaled = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
-                g2.drawImage(scaled,  sWidth*i, sHeight*j, null);
+                //Image scaled = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
+                //g2.drawImage(scaled,  sWidth*i, sHeight*j, null);
             }
         }
 

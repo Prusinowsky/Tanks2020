@@ -48,12 +48,12 @@ public class StateManager implements StateManagerInterface {
         game.addMenuStartActionListener(e -> {
             SetNickWindow nick = new SetNickWindow();
             nick.addSetNameActionListener(event -> {
-                Container.getInstance().provideOptions().nickName = nick.getNickInput().getText();
+                Container.getInstance().provideOptions().nickname = nick.getNickInput().getText();
             });
             nick.addCancelActionListener(event -> nick.dispose());
             nick.addOklActionListener(event -> {
                 nick.dispose();
-                Container.getInstance().provideOptions().nickName = nick.getNickInput().getText();
+                Container.getInstance().provideOptions().nickname = nick.getNickInput().getText();
                 changeStateTo("running-game");
             });
         });

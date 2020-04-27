@@ -1,6 +1,4 @@
-package app.entities;
-
-import app.entities.map.MapObjectInterface;
+package app.entities.map;
 
 /**
  * Obiekt rezprezentujący encję mapy
@@ -12,15 +10,20 @@ public class MapEntity implements Cloneable {
     public String name;
 
     /**
-     * Bloki mapy
-     */
-    public MapObjectInterface[][] blocks;
-
-    /**
      * Wymairy planszy
      */
-    public Integer sizeX;
-    public Integer sizeY;
+    public Integer width;
+    public Integer height;
+
+    /**
+     * Liczba warstw
+     */
+    public Integer numberOfLayers;
+
+    /**
+     * Warstwy
+     */
+    public MapLayer layers[];
 
     /**
      * Konstrukor domyślny
@@ -30,11 +33,11 @@ public class MapEntity implements Cloneable {
     /**
      * Konstrukotr inicjalizujący z parametrami
      * @param name
-     * @param blocks
      */
-    public MapEntity(String name, MapObjectInterface[][] blocks){
+    public MapEntity(String name, MapLayer[] layers){
         this.name = name;
-        this.blocks = blocks;
+        this.numberOfLayers = layers.length;
+        this.layers = layers;
     }
 
 

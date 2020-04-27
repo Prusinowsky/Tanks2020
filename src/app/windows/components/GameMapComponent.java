@@ -2,7 +2,7 @@ package app.windows.components;
 
 import app.Container;
 import app.config.ConfigInterface;
-import app.entities.MapEntity;
+import app.entities.map.MapEntity;
 import app.loaders.map.MapLoaderInterface;
 
 import javax.swing.*;

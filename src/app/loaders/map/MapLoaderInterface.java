@@ -1,9 +1,6 @@
 package app.loaders.map;
 
-import app.entities.MapEntity;
-import app.entities.map.MapObjectInterface;
-
-import java.util.HashMap;
+import app.entities.map.MapEntity;
 
 /**
  * Interfejs ladowania map
@@ -19,7 +16,7 @@ public interface MapLoaderInterface {
      * Przekształcająca wybraną mapę
      * @return
      */
-    public MapEntity convertToMapEntity(String name, String path, HashMap<Integer, MapObjectInterface> mapPattern);
+    public MapEntity convertToMapEntity(String name, String path);
 
     /**
      * Zwaraca mape o danej nazwie
