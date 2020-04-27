@@ -2,8 +2,9 @@ package app.windows.views;
 
 import app.Container;
 import app.config.ConfigInterface;
+import app.engine.interfaces.Renderable;
 import app.windows.components.GameHudComponent;
-import app.windows.components.GameMapComponent;
+import app.windows.components.GameScreenComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,18 +19,15 @@ public class GameRunningView extends JComponent {
 
     private ConfigInterface config;
 
-    private Image imageScreen;
-
-    private GameMapComponent map;
+    private GameScreenComponent view;
     private GameHudComponent hud;
 
     /**
      * Konstruktor Domyslny
      */
-    public GameRunningView(Image imageScreen){
+    public GameRunningView(){
         super();
         this.config = Container.getInstance().provideConfig();
-        this.imageScreen = imageScreen;
 
         setSize(new Dimension(500,700));
         setLayout(null);
@@ -52,22 +50,29 @@ public class GameRunningView extends JComponent {
         });
     }
 
-
     public void init(){
-        map = new GameMapComponent(config, imageScreen);
-        add(map);
+        view = new GameScreenComponent();
+        add(view);
 
         hud = new GameHudComponent(config);
         add(hud);
     }
+
+    public GameScreenComponent getGameScreenComponent(){
+        return view;
+    }
+
+    public GameHudComponent getGameHudComponent(){
+        return hud;
+    }
+
     /**
      * Renderowanie okna
      */
     public void render(){
 
-        map.setBounds(0,0,(int)(getWidth()*0.8),getHeight());
-        map.setSize(new Dimension((int)(getWidth()*0.8),getHeight()));
-        map.renderPeriodically();
+        view.setBounds(0,0,(int)(getWidth()*0.8),getHeight());
+        view.setSize(new Dimension((int)(getWidth()*0.8),getHeight()));
 
         hud.setBounds((int)(getWidth()*0.8),(int)(getHeight()*0.05),(int)(getWidth()*0.2), getHeight());
         hud.setSize(new Dimension((int)(getWidth()*0.18), (int)(getHeight()*0.9)));

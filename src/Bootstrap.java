@@ -15,7 +15,7 @@ public class Bootstrap {
     public static void main(String[] args)
     {
 
-        StateManagerInterface app = new StateManager(Container.getInstance(), new Engine());
+        StateManagerInterface app = new StateManager(new Engine());
         app.execute();
 
     }

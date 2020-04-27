@@ -104,6 +104,8 @@ public class MapLoader implements MapLoaderInterface {
                 }
             }
 
+            map.layers = mapLayers;
+
             return map;
         } catch (Exception e){
             System.out.println("Error during converting map + " + e.getMessage());

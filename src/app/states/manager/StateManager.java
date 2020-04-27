@@ -1,7 +1,7 @@
 package app.states.manager;
 
 import app.Container;
-import app.engine.EngineInterface;
+import app.engine.interfaces.EngineInterface;
 import app.states.*;
 import app.windows.*;
 
@@ -14,7 +14,6 @@ import java.util.HashMap;
 public class StateManager implements StateManagerInterface {
 
     private GameWindow game;
-    private Container container;
     private EngineInterface engine;
 
     private StateInterface current;
@@ -22,10 +21,8 @@ public class StateManager implements StateManagerInterface {
 
     /**
      * Konstruktor domyslny
-     * @param container
      */
-    public StateManager(Container container, EngineInterface engine){
-        this.container = container;
+    public StateManager(EngineInterface engine){
         this.engine = engine;
     }
 
@@ -44,7 +41,7 @@ public class StateManager implements StateManagerInterface {
      * Inicjalizacja okna glownego
      */
     private void init(){
-        game = new GameWindow();
+        this.game = new GameWindow();
         game.addMenuStartActionListener(e -> {
             SetNickWindow nick = new SetNickWindow();
             nick.addSetNameActionListener(event -> {
@@ -85,6 +82,10 @@ public class StateManager implements StateManagerInterface {
         states.put("running-game", new RunningGameState(this, game, engine));
     }
 
+    /**
+     * Zmaina stanu na inny stan
+     * @param toState
+     */
     @Override
     public void changeStateTo(String toState) {
         current.end();

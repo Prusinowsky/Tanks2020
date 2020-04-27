@@ -1,17 +1,21 @@
 package app.engine;
 
+import app.engine.interfaces.EngineInterface;
 import app.entities.map.players.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.players.Player;
 import app.loaders.map.MapLoaderInterface;
-import app.loaders.texture.TextureLoader;
+import app.windows.components.GameHudComponent;
+import app.windows.components.GameScreenComponent;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Engine implements EngineInterface {
 
-    private Image screen;
+    private EngineRender engineRender;
 
     private Integer score;
     private String playerName;
@@ -20,20 +24,23 @@ public class Engine implements EngineInterface {
     private Enemy[] enemies;
     private MapEntity map;
 
-    private TextureLoader textureLoader;
     private MapLoaderInterface mapLoader;
 
     public Engine(){
-        screen = new BufferedImage(16*32, 16*32, BufferedImage.TYPE_INT_ARGB);
-
-        textureLoader = (TextureLoader) app.Container.getInstance().provideTextureLoader();
         mapLoader = app.Container.getInstance().provideMapLoader();
+        initEngineRender();
+    }
+
+    private void initEngineRender(){
+        this.engineRender = new EngineRender();
     }
 
     @Override
     public void startGame() {
         map = mapLoader.getMap(app.Container.getInstance().provideOptions().mapName);
-        renderMap();
+        engineRender.setMapEntity(map);
+
+        renderWithFreq(5);
     }
 
     @Override
@@ -46,29 +53,27 @@ public class Engine implements EngineInterface {
 
     }
 
-    public void renderMap(){
-        Integer gridX = 16;
-        Integer gridY = 16;
-
-        Graphics2D g2 = (Graphics2D) screen.getGraphics();
-
-        Integer sWidth = screen.getWidth(null)/gridX;
-        Integer sHeight = screen.getHeight(null)/gridY;
-
-       for(Integer j=0; j < gridX; j++)
-        {
-            for(Integer i=0; i < gridY; i++)
-            {
-                //Image scaled = map.blocks[i][j].image.getScaledInstance(sWidth, sHeight, Image.SCALE_DEFAULT);
-                //g2.drawImage(scaled,  sWidth*i, sHeight*j, null);
+    private void renderWithFreq(Integer fps){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                render();
             }
-        }
-
-        g2.drawImage(textureLoader.getTexture("EnemyTank").image,  0,0, sWidth, sHeight, null);
+        }, 1000/fps , 1000 / fps);
     }
 
-    public Image getImageScreen(){
-        return screen;
+    private void render(){
+        engineRender.render();
+        engineRender.update();
+    }
+
+    public void setGameScreenComponent(GameScreenComponent gameScreenComponent){
+        engineRender.setGameScreenComponent(gameScreenComponent);
+    }
+
+    public void setGameHudComponent(GameHudComponent gameHudComponent){
+        engineRender.setGameHudComponent(gameHudComponent);
     }
 
 }

@@ -1,6 +1,7 @@
 package app.windows.components;
 
 import app.config.ConfigInterface;
+import app.engine.interfaces.Renderable;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 /**
  * Komponent odpowiadający za renderowanie HUD-a
  */
-public class GameHudComponent extends JPanel {
+public class GameHudComponent extends JPanel implements Renderable {
 
     private JLabel lTime, lHeart[], lLogo;
     private JButton bPause, bExit;
@@ -78,6 +79,11 @@ public class GameHudComponent extends JPanel {
 
         revalidate();
         repaint();
+    }
+
+    @Override
+    public void update() {
+
     }
 
     public void addPauseActionListener(ActionListener action){
