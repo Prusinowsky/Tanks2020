@@ -52,23 +52,24 @@ public class MapLoader implements MapLoaderInterface {
         for(Integer i = 0; i < number; i++){
             String name = config.getProperty("map_name_" + i);
             String path = pathToMap + config.getProperty("map_path_" + i);
-            MapEntity map = convertToMapEntity(name, path);
+            MapEntity map = convertToMapEntity(i, name, path);
+            map.code = i;
             maps.put(name, map);
         }
     };
 
     /**
      * Zwraca encję mapy
-     * @param name
+     * @param mapName
      * @param path
      * @return
      */
-    public MapEntity convertToMapEntity(String name, String path){
+    public MapEntity convertToMapEntity(Integer mapCode, String mapName, String path){
         //System.out.println("Mapa : " + name);
         //System.out.println("Name : " + name + " Path : " + path);
         try {
             MapEntity map = new MapEntity();
-            map.name = name;
+            map.name = mapName;
 
             File file = new File(path);
             Scanner scanner = new Scanner(file);
@@ -92,13 +93,14 @@ public class MapLoader implements MapLoaderInterface {
                     String line = scanner.nextLine();
                     for (Integer j = 0; j < map.width; j++) {
                         //System.out.print(line.charAt(j));
-                        mapLayers[l].blocks[j][i] = toMapObject(
-                                Integer.parseInt(
-                                        String.valueOf(
-                                                line.charAt(j)
-                                        )
-                                )
-                        );
+                        Integer code = Integer.parseInt(String.valueOf(line.charAt(j)));
+                        MapObject mapObject = toMapObject(code);
+                        if(mapObject != null) {
+                            mapObject.code = code;
+                            mapObject.mapCode = mapCode;
+                            mapObject.mapName = mapName;
+                        }
+                        mapLayers[l].blocks[j][i] = mapObject;
                     }
                     //System.out.println("");
                 }
@@ -119,8 +121,8 @@ public class MapLoader implements MapLoaderInterface {
         pattern.put(0, null);
         pattern.put(1, new GroundTile());
         pattern.put(2, new DestructibleObstacle());
-        pattern.put(3, new IndestructibleObstacle());
-        pattern.put(4, new Portal());
+        pattern.put(4, new IndestructibleObstacle());
+        pattern.put(5, new Portal());
 
         return pattern;
     }

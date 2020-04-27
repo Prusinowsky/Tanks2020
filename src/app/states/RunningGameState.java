@@ -39,5 +39,6 @@ public class RunningGameState implements StateInterface {
     @Override
     public void end() {
         game.remove(runningView);
+        engine.endGame();
     }
 }

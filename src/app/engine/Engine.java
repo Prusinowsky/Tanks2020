@@ -16,6 +16,7 @@ import java.util.TimerTask;
 public class Engine implements EngineInterface {
 
     private EngineRender engineRender;
+    private Timer timer;
 
     private Integer score;
     private String playerName;
@@ -40,6 +41,7 @@ public class Engine implements EngineInterface {
         map = mapLoader.getMap(app.Container.getInstance().provideOptions().mapName);
         engineRender.setMapEntity(map);
 
+        timer = new Timer();
         renderWithFreq(5);
     }
 
@@ -50,11 +52,10 @@ public class Engine implements EngineInterface {
 
     @Override
     public void endGame() {
-
+        timer.cancel();
     }
 
     private void renderWithFreq(Integer fps){
-        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

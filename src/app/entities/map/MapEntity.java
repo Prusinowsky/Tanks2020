@@ -4,6 +4,12 @@ package app.entities.map;
  * Obiekt rezprezentujący encję mapy
  */
 public class MapEntity implements Cloneable {
+
+    /**
+     * Kod mapy
+     */
+    public Integer code;
+
     /**
      * Nazwa mapy
      */

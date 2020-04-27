@@ -16,7 +16,7 @@ public interface MapLoaderInterface {
      * Przekształcająca wybraną mapę
      * @return
      */
-    public MapEntity convertToMapEntity(String name, String path);
+    public MapEntity convertToMapEntity(Integer mapCode, String mapName, String path);
 
     /**
      * Zwaraca mape o danej nazwie

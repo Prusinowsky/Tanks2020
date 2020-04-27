@@ -70,7 +70,12 @@ public class EngineRender {
     }
 
     private void renderLayer(Graphics2D g2d, MapLayer layer){
-
+        for(Integer i = 0; i < layer.height; i++){
+            for(Integer j = 0; j < layer.width; j++){
+                if(layer.blocks[i][j] != null)
+                    g2d.drawImage(layer.blocks[i][j].getTexture().image, i*32, j*32, null);
+            }
+        }
     }
 
     public void update(){
