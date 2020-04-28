@@ -36,7 +36,19 @@ public class RunningGameState implements StateInterface {
                 engine.moveUp();
             }
         });
+        runningView.addWActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveUp();
+            }
+        });
         runningView.addDownActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveDown();
+            }
+        });
+        runningView.addSActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 engine.moveDown();
@@ -48,7 +60,19 @@ public class RunningGameState implements StateInterface {
                 engine.moveRight();
             }
         });
+        runningView.addDActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveRight();
+            }
+        });
         runningView.addLeftActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.moveLeft();
+            }
+        });
+        runningView.addAActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 engine.moveLeft();
