@@ -10,6 +10,10 @@ public class Player extends MapObject {
     public Integer positionY;
     public Integer angle;
 
+    public Integer getCordinateX(){
+        return positionX/32;
+    }
+
     @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture("PlayerTank");

@@ -77,22 +77,22 @@ public class Engine implements EngineInterface {
     }
 
     public void moveUp(){
-        player.positionY -= 4;
+        player.positionY -= 32;
         player.angle = 0;
     }
 
     public void moveDown(){
-        player.positionY += 4;
+        player.positionY += 32;
         player.angle = 180;
     }
 
     public void moveRight(){
-        player.positionX += 4;
+        player.positionX += 32;
         player.angle = 90;
     }
 
     public void moveLeft(){
-        player.positionX -= 4;
+        player.positionX -= 32;
         player.angle = 270;
     }
 

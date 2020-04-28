@@ -68,11 +68,11 @@ public class EngineRender {
 
     private void renderPlayer(Graphics2D g2d){
         Image playerImg = this.player.getTexture().image;
-
-        //Graphics2D player2d = (new BufferedImage()).createGraphics();
-        //player2d.rotate(Math.toRadians(this.player.angle), playerImg.getWidth(null)>>1, playerImg.getHeight(null)>>1);
-        //player2d.drawImage(playerImg,0,0,null);
-        g2d.drawImage(playerImg, player.positionX, player.positionY,null);
+        Image playerBuffored = new BufferedImage(playerImg.getWidth(null), playerImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D player2d = ((BufferedImage) playerBuffored).createGraphics();
+        player2d.rotate(Math.toRadians(this.player.angle), playerImg.getWidth(null) >> 1, playerImg.getHeight(null) >> 1);
+        player2d.drawImage(playerImg,0,0,null);
+        g2d.drawImage(playerBuffored, player.positionX, player.positionY,null);
     }
 
     private void renderLayer(Graphics2D g2d, MapLayer layer){

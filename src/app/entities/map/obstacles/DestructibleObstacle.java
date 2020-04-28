@@ -5,10 +5,12 @@ import app.entities.TextureEntity;
 import app.entities.map.MapObject;
 
 public class DestructibleObstacle extends MapObject {
+
     @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture(
                 Container.getInstance().provideConfig().getProperty("map_destructible_" + mapCode)
         );
     }
+
 }
