@@ -51,7 +51,7 @@ public class Engine implements EngineInterface {
         engineRender.setMapEntity(map);
 
         timer = new Timer();
-        renderWithFreq(120);
+        renderWithFreq(30);
     }
 
     @Override

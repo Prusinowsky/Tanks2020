@@ -1,5 +1,6 @@
 package app.windows.components;
 
+import app.Container;
 import app.config.ConfigInterface;
 import app.engine.interfaces.Renderable;
 
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class GameHudComponent extends JPanel implements Renderable {
 
-    private JLabel lTime, lHeart[], lLogo;
+    private JLabel lTime, lLabelHeart, lHeart[], lLogo;
     private JButton bPause, bExit;
 
     /**
@@ -34,17 +35,21 @@ public class GameHudComponent extends JPanel implements Renderable {
      * Inicjalizacja elementów
      */
     public void init(){
-        lLogo = new JLabel("TANK 2020");
+        lLogo = new JLabel(new ImageIcon(new ImageIcon("assets/logo.png").getImage().getScaledInstance(200, 130, Image.SCALE_DEFAULT)));
         add(lLogo);
 
-        lTime = new JLabel("0:01:34");
-        add(lTime);
+        lTime = new JLabel("Czas: " +  "0:01:34");
+        lTime.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        add(lTime, SwingConstants.CENTER);
 
         Integer numberOfLifes = 3; //będzie pobierana z opcji
+        lLabelHeart = new JLabel("Życia:");
+        lLabelHeart.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        add(lLabelHeart);
         lHeart = new JLabel[numberOfLifes];
         for (Integer i=0; i<numberOfLifes; i++)
         {
-            ImageIcon picHeart = new ImageIcon("assets/textures/hud/life.png");
+            ImageIcon picHeart = new ImageIcon(new ImageIcon("assets/textures/hud/life.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
             lHeart[i] = new JLabel(picHeart);
             add(lHeart[i]);
         }
@@ -62,15 +67,15 @@ public class GameHudComponent extends JPanel implements Renderable {
 
     public void render()
     {
-
-        lLogo.setBounds( 25,20,50,50);
-        lTime.setBounds( 25,80, 80,20);
+        //lLogo = new JLabel(new ImageIcon(new ImageIcon("assets/logo.png").getImage().getScaledInstance(getWidth(), 200, Image.SCALE_DEFAULT)));
+        lLogo.setBounds( 0,0,getWidth(),140);
+        lTime.setBounds( 10,160, getWidth(),30);
 
         Integer numberOfLifes = 3; //będzie pobierana z opcji
-
+        lLabelHeart.setBounds(10, 190, getWidth(), 30);
         for (Integer i=0; i<numberOfLifes; i++)
         {
-            lHeart[i].setBounds( 20 + 20*i,120,20,20);
+            lHeart[i].setBounds(  getWidth()/2 + 30*i - 45,220,30,30);
         }
 
         Integer y = getHeight();
