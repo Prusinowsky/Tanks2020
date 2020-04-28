@@ -7,7 +7,10 @@ import app.entities.map.MapObject;
 public class Portal extends MapObject  {
 
     @Override
-    public Boolean isBlock() { return false; }
+    public Boolean isOpaque() { return false; }
+
+    @Override
+    public Boolean isDestructible() { return false; }
 
     @Override
     public TextureEntity getTexture() {

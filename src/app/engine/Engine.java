@@ -9,8 +9,7 @@ import app.loaders.map.MapLoaderInterface;
 import app.windows.components.GameHudComponent;
 import app.windows.components.GameScreenComponent;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,8 +22,8 @@ public class Engine implements EngineInterface {
     private String playerName;
 
     private Player player;
-    private Enemy[] enemies;
-    private Bullet[] bullets;
+    private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     private MapEntity map;
 
     private MapLoaderInterface mapLoader;
@@ -46,8 +45,13 @@ public class Engine implements EngineInterface {
         player.positionX = 0;
         player.positionY = 0;
         player.angle = 0;
-        engineRender.setPlayer(player);
 
+        engineRender.setPlayer(player);
+        engineRender.setBullets(bullets);
+
+        loadEnemies();
+
+        engineRender.setEnemies(enemies);
         engineRender.setMapEntity(map);
 
         timer = new Timer();
@@ -74,62 +78,168 @@ public class Engine implements EngineInterface {
     }
 
     private void render(){
+        handleBulletsBehaviour();
         engineRender.render();
         engineRender.update();
     }
 
-    public void moveUp(){
-        if(player.getCordinateY()-1>=0 && player.getCordinateY()-1 < map.height)
-            if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()-1] == null){
-                player.positionY -= 32;
-                player.angle = 0;
-            }
-            else if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()-1].isBlock() == false) {
-                player.positionY -= 32;
-                player.angle = 0;
+    private void handleBulletsBehaviour(){
+        for(Integer i=0; i<bullets.size(); i++){
+            handleSingleBulletBehaviour(bullets.get(i));
         }
     }
 
+    private void handleSingleBulletBehaviour(Bullet bullet){
+        moveSingleBullet(bullet);
+        destroyObstacle(bullet);
+    }
+
+    private void moveSingleBullet(Bullet bullet){
+        if(bullet.angle == 0){
+            bullet.positionY -= 4;
+        }
+        else if(bullet.angle == 90){
+            bullet.positionX += 4;
+        }
+        else if(bullet.angle == 180){
+            bullet.positionY += 4;
+        }
+        else if(bullet.angle == 270){
+            bullet.positionX -= 4;
+        }
+    }
+
+    private void destroyObstacle(Bullet bullet){
+        if(!(bullet.getCoordinateY()>=0 && bullet.getCoordinateY() < map.height && bullet.getCoordinateX()>=0 && bullet.getCoordinateX() < map.width)){
+            bullets.remove(bullet);
+        }
+        else if(map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()] != null &&
+                map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()].isOpaque()){
+            if(map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()].isDestructible()) {
+                map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()] = null;
+                bullets.remove(bullet);
+            }
+            else {
+                bullets.remove(bullet);
+            }
+        }
+    }
+
+    public void moveUp(){
+        if(player.getCoordinateY()-1>=0 && player.getCoordinateY()-1 < map.height)
+            if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()-1] == null){
+                player.positionY -= 32;
+                player.angle = 0;
+            }
+            else if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()-1].isOpaque() == false) {
+                player.positionY -= 32;
+                player.angle = 0;
+            }
+            else player.angle = 0;
+    }
+
     public void moveDown(){
-        if(player.getCordinateY()+1>=0 && player.getCordinateY()+1 < map.height)
-            if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()+1] == null){
+        if(player.getCoordinateY()+1>=0 && player.getCoordinateY()+1 < map.height)
+            if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()+1] == null){
                 player.positionY += 32;
                 player.angle = 180;
             }
-            else if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()+1].isBlock() == false) {
+            else if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()+1].isOpaque() == false) {
                 player.positionY += 32;
                 player.angle = 180;
             }
+            else player.angle = 180;
     }
 
     public void moveRight(){
-        if(player.getCordinateX()+1>=0 && player.getCordinateX()+1 < map.width)
-            if(map.layers[1].blocks[player.getCordinateX()+1][player.getCordinateY()] == null){
+        if(player.getCoordinateX()+1>=0 && player.getCoordinateX()+1 < map.width)
+            if(map.layers[1].blocks[player.getCoordinateX()+1][player.getCoordinateY()] == null){
                 player.positionX += 32;
                 player.angle = 90;
             }
-            else if(map.layers[1].blocks[player.getCordinateX()+1][player.getCordinateY()].isBlock() == false) {
+            else if(map.layers[1].blocks[player.getCoordinateX()+1][player.getCoordinateY()].isOpaque() == false) {
                 player.positionX += 32;
                 player.angle = 90;
             }
+            else player.angle = 90;
     }
 
     public void moveLeft(){
-        if(player.getCordinateX()-1>=0 && player.getCordinateX()-1 < map.width)
-            if(map.layers[1].blocks[player.getCordinateX()-1][player.getCordinateY()] == null){
+        if(player.getCoordinateX()-1>=0 && player.getCoordinateX()-1 < map.width)
+            if(map.layers[1].blocks[player.getCoordinateX()-1][player.getCoordinateY()] == null){
                 player.positionX -= 32;
                 player.angle = 270;
             }
-            else if(map.layers[1].blocks[player.getCordinateX()-1][player.getCordinateY()].isBlock() == false) {
+            else if(map.layers[1].blocks[player.getCoordinateX()-1][player.getCoordinateY()].isOpaque() == false) {
+                player.positionX -= 32;
+                player.angle = 270;
+            }
+            else player.angle = 270;
+    }
+
+    public void shoot() {
+        bullets.add(new Bullet());
+        Integer number = bullets.size();
+        bullets.get(number-1).positionX = player.positionX;
+        bullets.get(number-1).positionY = player.positionY;
+        bullets.get(number-1).angle = player.angle;
+
+        /*if (bullets.get(number-1).angle == 0) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() - 1] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() - 1].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateY() - 1 >= 0 && bullets.get(number-1).getCordinateY() - 1 < map.height) )  {
+                bullets.get(number-1).positionY -= 32;
+                System.out.println("up");
+            }
+        } else if (bullets.get(number-1).angle == 90) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX() + 1][bullets.get(number-1).getCordinateY()] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX() + 1][bullets.get(number-1).getCordinateY()].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateX() + 1 >= 0 && bullets.get(number-1).getCordinateX() + 1 < map.width)) {
+                bullets.get(number-1).positionX += 32;
+                System.out.println("right");
+            }
+        } else if (bullets.get(number-1).angle == 180) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() + 1] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() + 1].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateY() + 1 >= 0 && bullets.get(number-1).getCordinateY() + 1 < map.width)) {
+                bullets.get(number-1).positionY += 32;
+                System.out.println("down");
+            }
+        } else if (bullets.get(number-1).angle == 270) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX() - 1][bullets.get(number-1).getCordinateY()] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX() - 1][bullets.get(number-1).getCordinateY()].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateX() - 1 >= 0 && bullets.get(number-1).getCordinateX() - 1 < map.width)) {
+                bullets.get(number-1).positionX -= 32;
+                System.out.println("left");
+            }
+        }*/
+    }
+
+    public void loadEnemies(){
+        Enemy enemy1 = new Enemy(); //testEnemy
+        Enemy enemy2 = new Enemy();
+        Enemy enemy3 = new Enemy();
+        enemy1.positionX = 192;
+        enemy1.positionY = 0;
+        enemy1.angle = 180;
+        enemy2.positionX = 416;
+        enemy2.positionY = 32;
+        enemy2.angle = 270;
+        enemy3.positionX = 0;
+        enemy3.positionY = 224;
+        enemy3.angle = 0;
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
+    }
+
+    public void moveEnemies(Enemy enemy){
+        if(enemy.getCoordinateX()-1>=0 && enemy.getCoordinateX()-1 < map.width)
+            if(map.layers[1].blocks[enemy.getCoordinateX()-1][enemy.getCoordinateY()] == null){
                 player.positionX -= 32;
                 player.angle = 270;
             }
     }
-
-    public void shoot(){
-        
-    }
-
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){
         engineRender.setGameScreenComponent(gameScreenComponent);

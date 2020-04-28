@@ -32,7 +32,7 @@
     <entry key="map_indestructible_2">Obsidian</entry>
 
     <!--  Textures  -->
-    <entry key="texture_number">19</entry>
+    <entry key="texture_number">20</entry>
     <entry key="texture_name_0">EnemyTank</entry>
     <entry key="texture_path_0">entities/enemy_tank.png</entry>
     <entry key="texture_name_1">PlayerTank</entry>
@@ -71,6 +71,7 @@
     <entry key="texture_path_17">../logo.png</entry>
     <entry key="texture_name_18">Background</entry>
     <entry key="texture_path_18">../welcome.png</entry>
-
+	<entry key="texture_name_19">Bullet</entry>
+    <entry key="texture_path_19">entities/bullet.png</entry>
 
 </properties>

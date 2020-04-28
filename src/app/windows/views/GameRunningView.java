@@ -103,8 +103,18 @@ public class GameRunningView extends JComponent {
         this.getActionMap().put("move up", action);
     }
 
+    public void addWActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("W"), "move up");
+        this.getActionMap().put("move up", action);
+    }
+
     public void addDownActionListener(AbstractAction action) {
         this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "move down");
+        this.getActionMap().put("move down", action);
+    }
+
+    public void addSActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("S"), "move down");
         this.getActionMap().put("move down", action);
     }
 
@@ -113,8 +123,18 @@ public class GameRunningView extends JComponent {
         this.getActionMap().put("move right", action);
     }
 
+    public void addDActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"), "move right");
+        this.getActionMap().put("move right", action);
+    }
+
     public void addLeftActionListener(AbstractAction action) {
         this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "move left");
+        this.getActionMap().put("move left", action);
+    }
+
+    public void addAActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"), "move left");
         this.getActionMap().put("move left", action);
     }
 

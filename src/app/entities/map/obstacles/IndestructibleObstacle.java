@@ -7,7 +7,10 @@ import app.entities.map.MapObject;
 public class IndestructibleObstacle extends MapObject  {
 
     @Override
-    public Boolean isBlock() { return true; }
+    public Boolean isOpaque() { return true; }
+
+    @Override
+    public Boolean isDestructible() { return false; }
 
     @Override
     public TextureEntity getTexture() {
