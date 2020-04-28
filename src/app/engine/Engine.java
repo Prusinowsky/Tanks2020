@@ -24,8 +24,8 @@ public class Engine implements EngineInterface {
     private String playerName;
 
     private Player player;
-    private Enemy[] enemies;
     private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     private MapEntity map;
 
     private MapLoaderInterface mapLoader;
@@ -47,10 +47,13 @@ public class Engine implements EngineInterface {
         player.positionX = 0;
         player.positionY = 0;
         player.angle = 0;
-        engineRender.setPlayer(player);
 
+        engineRender.setPlayer(player);
         engineRender.setBullets(bullets);
 
+        loadEnemies();
+
+        engineRender.setEnemies(enemies);
         engineRender.setMapEntity(map);
 
         timer = new Timer();
@@ -171,8 +174,22 @@ public class Engine implements EngineInterface {
         }*/
     }
 
-    public void bulletMove(){
-
+    public void loadEnemies(){
+        Enemy enemy1 = new Enemy(); //testEnemy
+        Enemy enemy2 = new Enemy();
+        Enemy enemy3 = new Enemy();
+        enemy1.positionX = 192;
+        enemy1.positionY = 0;
+        enemy1.angle = 180;
+        enemy2.positionX = 416;
+        enemy2.positionY = 32;
+        enemy2.angle = 270;
+        enemy3.positionX = 0;
+        enemy3.positionY = 224;
+        enemy3.angle = 0;
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
     }
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){

@@ -11,6 +11,12 @@ public class Enemy extends MapObject {
     public Integer positionY;
     public Integer angle;
 
+    public Integer getCordinateX(){
+        return positionX/32;
+    }
+    public Integer getCordinateY(){
+        return positionY/32;
+    }
 
     @Override
     public Boolean isBlock() { return false; }
