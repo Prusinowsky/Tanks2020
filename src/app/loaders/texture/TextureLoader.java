@@ -75,6 +75,27 @@ public class TextureLoader implements TextureLoaderInterface {
         return collection.get(name);
     }
 
+    /**
+     * Zwraca obraz tekstury
+     * @param name
+     * @return
+     */
+    public Image getTextureImage(String name) {
+        return getTexture(name).image;
+    }
+
+    /**
+     * Zwraca przeskalowany obraz tekstury
+     * @param name
+     * @param width
+     * @param height
+     * @param hints
+     * @return
+     */
+    public Image getTextureImageScaled(String name, Integer width, Integer height, Integer hints){
+        return getTexture(name).image.getScaledInstance(width, height, hints);
+    }
+
 
     /**
      * Mtoda opowiedzialna za zwracanie obiektu konfiguracyjnego

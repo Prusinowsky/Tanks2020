@@ -6,10 +6,14 @@
     <entry key="start">Start</entry>
     <entry key="choose_map">Wybierz mapę</entry>
     <entry key="best_scores">Najlepsze wyniki</entry>
+    <entry key="time">Czas</entry>
+    <entry key="lives">Życia</entry>
     <entry key="cancel">Anuluj</entry>
     <entry key="ok">Ok</entry>
-    <entry key="exit">Wyjdż</entry>
     <entry key="help">Pomoc</entry>
+    <entry key="pause">Pauza</entry>
+    <entry key="back">Powrót</entry>
+    <entry key="exit">Wyjdż</entry>
     <entry key="about">O Programie</entry>
     <entry key="you_lost">Przegraleś</entry>
     <entry key="you_lost_your_score_isp">Przegrałeś twój wynik to</entry>

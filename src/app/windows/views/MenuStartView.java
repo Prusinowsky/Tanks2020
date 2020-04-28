@@ -2,6 +2,8 @@ package app.windows.views;
 
 import app.Container;
 import app.config.ConfigInterface;
+import app.loaders.texture.TextureLoader;
+import app.loaders.texture.TextureLoaderInterface;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,6 +18,8 @@ import java.io.IOException;
 public class MenuStartView extends JPanel {
 
     private ConfigInterface config;
+    private TextureLoaderInterface textureLoader;
+
     private JButton bStart, bExit;
 
     /**
@@ -23,6 +27,8 @@ public class MenuStartView extends JPanel {
      */
     public MenuStartView(){
         this.config = Container.getInstance().provideConfig();
+        this.textureLoader = Container.getInstance().provideTextureLoader();
+
         setLayout(null);
         setVisible(true);
 
@@ -34,10 +40,10 @@ public class MenuStartView extends JPanel {
      * Metoda odpowiadająca za inicjalizację stanu
      */
     private void init(){
-        bStart = new JButton("Start");
+        bStart = new JButton(config.getProperty("start"));
         add(bStart);
 
-        bExit = new JButton("Wyjdź z gry");
+        bExit = new JButton(config.getProperty("exit"));
         add(bExit);
     }
 
@@ -68,13 +74,9 @@ public class MenuStartView extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        File file = new File("assets/welcome.png");
-        try {
-            Image image = ImageIO.read(file).getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
-            g2d.drawImage(image, 0 , 0 , null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Image image = textureLoader.getTexture("Background").image.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
+        g2d.drawImage(image, 0 , 0 , null);
+
 
     }
 

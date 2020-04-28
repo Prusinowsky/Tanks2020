@@ -3,6 +3,7 @@ package app.windows.components;
 import app.Container;
 import app.config.ConfigInterface;
 import app.engine.interfaces.Renderable;
+import app.loaders.texture.TextureLoaderInterface;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -14,6 +15,9 @@ import java.awt.event.ActionListener;
  */
 public class GameHudComponent extends JPanel implements Renderable {
 
+    private ConfigInterface config;
+    private TextureLoaderInterface textureLoader;
+
     private JLabel lTime, lLabelHeart, lHeart[], lLogo;
     private JButton bPause, bExit;
 
@@ -22,6 +26,10 @@ public class GameHudComponent extends JPanel implements Renderable {
      * @param config
      */
     public GameHudComponent(ConfigInterface config){
+
+        this.config = Container.getInstance().provideConfig();
+        this.textureLoader = Container.getInstance().provideTextureLoader();
+
         setLayout(null);
         setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         setSize(new Dimension(200, 500));
@@ -35,29 +43,29 @@ public class GameHudComponent extends JPanel implements Renderable {
      * Inicjalizacja elementów
      */
     public void init(){
-        lLogo = new JLabel(new ImageIcon(new ImageIcon("assets/logo.png").getImage().getScaledInstance(200, 130, Image.SCALE_DEFAULT)));
+        lLogo = new JLabel(new ImageIcon(textureLoader.getTextureImageScaled("Logo", 200, 130, Image.SCALE_DEFAULT)));
         add(lLogo);
 
-        lTime = new JLabel("Czas: " +  "0:01:34");
-        lTime.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        lTime = new JLabel(config.getProperty("time") +  " 0:01:34");
+        lTime.setFont(new Font("SansSerif", Font.PLAIN, 20));
         add(lTime, SwingConstants.CENTER);
 
         Integer numberOfLifes = 3; //będzie pobierana z opcji
-        lLabelHeart = new JLabel("Życia:");
-        lLabelHeart.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        lLabelHeart = new JLabel(config.getProperty("lives") + ":");
+        lLabelHeart.setFont(new Font("SansSerif", Font.PLAIN, 20));
         add(lLabelHeart);
         lHeart = new JLabel[numberOfLifes];
         for (Integer i=0; i<numberOfLifes; i++)
         {
-            ImageIcon picHeart = new ImageIcon(new ImageIcon("assets/textures/hud/life.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+            ImageIcon picHeart = new ImageIcon(textureLoader.getTextureImageScaled("Life", 30, 30, Image.SCALE_DEFAULT));
             lHeart[i] = new JLabel(picHeart);
             add(lHeart[i]);
         }
 
-        bPause = new JButton("Pauza");
+        bPause = new JButton(config.getProperty("pause"));
         add(bPause);
 
-        bExit = new JButton("Powrót");
+        bExit = new JButton(config.getProperty("back"));
         add(bExit);
     }
 
@@ -67,7 +75,6 @@ public class GameHudComponent extends JPanel implements Renderable {
 
     public void render()
     {
-        //lLogo = new JLabel(new ImageIcon(new ImageIcon("assets/logo.png").getImage().getScaledInstance(getWidth(), 200, Image.SCALE_DEFAULT)));
         lLogo.setBounds( 0,0,getWidth(),140);
         lTime.setBounds( 10,160, getWidth(),30);
 
