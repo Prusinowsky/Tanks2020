@@ -2,6 +2,7 @@ package app.engine;
 
 import app.entities.map.MapEntity;
 import app.entities.map.MapLayer;
+import app.entities.map.objects.Bullet;
 import app.entities.map.players.Player;
 import app.loaders.texture.TextureLoader;
 import app.windows.components.GameHudComponent;
@@ -9,6 +10,7 @@ import app.windows.components.GameScreenComponent;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class EngineRender {
 
@@ -16,6 +18,7 @@ public class EngineRender {
     private MapEntity mapEntity;
     private TextureLoader textureLoader;
     private Player player;
+    private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
     private GameScreenComponent gameScreenComponent;
     private GameHudComponent gameHudComponent;
@@ -48,6 +51,8 @@ public class EngineRender {
         this.player = player;
     }
 
+    public void setBullets(ArrayList<Bullet> bullets) { this.bullets = bullets; }
+
     public void setEnemies(){
 
     }
@@ -62,6 +67,7 @@ public class EngineRender {
                 renderLayer(g2d, mapEntity.layers[i]);
             }
             renderPlayer(g2d);
+            renderBullets(g2d);
         }
         screen = offscreen;
     }
@@ -73,6 +79,18 @@ public class EngineRender {
         player2d.rotate(Math.toRadians(this.player.angle), playerImg.getWidth(null) >> 1, playerImg.getHeight(null) >> 1);
         player2d.drawImage(playerImg,0,0,null);
         g2d.drawImage(playerBuffored, player.positionX, player.positionY,null);
+    }
+
+    private void renderBullets(Graphics2D g2d){
+        Integer number = this.bullets.size();
+        for(Integer i=0; i<number; i++) {
+            Image bulletImg = this.bullets.get(i).getTexture().image;
+            Image bulletBuffored = new BufferedImage(bulletImg.getWidth(null), bulletImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D player2d = ((BufferedImage) bulletBuffored).createGraphics();
+            player2d.rotate(Math.toRadians(this.bullets.get(i).angle), bulletImg.getWidth(null) >> 1, bulletImg.getHeight(null) >> 1);
+            player2d.drawImage(bulletImg, 0, 0, null);
+            g2d.drawImage(bulletBuffored, bullets.get(i).positionX, bullets.get(i).positionY, null);
+        }
     }
 
     private void renderLayer(Graphics2D g2d, MapLayer layer){

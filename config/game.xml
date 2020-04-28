@@ -32,7 +32,7 @@
     <entry key="map_indestructible_2">Obsidian</entry>
 
     <!--  Textures  -->
-    <entry key="texture_number">15</entry>
+    <entry key="texture_number">16</entry>
     <entry key="texture_name_0">EnemyTank</entry>
     <entry key="texture_path_0">entities/enemy_tank.png</entry>
     <entry key="texture_name_1">PlayerTank</entry>
@@ -63,6 +63,8 @@
     <entry key="texture_path_13">maps/volcano/stone.png</entry>
     <entry key="texture_name_14">Portal</entry>
     <entry key="texture_path_14">maps/portal.png</entry>
+	<entry key="texture_name_15">Bullet</entry>
+    <entry key="texture_path_15">entities/bullet.png</entry>
 
 
 </properties>

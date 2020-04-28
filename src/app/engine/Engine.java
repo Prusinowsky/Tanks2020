@@ -11,6 +11,7 @@ import app.windows.components.GameScreenComponent;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,7 +25,7 @@ public class Engine implements EngineInterface {
 
     private Player player;
     private Enemy[] enemies;
-    private Bullet[] bullets;
+    private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     private MapEntity map;
 
     private MapLoaderInterface mapLoader;
@@ -48,10 +49,12 @@ public class Engine implements EngineInterface {
         player.angle = 0;
         engineRender.setPlayer(player);
 
+        engineRender.setBullets(bullets);
+
         engineRender.setMapEntity(map);
 
         timer = new Timer();
-        renderWithFreq(120);
+        renderWithFreq(30);
     }
 
     @Override
@@ -87,7 +90,8 @@ public class Engine implements EngineInterface {
             else if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()-1].isBlock() == false) {
                 player.positionY -= 32;
                 player.angle = 0;
-        }
+            }
+            else player.angle = 0;
     }
 
     public void moveDown(){
@@ -100,6 +104,7 @@ public class Engine implements EngineInterface {
                 player.positionY += 32;
                 player.angle = 180;
             }
+            else player.angle = 180;
     }
 
     public void moveRight(){
@@ -112,6 +117,7 @@ public class Engine implements EngineInterface {
                 player.positionX += 32;
                 player.angle = 90;
             }
+            else player.angle = 90;
     }
 
     public void moveLeft(){
@@ -124,12 +130,50 @@ public class Engine implements EngineInterface {
                 player.positionX -= 32;
                 player.angle = 270;
             }
+            else player.angle = 270;
     }
 
-    public void shoot(){
-        
+    public void shoot() {
+        bullets.add(new Bullet());
+        Integer number = bullets.size();
+        bullets.get(number-1).positionX = player.positionX;
+        bullets.get(number-1).positionY = player.positionY;
+        bullets.get(number-1).angle = player.angle;
+
+        /*if (bullets.get(number-1).angle == 0) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() - 1] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() - 1].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateY() - 1 >= 0 && bullets.get(number-1).getCordinateY() - 1 < map.height) )  {
+                bullets.get(number-1).positionY -= 32;
+                System.out.println("up");
+            }
+        } else if (bullets.get(number-1).angle == 90) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX() + 1][bullets.get(number-1).getCordinateY()] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX() + 1][bullets.get(number-1).getCordinateY()].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateX() + 1 >= 0 && bullets.get(number-1).getCordinateX() + 1 < map.width)) {
+                bullets.get(number-1).positionX += 32;
+                System.out.println("right");
+            }
+        } else if (bullets.get(number-1).angle == 180) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() + 1] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() + 1].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateY() + 1 >= 0 && bullets.get(number-1).getCordinateY() + 1 < map.width)) {
+                bullets.get(number-1).positionY += 32;
+                System.out.println("down");
+            }
+        } else if (bullets.get(number-1).angle == 270) {
+            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX() - 1][bullets.get(number-1).getCordinateY()] == null &&
+                    map.layers[1].blocks[bullets.get(number-1).getCordinateX() - 1][bullets.get(number-1).getCordinateY()].isBlock() == false &&
+                    (bullets.get(number-1).getCordinateX() - 1 >= 0 && bullets.get(number-1).getCordinateX() - 1 < map.width)) {
+                bullets.get(number-1).positionX -= 32;
+                System.out.println("left");
+            }
+        }*/
     }
 
+    public void bulletMove(){
+
+    }
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){
         engineRender.setGameScreenComponent(gameScreenComponent);
