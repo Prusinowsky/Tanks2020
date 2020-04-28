@@ -10,7 +10,7 @@ public class Enemy extends MapObject {
     public Integer positionX;
     public Integer positionY;
     public Integer angle;
-
+    
     public Integer getCoordinateX(){
         return positionX/32;
     }

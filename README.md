@@ -2,7 +2,50 @@
 
 
 
-#### Opis gry
+### Instrukcja 
+
+1. ##### Generowanie dokumentacji 
+
+   Dokumentacja programuj znajduje się w folderze `docs`
+
+
+```shell
+javadoc -sourcepath /src -d /docs -subpackages .
+```
+
+
+
+2. ##### Kompilowanie kodu źródłowego
+
+   Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`
+
+```shell
+javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Bootstrap.java
+```
+
+
+
+3. ##### Uruchamianie programu
+
+   Uruchamianie gry.
+
+```shell
+java -cp ./out Bootstrap
+```
+
+
+
+### **Diagram klas**
+
+Diagram klas programu. W kolejnym etapie pozmieniamy nazwy obiektów na bardziej odzwierciedlające zachowanie. Na ten moment podsyłam tylko takie coś. Staraliśmy się bardzo mocno, aby stworzyć taką architekturę gry, aby można było wykorzystać ją przy innych projektach, wymieniając jej tylko moduły. Przykładowo wymienić moduł `window` korzystający obecnie z AWT i Swinga na JavaFX, albo zmieniając `engine` stworzyć nową grę.
+
+
+
+![](./diagram.png)
+
+
+
+### Opis gry
 
 W oknie otwierającym aplikacji jest pasek menu (1). Opcje do wyboru to Gra (2), która jest rozsuwanym menu i Pomoc (7), która jest wyskakującym okienkiem z instrukcją jak grać. W menu Gra są do wyboru opcje: Start, Wybierz mapę (4) , Najlepsze wyniki (3) i Koniec. Start powoduje pojawienie się okienka Nick (5), które wymaga od gracza wpisania swojego nicku. Gdy nie będziemy chcieli wpisać nicku, gra wróci nas do ekranu startowego. Następnie otworzy się nowe okno z grą (8).
 
@@ -16,35 +59,6 @@ Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od któreg
 
 
 ![](./mockup.png)
-
-#### Instrukcja 
-
-1. ##### Generowanie dokumentacji 
-
-   Dokumentacja programuj znajduje się w folderze `docs`
-
-
-```
-javadoc -sourcepath /src -d /docs -subpackages .
-```
-
-
-
-2. ##### Kompilowanie kodu źródłowego
-
-   Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`
-
-```
-javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Bootstrap.java
-```
-
-
-
-3. ##### Uruchamianie programu
-
-```
-java -cp ./out Bootstrap
-```
 
 
 

@@ -131,7 +131,7 @@ public class Engine implements EngineInterface {
                 player.positionY -= 32;
                 player.angle = 0;
             }
-            else if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()-1].isOpaque() == false) {
+         else if(!map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY() - 1].isOpaque()) {
                 player.positionY -= 32;
                 player.angle = 0;
             }
@@ -144,7 +144,7 @@ public class Engine implements EngineInterface {
                 player.positionY += 32;
                 player.angle = 180;
             }
-            else if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()+1].isOpaque() == false) {
+            else if(!map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY() + 1].isOpaque()) {
                 player.positionY += 32;
                 player.angle = 180;
             }
@@ -157,7 +157,7 @@ public class Engine implements EngineInterface {
                 player.positionX += 32;
                 player.angle = 90;
             }
-            else if(map.layers[1].blocks[player.getCoordinateX()+1][player.getCoordinateY()].isOpaque() == false) {
+            else if(!map.layers[1].blocks[player.getCoordinateX() + 1][player.getCoordinateY()].isOpaque()) {
                 player.positionX += 32;
                 player.angle = 90;
             }
@@ -170,7 +170,7 @@ public class Engine implements EngineInterface {
                 player.positionX -= 32;
                 player.angle = 270;
             }
-            else if(map.layers[1].blocks[player.getCoordinateX()-1][player.getCoordinateY()].isOpaque() == false) {
+            else if(!map.layers[1].blocks[player.getCoordinateX() - 1][player.getCoordinateY()].isOpaque()) {
                 player.positionX -= 32;
                 player.angle = 270;
             }
@@ -183,36 +183,6 @@ public class Engine implements EngineInterface {
         bullets.get(number-1).positionX = player.positionX;
         bullets.get(number-1).positionY = player.positionY;
         bullets.get(number-1).angle = player.angle;
-
-        /*if (bullets.get(number-1).angle == 0) {
-            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() - 1] == null &&
-                    map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() - 1].isBlock() == false &&
-                    (bullets.get(number-1).getCordinateY() - 1 >= 0 && bullets.get(number-1).getCordinateY() - 1 < map.height) )  {
-                bullets.get(number-1).positionY -= 32;
-                System.out.println("up");
-            }
-        } else if (bullets.get(number-1).angle == 90) {
-            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX() + 1][bullets.get(number-1).getCordinateY()] == null &&
-                    map.layers[1].blocks[bullets.get(number-1).getCordinateX() + 1][bullets.get(number-1).getCordinateY()].isBlock() == false &&
-                    (bullets.get(number-1).getCordinateX() + 1 >= 0 && bullets.get(number-1).getCordinateX() + 1 < map.width)) {
-                bullets.get(number-1).positionX += 32;
-                System.out.println("right");
-            }
-        } else if (bullets.get(number-1).angle == 180) {
-            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() + 1] == null &&
-                    map.layers[1].blocks[bullets.get(number-1).getCordinateX()][bullets.get(number-1).getCordinateY() + 1].isBlock() == false &&
-                    (bullets.get(number-1).getCordinateY() + 1 >= 0 && bullets.get(number-1).getCordinateY() + 1 < map.width)) {
-                bullets.get(number-1).positionY += 32;
-                System.out.println("down");
-            }
-        } else if (bullets.get(number-1).angle == 270) {
-            while (map.layers[1].blocks[bullets.get(number-1).getCordinateX() - 1][bullets.get(number-1).getCordinateY()] == null &&
-                    map.layers[1].blocks[bullets.get(number-1).getCordinateX() - 1][bullets.get(number-1).getCordinateY()].isBlock() == false &&
-                    (bullets.get(number-1).getCordinateX() - 1 >= 0 && bullets.get(number-1).getCordinateX() - 1 < map.width)) {
-                bullets.get(number-1).positionX -= 32;
-                System.out.println("left");
-            }
-        }*/
     }
 
     public void loadEnemies(){
