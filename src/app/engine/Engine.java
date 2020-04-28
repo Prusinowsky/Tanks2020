@@ -79,6 +79,7 @@ public class Engine implements EngineInterface {
 
     private void render(){
         handleBulletsBehaviour();
+        handleEnemyTanksBehaviour();
         engineRender.render();
         engineRender.update();
     }
@@ -92,6 +93,7 @@ public class Engine implements EngineInterface {
     private void handleSingleBulletBehaviour(Bullet bullet){
         moveSingleBullet(bullet);
         destroyObstacle(bullet);
+        destroyEnemyTank(bullet);
     }
 
     private void moveSingleBullet(Bullet bullet){
@@ -125,13 +127,93 @@ public class Engine implements EngineInterface {
         }
     }
 
+    //NIEZROBIONE!!!
+    private void destroyEnemyTank(Bullet bullet){
+        if(!(bullet.getCoordinateY()>=0 && bullet.getCoordinateY() < map.height && bullet.getCoordinateX()>=0 && bullet.getCoordinateX() < map.width)){
+            bullets.remove(bullet);
+        }
+    }
+
+    private void handleEnemyTanksBehaviour(){
+        for(Integer i=0; i<enemies.size(); i++){
+            handleSingleEnemyTankBehaviour(enemies.get(i));
+        }
+    }
+
+    private void handleSingleEnemyTankBehaviour(Enemy enemy){
+        moveSingleEnemyTank(enemy);
+    }
+
+    private void moveSingleEnemyTank(Enemy enemy){
+        if(enemy.angle == 0) moveUpSingleEnemyTank(enemy);
+        if(enemy.angle == 90) moveRightSingleEnemyTank(enemy);
+        if(enemy.angle == 180) moveDownSingleEnemyTank(enemy);
+        if(enemy.angle == 270) moveLeftSingleEnemyTank(enemy);
+    }
+
+    private void moveUpSingleEnemyTank(Enemy enemy){
+        if(enemy.getCoordinateY()-1>=0 && enemy.getCoordinateY()-1 < map.height) {
+            if (map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() - 1] == null) {
+                enemy.positionY -= 32;
+                enemy.angle = 0;
+            }else if (!map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() - 1].isOpaque()) {
+                enemy.positionY -= 32;
+                enemy.angle = 0;
+            } else {
+                enemy.angle = 180;
+            }
+        }
+    }
+
+    private void moveRightSingleEnemyTank(Enemy enemy){
+        if(enemy.getCoordinateX()+1>=0 && enemy.getCoordinateX()+1 < map.width) {
+            if (map.layers[1].blocks[enemy.getCoordinateX() + 1][enemy.getCoordinateY()] == null) {
+                enemy.positionX += 32;
+                enemy.angle = 90;
+            } else if (!map.layers[1].blocks[enemy.getCoordinateX() + 1][enemy.getCoordinateY()].isOpaque()) {
+                enemy.positionX += 32;
+                enemy.angle = 90;
+            } else {
+                enemy.angle = 270;
+            }
+        }
+    }
+
+    private void moveDownSingleEnemyTank(Enemy enemy){
+        if(enemy.getCoordinateY()+1>=0 && enemy.getCoordinateY()+1 < map.height) {
+            if (map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() + 1] == null) {
+                enemy.positionY += 32;
+                enemy.angle = 180;
+            } else if (!map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() + 1].isOpaque()) {
+                enemy.positionY += 32;
+                enemy.angle = 180;
+            } else {
+                enemy.angle = 0;
+            }
+        }
+    }
+
+    private void moveLeftSingleEnemyTank(Enemy enemy){
+        if(enemy.getCoordinateX()-1>=0 && enemy.getCoordinateX()-1 < map.width) {
+            if (map.layers[1].blocks[enemy.getCoordinateX() - 1][enemy.getCoordinateY()] == null) {
+                enemy.positionX -= 32;
+                enemy.angle = 270;
+            } else if (!map.layers[1].blocks[enemy.getCoordinateX() - 1][enemy.getCoordinateY()].isOpaque()) {
+                enemy.positionX -= 32;
+                enemy.angle = 270;
+            } else {
+                enemy.angle = 90;
+            }
+        }
+    }
+
     public void moveUp(){
         if(player.getCoordinateY()-1>=0 && player.getCoordinateY()-1 < map.height)
             if(map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY()-1] == null){
                 player.positionY -= 32;
                 player.angle = 0;
             }
-         else if(!map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY() - 1].isOpaque()) {
+            else if(!map.layers[1].blocks[player.getCoordinateX()][player.getCoordinateY() - 1].isOpaque()) {
                 player.positionY -= 32;
                 player.angle = 0;
             }
@@ -201,14 +283,6 @@ public class Engine implements EngineInterface {
         enemies.add(enemy1);
         enemies.add(enemy2);
         enemies.add(enemy3);
-    }
-
-    public void moveEnemies(Enemy enemy){
-        if(enemy.getCoordinateX()-1>=0 && enemy.getCoordinateX()-1 < map.width)
-            if(map.layers[1].blocks[enemy.getCoordinateX()-1][enemy.getCoordinateY()] == null){
-                player.positionX -= 32;
-                player.angle = 270;
-            }
     }
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){

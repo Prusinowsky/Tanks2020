@@ -90,6 +90,12 @@ public class RunningGameState implements StateInterface {
                 engine.shoot();
             }
         });
+        runningView.addEActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.shoot();
+            }
+        });
 
         engine.setGameScreenComponent(runningView.getGameScreenComponent());
         engine.setGameHudComponent(runningView.getGameHudComponent());
