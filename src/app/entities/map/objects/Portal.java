@@ -5,6 +5,10 @@ import app.entities.TextureEntity;
 import app.entities.map.MapObject;
 
 public class Portal extends MapObject  {
+
+    @Override
+    public Boolean isBlock() { return false; }
+
     @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture("Portal");

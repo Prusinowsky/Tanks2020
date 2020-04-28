@@ -14,7 +14,9 @@ public interface EngineInterface {
     public void moveDown();
     public void moveRight();
     public void moveLeft();
+    public void shoot();
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent);
     public void setGameHudComponent(GameHudComponent gameHudComponent);
+
 }

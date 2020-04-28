@@ -13,6 +13,12 @@ public class Player extends MapObject {
     public Integer getCordinateX(){
         return positionX/32;
     }
+    public Integer getCordinateY(){
+        return positionY/32;
+    }
+
+    @Override
+    public Boolean isBlock() { return false; }
 
     @Override
     public TextureEntity getTexture() {

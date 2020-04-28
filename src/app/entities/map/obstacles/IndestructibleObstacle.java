@@ -5,6 +5,10 @@ import app.entities.TextureEntity;
 import app.entities.map.MapObject;
 
 public class IndestructibleObstacle extends MapObject  {
+
+    @Override
+    public Boolean isBlock() { return true; }
+
     @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture(

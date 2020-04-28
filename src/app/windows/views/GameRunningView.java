@@ -118,4 +118,14 @@ public class GameRunningView extends JComponent {
         this.getActionMap().put("move left", action);
     }
 
+    public void addSpaceActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE"), "push space");
+        this.getActionMap().put("push space", action);
+    }
+
+    public void addEnterActionListener(AbstractAction action) {
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "push enter");
+        this.getActionMap().put("push enter", action);
+    }
+
 }

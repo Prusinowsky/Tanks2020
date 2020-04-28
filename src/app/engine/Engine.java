@@ -1,6 +1,7 @@
 package app.engine;
 
 import app.engine.interfaces.EngineInterface;
+import app.entities.map.objects.Bullet;
 import app.entities.map.players.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.players.Player;
@@ -23,6 +24,7 @@ public class Engine implements EngineInterface {
 
     private Player player;
     private Enemy[] enemies;
+    private Bullet[] bullets;
     private MapEntity map;
 
     private MapLoaderInterface mapLoader;
@@ -77,24 +79,57 @@ public class Engine implements EngineInterface {
     }
 
     public void moveUp(){
-        player.positionY -= 32;
-        player.angle = 0;
+        if(player.getCordinateY()-1>=0 && player.getCordinateY()-1 < map.height)
+            if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()-1] == null){
+                player.positionY -= 32;
+                player.angle = 0;
+            }
+            else if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()-1].isBlock() == false) {
+                player.positionY -= 32;
+                player.angle = 0;
+        }
     }
 
     public void moveDown(){
-        player.positionY += 32;
-        player.angle = 180;
+        if(player.getCordinateY()+1>=0 && player.getCordinateY()+1 < map.height)
+            if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()+1] == null){
+                player.positionY += 32;
+                player.angle = 180;
+            }
+            else if(map.layers[1].blocks[player.getCordinateX()][player.getCordinateY()+1].isBlock() == false) {
+                player.positionY += 32;
+                player.angle = 180;
+            }
     }
 
     public void moveRight(){
-        player.positionX += 32;
-        player.angle = 90;
+        if(player.getCordinateX()+1>=0 && player.getCordinateX()+1 < map.width)
+            if(map.layers[1].blocks[player.getCordinateX()+1][player.getCordinateY()] == null){
+                player.positionX += 32;
+                player.angle = 90;
+            }
+            else if(map.layers[1].blocks[player.getCordinateX()+1][player.getCordinateY()].isBlock() == false) {
+                player.positionX += 32;
+                player.angle = 90;
+            }
     }
 
     public void moveLeft(){
-        player.positionX -= 32;
-        player.angle = 270;
+        if(player.getCordinateX()-1>=0 && player.getCordinateX()-1 < map.width)
+            if(map.layers[1].blocks[player.getCordinateX()-1][player.getCordinateY()] == null){
+                player.positionX -= 32;
+                player.angle = 270;
+            }
+            else if(map.layers[1].blocks[player.getCordinateX()-1][player.getCordinateY()].isBlock() == false) {
+                player.positionX -= 32;
+                player.angle = 270;
+            }
     }
+
+    public void shoot(){
+        
+    }
+
 
     public void setGameScreenComponent(GameScreenComponent gameScreenComponent){
         engineRender.setGameScreenComponent(gameScreenComponent);

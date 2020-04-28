@@ -10,5 +10,6 @@ public abstract class MapObject {
     public Integer mapCode; // 0 - dolina
     public String mapName; // Dolina
 
+    public abstract Boolean isBlock();
     public abstract TextureEntity getTexture();
 }
