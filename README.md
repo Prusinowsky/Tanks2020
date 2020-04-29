@@ -10,7 +10,7 @@
 
 
 ```shell
-javadoc -sourcepath /src -d /docs -subpackages .
+javadoc -sourcepath ./src -d ./docs -classpath ./src -subpackages . ./src/Bootstrap.java
 ```
 
 

@@ -27,6 +27,7 @@ public class TextureLoader implements TextureLoaderInterface {
 
     /**
      * Konstrukor z ładowaniem
+     * @param config Obiekt konfiguracyjny
      */
     public TextureLoader(ConfigInterface config){
         this.config = config;
@@ -48,8 +49,8 @@ public class TextureLoader implements TextureLoaderInterface {
 
     /**
      * Metoda odpowiadajaca za ładowanie tekstury
-     * @param name
-     * @param path
+     * @param name nazwa tekstury
+     * @param path ścieżka tekstury
      */
     public void loadTexture(String name, String path) {
 
@@ -68,8 +69,8 @@ public class TextureLoader implements TextureLoaderInterface {
 
     /**
      * Zwraca teksture znajdujaca sie po dana nazwa
-     * @param name
-     * @return
+     * @param name nazwa tekstury
+     * @return Encja tekstury
      */
     public TextureEntity getTexture(String name){
         return collection.get(name);
@@ -77,8 +78,8 @@ public class TextureLoader implements TextureLoaderInterface {
 
     /**
      * Zwraca obraz tekstury
-     * @param name
-     * @return
+     * @param name nazwa tekstury
+     * @return Obraz tesktury
      */
     public Image getTextureImage(String name) {
         return getTexture(name).image;
@@ -86,11 +87,11 @@ public class TextureLoader implements TextureLoaderInterface {
 
     /**
      * Zwraca przeskalowany obraz tekstury
-     * @param name
-     * @param width
-     * @param height
-     * @param hints
-     * @return
+     * @param name nazwa
+     * @param width szerokość
+     * @param height wyskosć
+     * @param hints wskazówka
+     * @return Przeskalowany orbaz
      */
     public Image getTextureImageScaled(String name, Integer width, Integer height, Integer hints){
         return getTexture(name).image.getScaledInstance(width, height, hints);

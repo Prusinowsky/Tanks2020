@@ -104,7 +104,7 @@ public class Engine implements EngineInterface {
 
     /**
      * Metoda odpowiedzialna za odswiezanie gry
-     * @param fps
+     * @param fps ilosc klatek na sekunde
      */
     private void renderWithFreq(Integer fps){
         timer.schedule(new TimerTask() {
@@ -128,7 +128,7 @@ public class Engine implements EngineInterface {
 
     /**
      * Zwraca sterownik gry
-     * @return
+     * @return Steronik silnika
      */
     public EngineDriver getDriver(){
         return this.driver;
@@ -136,7 +136,7 @@ public class Engine implements EngineInterface {
 
     /**
      * Zwraca silnik gry
-     * @return
+     * @return Fizyka silnika
      */
     public EnginePhysics getPhysics(){
         return this.physics;
@@ -144,7 +144,7 @@ public class Engine implements EngineInterface {
 
     /**
      * Zwraca obiekt renderujacy gre
-     * @return
+     * @return Obiekt renderujacy mape
      */
     public EngineRender getRender(){
         return this.render;

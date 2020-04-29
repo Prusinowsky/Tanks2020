@@ -11,8 +11,10 @@ public interface GameStateManagerInterface {
     public void execute();
 
     /**
-     * Zmaina stanu
+     * Zamienń na stan
+     * @param toState stan na jaki ma zostać zamienione
      */
+
     public void changeStateTo(String toState);
 
     /**

@@ -62,7 +62,7 @@ public class MenuStartView extends JPanel {
 
     /**
      * Metoda odpowiadajaca za rysowanie mapy
-     * @param g
+     * @param g Obiekt grafiki
      */
     @Override
     public void paint(Graphics g) {

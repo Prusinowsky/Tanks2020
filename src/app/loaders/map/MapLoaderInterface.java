@@ -12,16 +12,19 @@ public interface MapLoaderInterface {
      */
     public void load();
 
-    /**
-     * Przekształcająca wybraną mapę
-     * @return
+    /** Przekształcająca wybraną mapę
+     * @param mapCode kody mapy
+     * @param mapName nazwa mapy
+     * @param path ścieżka mapy
+     * @return Encja mapy
      */
+
     public MapEntity convertToMapEntity(Integer mapCode, String mapName, String path);
 
     /**
      * Zwaraca mape o danej nazwie
-     * @param name
-     * @return
+     * @param name nazwa mapy
+     * @return Encja mapy
      */
     public MapEntity getMap(String name);
 }

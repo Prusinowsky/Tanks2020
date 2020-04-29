@@ -35,7 +35,8 @@ public class MapLoader implements MapLoaderInterface {
 
 
     /**
-     * Konstruktor domsylny
+     * Konstruktor domyslny
+     * @param config Obiekt konfiguracyjny
      */
     public MapLoader(ConfigInterface config){
         this.config = config;
@@ -60,9 +61,10 @@ public class MapLoader implements MapLoaderInterface {
 
     /**
      * Zwraca encję mapy
-     * @param mapName
-     * @param path
-     * @return
+     * @param mapCode kody mapu
+     * @param mapName nazwa mapy
+     * @param path ścieżka mapy
+     * @return Encja mapy
      */
     public MapEntity convertToMapEntity(Integer mapCode, String mapName, String path){
         //System.out.println("Mapa : " + name);

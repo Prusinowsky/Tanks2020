@@ -18,7 +18,7 @@ public class MenuBarComponent extends JMenuBar {
 
     /**
      * Kontruktor domyslny
-     * @param config
+     * @param config Obiekt konfiguracyjny
      */
     public MenuBarComponent(ConfigInterface config){
         super();
@@ -68,7 +68,7 @@ public class MenuBarComponent extends JMenuBar {
 
     /**
      * Zwraca obiekt JMenuBar
-     * @return
+     * @return JMenuBar
      */
     public JMenuBar getJMenuBar() {
         return jmenuBar;

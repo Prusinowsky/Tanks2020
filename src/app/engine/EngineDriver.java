@@ -13,7 +13,7 @@ public class EngineDriver {
 
     /**
      * Kontruktor domyslny
-     * @param engine
+     * @param engine Slnik gry
      */
     public EngineDriver(Engine engine){
         this.engine = engine;

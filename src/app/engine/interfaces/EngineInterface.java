@@ -26,19 +26,19 @@ public interface EngineInterface {
 
     /**
      * Meotda zwraca sterownik silnika
-     * @return
+     * @return Sterownik silnika
      */
     public EngineDriver getDriver();
 
     /**
      * Metoda zwraca odbiekt fizyki silnika
-     * @return
+     * @return Fizyka silnika
      */
     public EnginePhysics getPhysics();
 
     /**
      * Metoda zwraca obiekt odpowiedzlany za renderowanie silnika
-     * @return
+     * @return Obiekt renderujący obraz gry
      */
     public EngineRender getRender();
 }

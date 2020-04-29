@@ -34,8 +34,9 @@ public class TextureEntity implements Cloneable {
 
     /**
      * Konstrukotr inicjalizujący z parametrami
-     * @param name
-     * @param path
+     * @param name nazwa tesktury
+     * @param path nazwa ścieżki
+     * @param image przypisywany obraz
      */
     public TextureEntity(String name, String path, Image image){
         this.name = name;
@@ -43,16 +44,6 @@ public class TextureEntity implements Cloneable {
         this.image = image;
         this.imageIcon = new ImageIcon(image);
     }
-
-
-        /*  put się nie przyda, ale reszta już tak XD, tu będzie jakiś if związany z typem
-        pattern.put(0, textureLoader.getTexture(config.getProperty("map_ground_" + i)));
-        pattern.put(1, textureLoader.getTexture(config.getProperty("map_destructible_" + i)));
-        pattern.put(2, textureLoader.getTexture(config.getProperty("map_destroyed_" + i)));
-        pattern.put(3, textureLoader.getTexture(config.getProperty("map_indestructible_" + i)));
-        pattern.put(4, textureLoader.getTexture("Portal"));
-     */
-
 
     @Override
     public Object clone() throws CloneNotSupportedException {

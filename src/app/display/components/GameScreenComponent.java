@@ -22,7 +22,7 @@ public class GameScreenComponent extends JPanel{
 
     /**
      * Ustawianie nowego obrazu :)
-     * @param screen
+     * @param screen Obraz gry
      */
     public void setScreen(Image screen){
         this.screen = screen;
@@ -30,7 +30,7 @@ public class GameScreenComponent extends JPanel{
 
     /**
      * Metoda odpowiadajaca za rysowanie mapy
-     * @param g
+     * @param g Obiekt graficzny
      */
     @Override
     protected void paintComponent(Graphics g) {

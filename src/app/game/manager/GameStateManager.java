@@ -22,7 +22,8 @@ public class GameStateManager implements GameStateManagerInterface {
     private HashMap<String, StateInterface> states = new HashMap<String, StateInterface>();
 
     /**
-     * Konstruktor domyslny
+     * Kontruktor domyslny
+     * @param engine Silnik gry
      */
     public GameStateManager(EngineInterface engine){
         this.engine = engine;
@@ -86,7 +87,7 @@ public class GameStateManager implements GameStateManagerInterface {
 
     /**
      * Zmaina stanu na inny stan
-     * @param toState
+     * @param toState stan, na który ma zostać zamieniony
      */
     @Override
     public void changeStateTo(String toState) {

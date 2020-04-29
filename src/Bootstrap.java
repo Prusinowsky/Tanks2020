@@ -9,14 +9,12 @@ public class Bootstrap {
 
     /**
      * Główna metoda, uruchamiana podczas uruchamiania aplikacji
-     * @param args
+     * @param args Argumenty z CLI
      */
     public static void main(String[] args)
     {
-
         GameStateManagerInterface app = new GameStateManager(new Engine());
         app.execute();
-
     }
 
 }

@@ -23,7 +23,7 @@ public class GameHudComponent extends JPanel implements Renderable {
 
     /**
      * Konstrukotr dymyślny
-     * @param config
+     * @param config Obiekt konfiguracyjny
      */
     public GameHudComponent(ConfigInterface config){
 
@@ -72,7 +72,6 @@ public class GameHudComponent extends JPanel implements Renderable {
     /**
      * Metoda renderująca HUD'a
      */
-
     public void render()
     {
         lLogo.setBounds( 0,0,getWidth(),140);
@@ -93,18 +92,30 @@ public class GameHudComponent extends JPanel implements Renderable {
         repaint();
     }
 
+    /**
+     * Metoda aktualizująca okno
+     */
     @Override
     public void update() {
 
     }
 
+    /**
+     * Meotda dodająca akację dla przycisku pauzy
+     * @param action Przypisywana akcja
+     */
     public void addPauseActionListener(ActionListener action){
         bPause.addActionListener(action);
     }
 
+    /**
+     * Meotda dodająca akację dla przycisku exit
+     * @param action Przypisywana akcja
+     */
     public void addExitActionListener(ActionListener action){
         bExit.addActionListener(action);
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {

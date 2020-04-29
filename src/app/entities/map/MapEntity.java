@@ -38,7 +38,8 @@ public class MapEntity implements Cloneable {
 
     /**
      * Konstrukotr inicjalizujący z parametrami
-     * @param name
+     * @param name nazwa mapy
+     * @param layers warstwy mapy
      */
     public MapEntity(String name, MapLayer[] layers){
         this.name = name;
