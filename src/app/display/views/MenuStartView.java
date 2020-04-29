@@ -1,18 +1,14 @@
-package app.windows.views;
+package app.display.views;
 
 import app.Container;
 import app.config.ConfigInterface;
-import app.loaders.texture.TextureLoader;
 import app.loaders.texture.TextureLoaderInterface;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.io.File;
-import java.io.IOException;
 
 
 public class MenuStartView extends JPanel {

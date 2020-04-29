@@ -1,10 +1,4 @@
-package app.windows.components;
-
-import app.Container;
-import app.config.ConfigInterface;
-import app.engine.interfaces.Renderable;
-import app.entities.map.MapEntity;
-import app.loaders.map.MapLoaderInterface;
+package app.display.components;
 
 import javax.swing.*;
 import java.awt.*;

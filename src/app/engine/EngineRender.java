@@ -1,32 +1,29 @@
 package app.engine;
 
-import app.entities.map.MapEntity;
 import app.entities.map.MapLayer;
-import app.entities.map.objects.Bullet;
-import app.entities.map.players.Enemy;
-import app.entities.map.players.Player;
 import app.loaders.texture.TextureLoader;
-import app.windows.components.GameHudComponent;
-import app.windows.components.GameScreenComponent;
+import app.display.components.GameHudComponent;
+import app.display.components.GameScreenComponent;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
+/**
+ * Obiekt odpowiedzialny za renderowanie gry
+ */
 public class EngineRender {
 
+    private Engine engine;
+
     private Image offscreen, screen;
-    private MapEntity mapEntity;
     private TextureLoader textureLoader;
-    private Player player;
-    private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     private GameScreenComponent gameScreenComponent;
     private GameHudComponent gameHudComponent;
 
 
-    public EngineRender(){
+    public EngineRender(Engine engine){
+        this.engine = engine;
         init();
     }
 
@@ -45,26 +42,14 @@ public class EngineRender {
         this.gameHudComponent = gameHudComponent;
     }
 
-    public void setMapEntity(MapEntity map){
-        this.mapEntity = map;
-    }
-
-    public void setPlayer(Player player){
-        this.player = player;
-    }
-
-    public void setBullets(ArrayList<Bullet> bullets) { this.bullets = bullets; }
-
-    public void setEnemies(ArrayList<Enemy> enemies){ this.enemies = enemies; }
-
     public void render(){
-        if(offscreen != null && mapEntity != null) {
+        if(offscreen != null && engine.map != null) {
             offscreen = new BufferedImage(16*32, 16*32, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = (Graphics2D) offscreen.getGraphics();
             g2d.clearRect(0,0, offscreen.getWidth(null), offscreen.getHeight(null));
 
-            for(Integer i = 0; i < mapEntity.numberOfLayers; i++){
-                renderLayer(g2d, mapEntity.layers[i]);
+            for(Integer i = 0; i < engine.map.numberOfLayers; i++){
+                renderLayer(g2d, engine.map.layers[i]);
             }
             renderPlayer(g2d);
             renderBullets(g2d);
@@ -74,35 +59,35 @@ public class EngineRender {
     }
 
     private void renderPlayer(Graphics2D g2d){
-        Image playerImg = this.player.getTexture().image;
+        Image playerImg = engine.player.getTexture().image;
         Image playerBuffored = new BufferedImage(playerImg.getWidth(null), playerImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics2D player2d = ((BufferedImage) playerBuffored).createGraphics();
-        player2d.rotate(Math.toRadians(this.player.angle), playerImg.getWidth(null) >> 1, playerImg.getHeight(null) >> 1);
+        player2d.rotate(Math.toRadians(engine.player.angle), playerImg.getWidth(null) >> 1, playerImg.getHeight(null) >> 1);
         player2d.drawImage(playerImg,0,0,null);
-        g2d.drawImage(playerBuffored, player.positionX, player.positionY,null);
+        g2d.drawImage(playerBuffored, engine.player.positionX, engine.player.positionY,null);
     }
 
     private void renderBullets(Graphics2D g2d){
-        Integer number = this.bullets.size();
+        Integer number = engine.bullets.size();
         for(Integer i=0; i<number; i++) {
-            Image bulletImg = this.bullets.get(i).getTexture().image;
+            Image bulletImg = engine.bullets.get(i).getTexture().image;
             Image bulletBuffored = new BufferedImage(bulletImg.getWidth(null), bulletImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
             Graphics2D bullet2d = ((BufferedImage) bulletBuffored).createGraphics();
-            bullet2d.rotate(Math.toRadians(this.bullets.get(i).angle), bulletImg.getWidth(null) >> 1, bulletImg.getHeight(null) >> 1);
+            bullet2d.rotate(Math.toRadians(engine.bullets.get(i).angle), bulletImg.getWidth(null) >> 1, bulletImg.getHeight(null) >> 1);
             bullet2d.drawImage(bulletImg, 0, 0, null);
-            g2d.drawImage(bulletBuffored, bullets.get(i).positionX, bullets.get(i).positionY, null);
+            g2d.drawImage(bulletBuffored, engine.bullets.get(i).positionX, engine.bullets.get(i).positionY, null);
         }
     }
 
     private void renderEnemies(Graphics2D g2d){
-        Integer number = this.enemies.size();
+        Integer number = engine.enemies.size();
         for(Integer i=0; i<number; i++) {
-            Image enemyImg = this.enemies.get(i).getTexture().image;
+            Image enemyImg = engine.enemies.get(i).getTexture().image;
             Image enemyBuffored = new BufferedImage(enemyImg.getWidth(null), enemyImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
             Graphics2D enemy2d = ((BufferedImage) enemyBuffored).createGraphics();
-            enemy2d.rotate(Math.toRadians(this.enemies.get(i).angle), enemyImg.getWidth(null) >> 1, enemyImg.getHeight(null) >> 1);
+            enemy2d.rotate(Math.toRadians(engine.enemies.get(i).angle), enemyImg.getWidth(null) >> 1, enemyImg.getHeight(null) >> 1);
             enemy2d.drawImage(enemyImg, 0, 0, null);
-            g2d.drawImage(enemyBuffored, enemies.get(i).positionX, enemies.get(i).positionY, null);
+            g2d.drawImage(enemyBuffored, engine.enemies.get(i).positionX, engine.enemies.get(i).positionY, null);
         }
     }
 

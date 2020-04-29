@@ -1,21 +1,21 @@
-package app.states;
+package app.game.states;
 
 import app.Container;
-import app.states.manager.StateManagerInterface;
-import app.windows.GameWindow;
-import app.windows.SetNickWindow;
-import app.windows.views.MenuStartView;
+import app.game.manager.GameStateManagerInterface;
+import app.display.windows.GameWindow;
+import app.display.windows.SetNickWindow;
+import app.display.views.MenuStartView;
 
 /**
  * Stan początku gry
  */
 public class WelcomeState implements StateInterface {
 
-    private StateManagerInterface manager;
+    private GameStateManagerInterface manager;
     private GameWindow game;
     private MenuStartView menu;
 
-    public WelcomeState(StateManagerInterface manager, GameWindow game){
+    public WelcomeState(GameStateManagerInterface manager, GameWindow game){
         this.manager = manager;
         this.game = game;
     }

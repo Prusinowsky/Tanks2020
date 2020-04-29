@@ -1,9 +1,9 @@
-package app.states.manager;
+package app.game.manager;
 
 /**
  * Menadżer stanów
  */
-public interface StateManagerInterface {
+public interface GameStateManagerInterface {
 
     /**
      * Inicjalizuje stany

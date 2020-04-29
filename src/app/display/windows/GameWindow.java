@@ -1,15 +1,13 @@
-package app.windows;
+package app.display.windows;
 
 import app.Container;
 import app.config.ConfigInterface;
-import app.windows.abstracts.AbstractWindow;
-import app.windows.components.MenuBarComponent;
+import app.display.abstracts.AbstractWindow;
+import app.display.components.MenuBarComponent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  * Główne okno aplikacji - STARTOWE (MENU)

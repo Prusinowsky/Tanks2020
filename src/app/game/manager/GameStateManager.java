@@ -1,9 +1,11 @@
-package app.states.manager;
+package app.game.manager;
 
 import app.Container;
 import app.engine.interfaces.EngineInterface;
-import app.states.*;
-import app.windows.*;
+import app.display.windows.*;
+import app.game.states.RunningState;
+import app.game.states.StateInterface;
+import app.game.states.WelcomeState;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -11,7 +13,7 @@ import java.util.HashMap;
 /**
  * Menadżer stanów
  */
-public class StateManager implements StateManagerInterface {
+public class GameStateManager implements GameStateManagerInterface {
 
     private GameWindow game;
     private EngineInterface engine;
@@ -22,7 +24,7 @@ public class StateManager implements StateManagerInterface {
     /**
      * Konstruktor domyslny
      */
-    public StateManager(EngineInterface engine){
+    public GameStateManager(EngineInterface engine){
         this.engine = engine;
     }
 
@@ -79,7 +81,7 @@ public class StateManager implements StateManagerInterface {
      */
     private void initStates(){
         states.put("welcome", new WelcomeState(this, game));
-        states.put("running-game", new RunningGameState(this, game, engine));
+        states.put("running-game", new RunningState(this, game, engine));
     }
 
     /**

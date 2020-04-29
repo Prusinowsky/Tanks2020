@@ -1,22 +1,44 @@
 package app.engine.interfaces;
 
-import app.windows.components.GameHudComponent;
-import app.windows.components.GameScreenComponent;
+import app.engine.EngineDriver;
+import app.engine.EnginePhysics;
+import app.engine.EngineRender;
 
-import java.awt.*;
-
+/**
+ * Interferjs silnika gry
+ */
 public interface EngineInterface {
+
+    /**
+     * Metoda odpowiadająca za start gry
+     */
     public void startGame();
+
+    /**
+     * Metoda odpowiadająca za pausowanie gry
+     */
     public void pauseGame();
+
+    /**
+     * Metoda odpowiadająca za koniec gry
+     */
     public void endGame();
 
-    public void moveUp();
-    public void moveDown();
-    public void moveRight();
-    public void moveLeft();
-    public void shoot();
+    /**
+     * Meotda zwraca sterownik silnika
+     * @return
+     */
+    public EngineDriver getDriver();
 
-    public void setGameScreenComponent(GameScreenComponent gameScreenComponent);
-    public void setGameHudComponent(GameHudComponent gameHudComponent);
+    /**
+     * Metoda zwraca odbiekt fizyki silnika
+     * @return
+     */
+    public EnginePhysics getPhysics();
 
+    /**
+     * Metoda zwraca obiekt odpowiedzlany za renderowanie silnika
+     * @return
+     */
+    public EngineRender getRender();
 }

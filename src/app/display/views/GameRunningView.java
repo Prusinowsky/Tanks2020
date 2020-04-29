@@ -1,11 +1,9 @@
-package app.windows.views;
+package app.display.views;
 
 import app.Container;
 import app.config.ConfigInterface;
-import app.engine.Engine;
-import app.engine.interfaces.Renderable;
-import app.windows.components.GameHudComponent;
-import app.windows.components.GameScreenComponent;
+import app.display.components.GameHudComponent;
+import app.display.components.GameScreenComponent;
 
 import javax.swing.*;
 import java.awt.*;

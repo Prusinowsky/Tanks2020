@@ -1,4 +1,4 @@
-package app.windows.views;
+package app.display.views;
 
 import javax.swing.*;
 

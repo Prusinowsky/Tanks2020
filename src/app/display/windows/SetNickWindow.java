@@ -1,7 +1,7 @@
-package app.windows;
+package app.display.windows;
 import app.Container;
 import app.config.ConfigInterface;
-import app.windows.abstracts.AbstractWindow;
+import app.display.abstracts.AbstractWindow;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package app.states;
+package app.game.states;
 
 /**
  * Interfejs stanow

@@ -1,4 +1,4 @@
-package app.windows.components;
+package app.display.components;
 
 import app.config.ConfigInterface;
 

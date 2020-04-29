@@ -1,16 +1,16 @@
-package app.states;
+package app.game.states;
 
 import app.engine.interfaces.EngineInterface;
-import app.states.manager.StateManagerInterface;
-import app.windows.GameWindow;
-import app.windows.views.GameRunningView;
+import app.game.manager.GameStateManagerInterface;
+import app.display.windows.GameWindow;
+import app.display.views.GameRunningView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class RunningGameState implements StateInterface {
+public class RunningState implements StateInterface {
 
-    private StateManagerInterface manager;
+    private GameStateManagerInterface manager;
 
     private EngineInterface engine;
 
@@ -18,7 +18,7 @@ public class RunningGameState implements StateInterface {
     private GameRunningView runningView;
 
 
-    public RunningGameState(StateManagerInterface manager, GameWindow game, EngineInterface engine){
+    public RunningState(GameStateManagerInterface manager, GameWindow game, EngineInterface engine){
         this.manager = manager;
         this.game = game;
         this.engine = engine;
@@ -33,72 +33,72 @@ public class RunningGameState implements StateInterface {
         runningView.addUpActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveUp();
+                engine.getDriver().moveUp();
             }
         });
         runningView.addWActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveUp();
+                engine.getDriver().moveUp();
             }
         });
         runningView.addDownActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveDown();
+                engine.getDriver().moveDown();
             }
         });
         runningView.addSActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveDown();
+                engine.getDriver().moveDown();
             }
         });
         runningView.addRightActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveRight();
+                engine.getDriver().moveRight();
             }
         });
         runningView.addDActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveRight();
+                engine.getDriver().moveRight();
             }
         });
         runningView.addLeftActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveLeft();
+                engine.getDriver().moveLeft();
             }
         });
         runningView.addAActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.moveLeft();
+                engine.getDriver().moveLeft();
             }
         });
         runningView.addSpaceActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.shoot();
+                engine.getDriver().shoot();
             }
         });
         runningView.addEnterActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.shoot();
+                engine.getDriver().shoot();
             }
         });
         runningView.addEActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.shoot();
+                engine.getDriver().shoot();
             }
         });
 
-        engine.setGameScreenComponent(runningView.getGameScreenComponent());
-        engine.setGameHudComponent(runningView.getGameHudComponent());
+        engine.getRender().setGameScreenComponent(runningView.getGameScreenComponent());
+        engine.getRender().setGameHudComponent(runningView.getGameHudComponent());
         engine.startGame();
 
         game.add(runningView);
