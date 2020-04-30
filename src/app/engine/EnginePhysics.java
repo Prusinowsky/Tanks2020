@@ -1,7 +1,7 @@
 package app.engine;
 
 import app.entities.map.objects.Bullet;
-import app.entities.map.players.Enemy;
+import app.entities.map.tanks.Enemy;
 
 import java.util.Random;
 

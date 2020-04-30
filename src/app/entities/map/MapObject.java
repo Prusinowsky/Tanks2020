@@ -10,6 +10,16 @@ public abstract class MapObject {
     public Integer mapCode; // 0 - dolina
     public String mapName; // Dolina
 
+    public Integer positionX = 0;
+    public Integer positionY = 0;
+
+    public Integer getCoordinateX(){
+        return positionX/32;
+    }
+    public Integer getCoordinateY(){
+        return positionY/32;
+    }
+
     public abstract Boolean isOpaque();
     public abstract Boolean isDestructible();
     public abstract TextureEntity getTexture();

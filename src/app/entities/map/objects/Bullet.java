@@ -6,16 +6,7 @@ import app.entities.map.MapObject;
 
 public class Bullet extends MapObject {
 
-    public Integer positionX;
-    public Integer positionY;
     public Integer angle;
-
-    public Integer getCoordinateX(){
-        return positionX/32;
-    }
-    public Integer getCoordinateY(){
-        return positionY/32;
-    }
 
     @Override
     public Boolean isOpaque() { return false; }

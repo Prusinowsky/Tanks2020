@@ -53,6 +53,7 @@ public class GameRunningView extends JComponent {
         add(view);
 
         hud = new GameHudComponent(config);
+        hud.setFocusable(false);
         add(hud);
     }
 
@@ -79,15 +80,6 @@ public class GameRunningView extends JComponent {
         repaint();
     }
 
-    private class MoveAction extends AbstractAction{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("despacito");
-           // if(this.direction=="down")
-        }
-    }
-
     public void addHudPauseActionListener(ActionListener action){
         hud.addPauseActionListener(action);
     }
@@ -97,57 +89,57 @@ public class GameRunningView extends JComponent {
     }
 
     public void addUpActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "move up");
+        this.getInputMap().put(KeyStroke.getKeyStroke("UP"), "move up");
         this.getActionMap().put("move up", action);
     }
 
     public void addWActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("W"), "move up");
+        this.getInputMap().put(KeyStroke.getKeyStroke("W"), "move up");
         this.getActionMap().put("move up", action);
     }
 
     public void addDownActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "move down");
+        this.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "move down");
         this.getActionMap().put("move down", action);
     }
 
     public void addSActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("S"), "move down");
+        this.getInputMap().put(KeyStroke.getKeyStroke("S"), "move down");
         this.getActionMap().put("move down", action);
     }
 
     public void addRightActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "move right");
+        this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "move right");
         this.getActionMap().put("move right", action);
     }
 
     public void addDActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"), "move right");
+        this.getInputMap().put(KeyStroke.getKeyStroke("D"), "move right");
         this.getActionMap().put("move right", action);
     }
 
     public void addLeftActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "move left");
+        this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "move left");
         this.getActionMap().put("move left", action);
     }
 
     public void addAActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"), "move left");
+        this.getInputMap().put(KeyStroke.getKeyStroke("A"), "move left");
         this.getActionMap().put("move left", action);
     }
 
     public void addSpaceActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE"), "push space");
+        this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "push space");
         this.getActionMap().put("push space", action);
     }
 
     public void addEnterActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "push enter");
+        this.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "push enter");
         this.getActionMap().put("push enter", action);
     }
 
     public void addEActionListener(AbstractAction action) {
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("E"), "push E");
+        this.getInputMap().put(KeyStroke.getKeyStroke("E"), "push E");
         this.getActionMap().put("push E", action);
     }
 
