@@ -9,6 +9,9 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.InputMethodListener;
+import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 /**
  * Komponent odpowiadający za renderowanie HUD-a
@@ -62,8 +65,11 @@ public class GameHudComponent extends JPanel implements Renderable {
             add(lHeart[i]);
         }
 
+        setFocusable(false);
+
         bPause = new JButton(config.getProperty("pause"));
         add(bPause);
+
 
         bExit = new JButton(config.getProperty("back"));
         add(bExit);
@@ -87,6 +93,9 @@ public class GameHudComponent extends JPanel implements Renderable {
         Integer y = getHeight();
         bPause.setBounds( (int)(getWidth()*0.1), y - 120, (int)(getWidth()*0.8),40);
         bExit.setBounds( (int)(getWidth()*0.1),y - 60,(int)(getWidth()*0.8),40);
+
+//        bPause.key
+//        System.out.println(bPause.getRegisteredKeyStrokes());
 
         revalidate();
         repaint();

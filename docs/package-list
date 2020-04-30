@@ -11,7 +11,7 @@ app.entities
 app.entities.map
 app.entities.map.objects
 app.entities.map.obstacles
-app.entities.map.players
+app.entities.map.tanks
 app.entities.map.tiles
 app.game.manager
 app.game.states

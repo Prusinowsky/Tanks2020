@@ -1,7 +1,8 @@
 package app.engine;
 
-import app.engine.interfaces.EngineInterface;
+import app.engine.animations.MoveTankAnimation;
 import app.entities.map.objects.Bullet;
+
 
 
 /**
@@ -20,53 +21,45 @@ public class EngineDriver {
     }
 
     public void moveUp(){
-        if(engine.player.getCoordinateY()-1>=0 && engine.player.getCoordinateY()-1 < engine.map.height)
+        if(engine.player.getCoordinateY()-1>=0 && engine.player.getCoordinateY()-1 < engine.map.height && !engine.player.inAnimation)
             if(engine.map.layers[1].blocks[engine.player.getCoordinateX()][engine.player.getCoordinateY()-1] == null){
-                engine.player.positionY -= 32;
-                engine.player.angle = 0;
+                new MoveTankAnimation(engine.player, 0, -32);
             }
             else if(!engine.map.layers[1].blocks[engine.player.getCoordinateX()][engine.player.getCoordinateY() - 1].isOpaque()) {
-                engine.player.positionY -= 32;
-                engine.player.angle = 0;
+                new MoveTankAnimation(engine.player, 0, -32);
             }
             else engine.player.angle = 0;
     }
 
     public void moveDown(){
-        if(engine.player.getCoordinateY()+1>=0 && engine.player.getCoordinateY()+1 < engine.map.height)
+        if(engine.player.getCoordinateY()+1>=0 && engine.player.getCoordinateY()+1 < engine.map.height && !engine.player.inAnimation)
             if(engine.map.layers[1].blocks[engine.player.getCoordinateX()][engine.player.getCoordinateY()+1] == null){
-                engine.player.positionY += 32;
-                engine.player.angle = 180;
+                new MoveTankAnimation(engine.player, 0, 32);
             }
             else if(!engine.map.layers[1].blocks[engine.player.getCoordinateX()][engine.player.getCoordinateY() + 1].isOpaque()) {
-                engine.player.positionY += 32;
-                engine.player.angle = 180;
+                new MoveTankAnimation(engine.player, 0, 32);
             }
             else engine.player.angle = 180;
     }
 
     public void moveRight(){
-        if(engine.player.getCoordinateX()+1>=0 && engine.player.getCoordinateX()+1 < engine.map.width)
+        if(engine.player.getCoordinateX()+1>=0 && engine.player.getCoordinateX()+1 < engine.map.width && !engine.player.inAnimation)
             if(engine.map.layers[1].blocks[engine.player.getCoordinateX()+1][engine.player.getCoordinateY()] == null){
-                engine.player.positionX += 32;
-                engine.player.angle = 90;
+                new MoveTankAnimation(engine.player, 32, 0);
             }
             else if(!engine.map.layers[1].blocks[engine.player.getCoordinateX() + 1][engine.player.getCoordinateY()].isOpaque()) {
-                engine.player.positionX += 32;
-                engine.player.angle = 90;
+                new MoveTankAnimation(engine.player, 32, 0);
             }
             else engine.player.angle = 90;
     }
 
     public void moveLeft(){
-        if(engine.player.getCoordinateX()-1>=0 && engine.player.getCoordinateX()-1 < engine.map.width)
+        if(engine.player.getCoordinateX()-1>=0 && engine.player.getCoordinateX()-1 < engine.map.width && !engine.player.inAnimation)
             if(engine.map.layers[1].blocks[engine.player.getCoordinateX()-1][engine.player.getCoordinateY()] == null){
-                engine.player.positionX -= 32;
-                engine.player.angle = 270;
+                new MoveTankAnimation(engine.player, -32, 0);
             }
             else if(!engine.map.layers[1].blocks[engine.player.getCoordinateX() - 1][engine.player.getCoordinateY()].isOpaque()) {
-                engine.player.positionX -= 32;
-                engine.player.angle = 270;
+                new MoveTankAnimation(engine.player, -32, 0);
             }
             else engine.player.angle = 270;
     }

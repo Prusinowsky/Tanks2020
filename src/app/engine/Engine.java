@@ -2,9 +2,9 @@ package app.engine;
 
 import app.engine.interfaces.EngineInterface;
 import app.entities.map.objects.Bullet;
-import app.entities.map.players.Enemy;
+import app.entities.map.tanks.Enemy;
 import app.entities.map.MapEntity;
-import app.entities.map.players.Player;
+import app.entities.map.tanks.Player;
 import app.loaders.map.MapLoaderInterface;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class Engine implements EngineInterface {
         loadEnemies();
 
         timer = new Timer();
-        renderWithFreq(30);
+        renderWithFreq(60);
     }
 
     public void loadEnemies(){

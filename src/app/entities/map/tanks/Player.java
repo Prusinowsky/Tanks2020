@@ -1,21 +1,9 @@
-package app.entities.map.players;
+package app.entities.map.tanks;
 
 import app.Container;
 import app.entities.TextureEntity;
-import app.entities.map.MapObject;
 
-public class Player extends MapObject {
-
-    public Integer positionX;
-    public Integer positionY;
-    public Integer angle;
-
-    public Integer getCoordinateX(){
-        return positionX/32;
-    }
-    public Integer getCoordinateY(){
-        return positionY/32;
-    }
+public class Player extends AbstractTank {
 
     @Override
     public Boolean isOpaque() { return false; }
