@@ -18,7 +18,7 @@ public class Player extends MapObject {
     }
 
     @Override
-    public Boolean isOpaque() { return false; }
+    public Boolean isOpaque() { return true; }
 
     @Override
     public Boolean isDestructible() { return true; }
