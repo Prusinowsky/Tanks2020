@@ -6,6 +6,7 @@ import app.entities.map.tanks.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.tanks.Player;
 import app.loaders.map.MapLoaderInterface;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -21,15 +22,15 @@ public class Engine implements EngineInterface {
     public EnginePhysics physics;
     public EngineRender render;
 
-    protected Timer timer;
+    public Timer timer;
 
-    protected Integer score;
-    protected String playerName;
+    public Integer score;
+    public String playerName;
 
-    protected Player player;
-    protected MapEntity map;
-    protected ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    public Player player;
+    public MapEntity map;
+    public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     private MapLoaderInterface mapLoader;
 

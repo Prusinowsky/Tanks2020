@@ -17,7 +17,7 @@ public class MoveTankAnimation extends AbstractAnimation {
         this.x = x;
         this.y = y;
         setAngle();
-        this.timer.schedule(this, 0, 8);
+        this.timer.schedule(this, 0, 12);
     }
 
     private void setAngle(){
