@@ -7,45 +7,43 @@ import app.entities.map.tanks.Enemy;
 
 import java.util.Random;
 
-public class EnemyTanksBehaviour {
+/**
+ * Obiekt odpowiedzialny za fizykę wrogów
+ */
+public class EnemyTanksPhysics {
 
     private Engine engine;
     private Random generator = new Random();
 
-    public EnemyTanksBehaviour(Engine engine){
+    public EnemyTanksPhysics(Engine engine){
         this.engine = engine;
     }
 
-    public void handleTanks(){
+    public void handle(){
         for(Integer i=0; i < engine.enemies.size(); i++){
-            handleSingleTank(engine.enemies.get(i));
+            moveSingleTank(engine.enemies.get(i));
         }
-    }
-
-    public void handleSingleTank(Enemy enemy){
-        moveSingleTank(enemy);
-        //shootTank(enemy);
     }
 
     public void moveSingleTank(Enemy enemy){
         if(enemy.inAnimation) return;
         if(enemy.getCoordinateX()+1 == engine.player.getCoordinateX() && enemy.getCoordinateY() == engine.player.getCoordinateY()){
-            moveLeftSingleTank(enemy);
+            moveLeftSingle(enemy);
         }
         else if(enemy.getCoordinateX()-1 == engine.player.getCoordinateX() && enemy.getCoordinateY() == engine.player.getCoordinateY()){
-            moveRightSingleTank(enemy);
+            moveRightSingle(enemy);
         }
         else if(enemy.getCoordinateX() == engine.player.getCoordinateX() && enemy.getCoordinateY()-1 == engine.player.getCoordinateY()){
-            moveDownSingleTank(enemy);
+            moveDownSingle(enemy);
         }
         else if(enemy.getCoordinateX() == engine.player.getCoordinateX() && enemy.getCoordinateY()+1 == engine.player.getCoordinateY()){
             moveUpSingleTank(enemy);
         }
         else {
             if (enemy.angle == 0) moveUpSingleTank(enemy);
-            if (enemy.angle == 90) moveRightSingleTank(enemy);
-            if (enemy.angle == 180) moveDownSingleTank(enemy);
-            if (enemy.angle == 270) moveLeftSingleTank(enemy);
+            if (enemy.angle == 90) moveRightSingle(enemy);
+            if (enemy.angle == 180) moveDownSingle(enemy);
+            if (enemy.angle == 270) moveLeftSingle(enemy);
         }
     }
 
@@ -64,7 +62,7 @@ public class EnemyTanksBehaviour {
         }
     }
 
-    public void moveRightSingleTank(Enemy enemy){
+    public void moveRightSingle(Enemy enemy){
         if(enemy.getCoordinateX()+1>=0 && enemy.getCoordinateX()+1 < engine.map.width) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX() + 1][enemy.getCoordinateY()] == null) {
                 new MoveTankAnimation(enemy, 32, 0);
@@ -79,7 +77,7 @@ public class EnemyTanksBehaviour {
         }
     }
 
-    public void moveDownSingleTank(Enemy enemy){
+    public void moveDownSingle(Enemy enemy){
         if(enemy.getCoordinateY()+1>=0 && enemy.getCoordinateY()+1 < engine.map.height) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() + 1] == null) {
                 new MoveTankAnimation(enemy, 0, 32);
@@ -94,7 +92,7 @@ public class EnemyTanksBehaviour {
         }
     }
 
-    public void moveLeftSingleTank(Enemy enemy){
+    public void moveLeftSingle(Enemy enemy){
         if(enemy.getCoordinateX()-1>=0 && enemy.getCoordinateX()-1 < engine.map.width) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX() - 1][enemy.getCoordinateY()] == null) {
                 new MoveTankAnimation(enemy, -32, 0);
@@ -125,11 +123,11 @@ public class EnemyTanksBehaviour {
         }
     }
 
-    /*public void shootTank(Enemy enemy){
+    public void shoot(Enemy enemy){
         if(enemy.getCoordinateX() == engine.player.getCoordinateX() || enemy.getCoordinateY() == engine.player.getCoordinateY()){
-            singleShootEnemyTank(enemy);
+            singleShoot(enemy);
         }
-        /*Integer enemyX = enemy.getCoordinateX();
+        Integer enemyX = enemy.getCoordinateX();
         Integer enemyY = enemy.getCoordinateY();
         Integer playerX = engine.player.getCoordinateX();
         Integer playerY = engine.player.getCoordinateY();
@@ -158,7 +156,7 @@ public class EnemyTanksBehaviour {
                 return;
             }
         }
-        singleShootEnemyTank(enemy);
+        singleShoot(enemy);
     }
 
     public void compareBeforeShootX(Enemy enemy, Integer a, Integer b, Integer c){
@@ -167,10 +165,10 @@ public class EnemyTanksBehaviour {
                 return;
             }
         }
-        singleShootEnemyTank(enemy);
-    }*/
+        singleShoot(enemy);
+    }
 
-    public void singleShootTank(Enemy enemy){
+    public void singleShoot(Enemy enemy){
         engine.bullets.add(new Bullet());
         Integer number = engine.bullets.size();
         engine.bullets.get(number-1).angle = enemy.angle;

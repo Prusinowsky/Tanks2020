@@ -1,7 +1,8 @@
 package app.engine;
 
-import app.engine.physics.BulletBehaviour;
-import app.engine.physics.EnemyTanksBehaviour;
+import app.engine.physics.BulletPhysics;
+import app.engine.physics.EnemyTanksPhysics;
+import app.engine.physics.PlayerTankPhysics;
 
 /**
  * Obiekt odpowiedzialny za fizyke gry
@@ -9,21 +10,43 @@ import app.engine.physics.EnemyTanksBehaviour;
 public class EnginePhysics {
 
     private Engine engine;
-    private EnemyTanksBehaviour enemyTanksBehaviour;
-    private BulletBehaviour bulletBehaviour;
+    private PlayerTankPhysics playerTankPhysics;
+    private EnemyTanksPhysics enemyTanksPhysics;
+    private BulletPhysics bulletPhysics;
 
+    /**
+     * Konstruktor domyslny
+     * @param engine
+     */
     public EnginePhysics(Engine engine){
         this.engine = engine;
-        enemyTanksBehaviour = new EnemyTanksBehaviour(engine);
-        bulletBehaviour = new BulletBehaviour(engine);
+        playerTankPhysics = new PlayerTankPhysics(engine);
+        enemyTanksPhysics = new EnemyTanksPhysics(engine);
+        bulletPhysics = new BulletPhysics(engine);
     }
 
-    public void handleBulletsBehaviour(){
-        bulletBehaviour.handleBullets();
+    /**
+     * Zwraca obiekt fiyzki gracza
+     * @return Fizyka gracza
+     */
+    public PlayerTankPhysics getPlayerTankPhysics(){
+        return playerTankPhysics;
     }
 
-    public void handleEnemyTanksBehaviour(){
-        enemyTanksBehaviour.handleTanks();
+    /**
+     * Zwraca obiekt fiyzki wrogów
+     * @return Fizyka wroga
+     */
+    public EnemyTanksPhysics getEnemyTanksPhysics(){
+        return enemyTanksPhysics;
+    }
+
+    /**
+     * Zwraca obiekt fiyzki kul
+     * @return Fizyka kul
+     */
+    public BulletPhysics getBulletPhysics(){
+        return bulletPhysics;
     }
 
 }

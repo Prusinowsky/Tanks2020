@@ -111,18 +111,23 @@ public class Engine implements EngineInterface {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                render();
+                handle(); render();
             }
         }, 1000/fps , 1000 / fps);
     }
 
     /**
+     * Obsluga gry
+     */
+    private void handle(){
+        physics.getBulletPhysics().handle();
+        physics.getEnemyTanksPhysics().handle();
+    }
+
+    /**
      * Metoda odpowiedzialna za renderowanie gry
-     * (tu faktycznie obsluga + renderowanie)
      */
     private void render(){
-        physics.handleBulletsBehaviour();
-        physics.handleEnemyTanksBehaviour();
         render.render();
         render.update();
     }

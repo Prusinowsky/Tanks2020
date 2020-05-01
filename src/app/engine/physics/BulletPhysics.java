@@ -3,27 +3,30 @@ package app.engine.physics;
 import app.engine.Engine;
 import app.entities.map.objects.Bullet;
 
-public class BulletBehaviour {
+/**
+ * Obiekt odpowiedzialny za fizykę kul
+ */
+public class BulletPhysics {
 
     private Engine engine;
 
-    public BulletBehaviour(Engine engine){
+    public BulletPhysics(Engine engine){
         this.engine = engine;
     }
 
-    public void handleBullets(){
+    public void handle(){
         for(Integer i=0; i < engine.bullets.size(); i++){
             handleSingleBullet(engine.bullets.get(i));
         }
     }
 
     public void handleSingleBullet(Bullet bullet){
-        moveSingleBullet(bullet);
+        moveSingle(bullet);
         destroyObstacle(bullet);
         destroyEnemyTank(bullet);
     }
 
-    public void moveSingleBullet(Bullet bullet){
+    public void moveSingle(Bullet bullet){
         if(bullet.angle == 0){
             bullet.positionY -= 4;
         }
