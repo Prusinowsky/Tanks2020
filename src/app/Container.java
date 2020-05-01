@@ -52,6 +52,7 @@ public class Container {
             mapLoader = new MapLoader();
             mapLoader.load();
         }
+        mapLoader.load();
         return mapLoader;
     }
 

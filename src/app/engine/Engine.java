@@ -1,14 +1,17 @@
 package app.engine;
 
+import app.Container;
 import app.engine.interfaces.EngineInterface;
+import app.entities.map.MapLayer;
+import app.entities.map.MapObject;
 import app.entities.map.objects.Bullet;
 import app.entities.map.tanks.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.tanks.Player;
 import app.loaders.map.MapLoaderInterface;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,8 +27,11 @@ public class Engine implements EngineInterface {
 
     public Timer timer;
 
-    public Integer score;
-    public String playerName;
+    public Integer score = 100;
+    public Integer lifes = 3;
+    public String playerName = "";
+
+    public Long startTime;
 
     public Player player;
     public MapEntity map;
@@ -38,7 +44,6 @@ public class Engine implements EngineInterface {
      * Konstrukor dymyslny
      */
     public Engine(){
-        mapLoader = app.Container.getInstance().provideMapLoader();
         init();
     }
 
@@ -46,6 +51,7 @@ public class Engine implements EngineInterface {
      * Meotda inicjalizujaca silnik
      */
     private void init(){
+
         this.driver = new EngineDriver(this);
         this.physics = new EnginePhysics(this);
         this.render = new EngineRender(this);
@@ -56,7 +62,10 @@ public class Engine implements EngineInterface {
      */
     @Override
     public void startGame() {
+        this.startTime = new Date().getTime();
+        mapLoader = app.Container.getInstance().provideMapLoader();
         map = mapLoader.getMap(app.Container.getInstance().provideOptions().mapName);
+        playerName = !Container.getInstance().provideOptions().nickname.isEmpty() ? Container.getInstance().provideOptions().nickname : "Player Tank";
 
         player = new Player();
         player.positionX = 0;
@@ -70,6 +79,7 @@ public class Engine implements EngineInterface {
     }
 
     public void loadEnemies(){
+        enemies.clear();
         Enemy enemy1 = new Enemy(); //testEnemy
         Enemy enemy2 = new Enemy();
         Enemy enemy3 = new Enemy();
@@ -92,7 +102,16 @@ public class Engine implements EngineInterface {
      */
     @Override
     public void pauseGame() {
+        timer.cancel();
+    }
 
+    /**
+     * Pazua gry
+     */
+    @Override
+    public void resumeGame() {
+        timer = new Timer();
+        renderWithFreq(60);
     }
 
     /**
@@ -130,6 +149,31 @@ public class Engine implements EngineInterface {
     private void render(){
         render.render();
         render.update();
+    }
+
+    public Boolean isOnMap(MapObject object){
+        return object != null
+                && isOnMap(object.getCoordinateX(), object.getCoordinateY());
+    }
+
+    public Boolean isOnMap(Integer coordinateX, Integer coordinateY){
+        return coordinateX >= 0 && coordinateX < map.width
+                && coordinateY >= 0 && coordinateY < map.height;
+    }
+
+    public Boolean isEmptySpace(MapLayer layer, Integer coordinateX, Integer coordinateY){
+        return isOnMap(coordinateX, coordinateY)
+                && layer.blocks[coordinateX][coordinateY] == null;
+    }
+
+    public Boolean isOpaqueObject(MapLayer layer, Integer coordinateX, Integer coordinateY){
+        return !isEmptySpace(layer, coordinateX, coordinateY)
+                && layer.blocks[coordinateX][coordinateY].isOpaque();
+    }
+
+    public Boolean isDestructibleObject(MapLayer layer, Integer coordinateX, Integer coordinateY){
+        return !isEmptySpace(layer, coordinateX, coordinateY)
+                && layer.blocks[coordinateX][coordinateY].isDestructible();
     }
 
     /**

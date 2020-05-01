@@ -7,6 +7,8 @@ import app.display.components.GameScreenComponent;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Obiekt odpowiedzialny za renderowanie gry
@@ -74,7 +76,24 @@ public class EngineRender {
         gameScreenComponent.setScreen(screen);
         gameScreenComponent.revalidate();
         gameScreenComponent.repaint();
+
+        gameHudComponent.setPlayerName(engine.playerName);
+        gameHudComponent.setTime(
+                twoDigit(TimeUnit.MILLISECONDS.toMinutes(new Date().getTime() - engine.startTime)) + ":" + twoDigit(TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - engine.startTime)%60)
+        );
+        gameHudComponent.setScore(engine.score);
+        gameHudComponent.setLifes(engine.lifes);
+
+        gameHudComponent.render();
+        gameHudComponent.revalidate();
+        gameHudComponent.repaint();
     };
+
+    private String twoDigit(long number){
+        if(number < 10)
+            return "0" + number;
+        return String.valueOf(number);
+    }
 
     /**
      * Renderowanie gracza

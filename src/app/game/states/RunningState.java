@@ -28,7 +28,16 @@ public class RunningState implements StateInterface {
     public void start() {
         runningView = new GameRunningView();
 
-        runningView.addHudPauseActionListener(e -> System.out.println("Michal zrobisz to co nie? :D"));
+        runningView.addHudPauseActionListener(e -> {
+            runningView.getGameHudComponent().hidePause();
+            runningView.getGameHudComponent().showResume();
+            engine.pauseGame();
+        });
+        runningView.addHudResumeActionListener(e -> {
+            runningView.getGameHudComponent().showPause();
+            runningView.getGameHudComponent().hideResume();
+            engine.resumeGame();
+        });
         runningView.addHudExitActionListener(e -> manager.changeStateTo("welcome"));
         runningView.addUpActionListener(new AbstractAction() {
             @Override
@@ -99,6 +108,7 @@ public class RunningState implements StateInterface {
 
         engine.getRender().setGameScreenComponent(runningView.getGameScreenComponent());
         engine.getRender().setGameHudComponent(runningView.getGameHudComponent());
+
         engine.startGame();
 
         game.add(runningView);

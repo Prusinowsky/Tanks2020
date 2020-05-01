@@ -84,6 +84,10 @@ public class GameRunningView extends JComponent {
         hud.addPauseActionListener(action);
     }
 
+    public void addHudResumeActionListener(ActionListener action){
+        hud.addResumeActionListener(action);
+    }
+
     public void addHudExitActionListener(ActionListener action){
         hud.addExitActionListener(action);
     }

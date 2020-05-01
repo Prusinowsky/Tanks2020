@@ -20,6 +20,11 @@ public interface EngineInterface {
     public void pauseGame();
 
     /**
+     * Metoda odpowiadająca za pausowanie gry
+     */
+    public void resumeGame();
+
+    /**
      * Metoda odpowiadająca za koniec gry
      */
     public void endGame();

@@ -65,7 +65,7 @@ public class SetNickWindow extends AbstractWindow
      * Metoda dodająca pole tekstowe
      */
     private void addNickInput(){
-        tNickname = new JTextField("");
+        tNickname = new JTextField(Container.getInstance().provideOptions().nickname);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;

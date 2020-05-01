@@ -13,5 +13,10 @@ public class OptionsEntity {
     /**
      * Nazwa użytkownika
      */
-    public String nickname;
+    public String nickname = "";
+
+    /**
+     * Liczba żyć
+     */
+    public Integer life = 3;
 }

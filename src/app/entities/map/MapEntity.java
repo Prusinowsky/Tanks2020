@@ -1,9 +1,12 @@
 package app.entities.map;
 
+import java.util.Arrays;
+import java.util.Map;
+
 /**
  * Obiekt rezprezentujący encję mapy
  */
-public class MapEntity implements Cloneable {
+public class MapEntity {
 
     /**
      * Kod mapy
@@ -29,7 +32,7 @@ public class MapEntity implements Cloneable {
     /**
      * Warstwy
      */
-    public MapLayer layers[];
+    public MapLayer layers[] = null;
 
     /**
      * Konstrukor domyślny
@@ -47,9 +50,4 @@ public class MapEntity implements Cloneable {
         this.layers = layers;
     }
 
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }

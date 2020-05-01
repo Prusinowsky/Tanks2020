@@ -67,8 +67,6 @@ public class MapLoader implements MapLoaderInterface {
      * @return Encja mapy
      */
     public MapEntity convertToMapEntity(Integer mapCode, String mapName, String path){
-        //System.out.println("Mapa : " + name);
-        //System.out.println("Name : " + name + " Path : " + path);
         try {
             MapEntity map = new MapEntity();
             map.name = mapName;
@@ -79,8 +77,6 @@ public class MapLoader implements MapLoaderInterface {
             map.numberOfLayers = Integer.parseInt(scanner.nextLine());
             map.width = Integer.parseInt(scanner.nextLine());
             map.height = Integer.parseInt(scanner.nextLine());
-
-            //System.out.println(map.numberOfLayers + " " + map.width + " " + map.height);
 
             MapLayer[] mapLayers = new MapLayer[2];
 
@@ -94,7 +90,6 @@ public class MapLoader implements MapLoaderInterface {
                 for (Integer i = 0; i < map.height; i++) {
                     String line = scanner.nextLine();
                     for (Integer j = 0; j < map.width; j++) {
-                        //System.out.print(line.charAt(j));
                         Integer code = Integer.parseInt(String.valueOf(line.charAt(j)));
                         MapObject mapObject = toMapObject(code);
                         if(mapObject != null) {
@@ -104,7 +99,6 @@ public class MapLoader implements MapLoaderInterface {
                         }
                         mapLayers[l].blocks[j][i] = mapObject;
                     }
-                    //System.out.println("");
                 }
             }
 
@@ -115,6 +109,11 @@ public class MapLoader implements MapLoaderInterface {
             System.out.println("Error during converting map + " + e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public MapEntity getMap(String name) {
+        return maps.get(name);
     }
 
     private HashMap<Integer, MapObject> pattern(){
@@ -131,10 +130,6 @@ public class MapLoader implements MapLoaderInterface {
 
     private MapObject toMapObject(Integer code){
         return pattern().get(code);
-    }
-
-    public MapEntity getMap(String name){
-        return maps.get(name);
     }
 
 }

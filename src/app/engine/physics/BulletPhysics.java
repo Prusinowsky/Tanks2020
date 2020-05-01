@@ -42,27 +42,25 @@ public class BulletPhysics {
     }
 
     public void destroyObstacle(Bullet bullet){
-        if(!(bullet.getCoordinateY()>=0 && bullet.getCoordinateY() < engine.map.height && bullet.getCoordinateX()>=0 && bullet.getCoordinateX() < engine.map.width)){
+        if(!engine.isOnMap(bullet)){
+            engine.bullets.remove(bullet);
+            return;
+        }
+        if(engine.isOpaqueObject(engine.map.layers[1], bullet.getCoordinateX(), bullet.getCoordinateY())){
             engine.bullets.remove(bullet);
         }
-        else if(engine.map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()] != null &&
-                engine.map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()].isOpaque()){
-            if(engine.map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()].isDestructible()) {
-                engine.map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()] = null;
-                engine.bullets.remove(bullet);
-            }
-            else {
-                engine.bullets.remove(bullet);
-            }
+        if(engine.isDestructibleObject(engine.map.layers[1], bullet.getCoordinateX(), bullet.getCoordinateY())){
+            engine.map.layers[1].blocks[bullet.getCoordinateX()][bullet.getCoordinateY()] = null;
         }
     }
 
     public void destroyEnemyTank(Bullet bullet){
         for(Integer i=0; i < engine.enemies.size(); i++){
-            if(!(bullet.getCoordinateY()>=0 && bullet.getCoordinateY() < engine.map.height && bullet.getCoordinateX()>=0 && bullet.getCoordinateX() < engine.map.width)){
+            if(!engine.isOnMap(bullet)){
                 engine.bullets.remove(bullet);
+                continue;
             }
-            else if(engine.enemies.get(i).getCoordinateX() == bullet.getCoordinateX() && engine.enemies.get(i).getCoordinateY() == bullet.getCoordinateY()){
+            if(engine.enemies.get(i).isOnTheSameCoordinate(bullet)){
                 engine.enemies.remove(engine.enemies.get(i));
                 engine.bullets.remove(bullet);
             }
