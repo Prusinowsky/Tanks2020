@@ -5,6 +5,7 @@ import app.engine.interfaces.EngineInterface;
 import app.entities.map.MapLayer;
 import app.entities.map.MapObject;
 import app.entities.map.objects.Bullet;
+import app.entities.map.objects.EnemyBullet;
 import app.entities.map.tanks.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.tanks.Player;
@@ -36,6 +37,7 @@ public class Engine implements EngineInterface {
     public Player player;
     public MapEntity map;
     public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    public ArrayList<EnemyBullet> enemyBullets = new ArrayList<EnemyBullet>();
     public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     private MapLoaderInterface mapLoader;
@@ -72,29 +74,188 @@ public class Engine implements EngineInterface {
         player.positionY = 0;
         player.angle = 0;
 
-        loadEnemies();
+        loadTanks();
 
         timer = new Timer();
         renderWithFreq(60);
     }
 
-    public void loadEnemies(){
+    public void loadTanks(){
         enemies.clear();
-        Enemy enemy1 = new Enemy(); //testEnemy
+        if(map.code == 0) map1Tanks();
+        else if(map.code == 1) map2Tanks();
+        else if(map.code == 2) map3Tanks();
+    }
+
+    public void map1Tanks(){
+        player.positionX = 0;
+        player.positionY = 288;
+        player.angle = 180;
+
+        Enemy enemy1 = new Enemy();
         Enemy enemy2 = new Enemy();
         Enemy enemy3 = new Enemy();
-        enemy1.positionX = 192;
-        enemy1.positionY = 0;
+        Enemy enemy4 = new Enemy();
+        Enemy enemy5 = new Enemy();
+        Enemy enemy6 = new Enemy();
+        Enemy enemy7 = new Enemy();
+        Enemy enemy8 = new Enemy();
+        enemy1.positionX = 0;
+        enemy1.positionY = 160;
         enemy1.angle = 180;
-        enemy2.positionX = 416;
-        enemy2.positionY = 32;
-        enemy2.angle = 270;
-        enemy3.positionX = 0;
-        enemy3.positionY = 224;
+        enemy2.positionX = 128;
+        enemy2.positionY = 128;
+        enemy2.angle = 180;
+        enemy3.positionX = 192;
+        enemy3.positionY = 192;
         enemy3.angle = 0;
+        enemy4.positionX = 352;
+        enemy4.positionY = 160;
+        enemy4.angle = 180;
+        enemy5.positionX = 480;
+        enemy5.positionY = 256;
+        enemy5.angle = 0;
+        enemy6.positionX = 352;
+        enemy6.positionY = 352;
+        enemy6.angle = 180;
+        enemy7.positionX = 288;
+        enemy7.positionY = 384;
+        enemy7.angle = 0;
+        enemy8.positionX = 192;
+        enemy8.positionY = 448;
+        enemy8.angle = 270;
         enemies.add(enemy1);
         enemies.add(enemy2);
         enemies.add(enemy3);
+        enemies.add(enemy4);
+        enemies.add(enemy5);
+        enemies.add(enemy6);
+        enemies.add(enemy7);
+        enemies.add(enemy8);
+    }
+
+    public void map2Tanks(){
+        player.positionX = 64;
+        player.positionY = 352;
+        player.angle = 270;
+
+        Enemy enemy1 = new Enemy();
+        Enemy enemy2 = new Enemy();
+        Enemy enemy3 = new Enemy();
+        Enemy enemy4 = new Enemy();
+        Enemy enemy5 = new Enemy();
+        Enemy enemy6 = new Enemy();
+        Enemy enemy7 = new Enemy();
+        Enemy enemy8 = new Enemy();
+        Enemy enemy9 = new Enemy();
+        enemy1.positionX = 96;
+        enemy1.positionY = 0;
+        enemy1.angle = 270;
+        enemy2.positionX = 480;
+        enemy2.positionY = 32;
+        enemy2.angle = 180;
+        enemy3.positionX = 288;
+        enemy3.positionY = 96;
+        enemy3.angle = 0;
+        enemy4.positionX = 288;
+        enemy4.positionY = 160;
+        enemy4.angle = 180;
+        enemy5.positionX = 32;
+        enemy5.positionY = 192;
+        enemy5.angle = 270;
+        enemy6.positionX = 384;
+        enemy6.positionY = 288;
+        enemy6.angle = 0;
+        enemy7.positionX = 320;
+        enemy7.positionY = 320;
+        enemy7.angle = 180;
+        enemy8.positionX = 448;
+        enemy8.positionY = 320;
+        enemy8.angle = 0;
+        enemy9.positionX = 224;
+        enemy9.positionY = 448;
+        enemy9.angle = 180;
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
+        enemies.add(enemy4);
+        enemies.add(enemy5);
+        enemies.add(enemy6);
+        enemies.add(enemy7);
+        enemies.add(enemy8);
+        enemies.add(enemy9);
+    }
+
+    public void map3Tanks(){
+        player.positionX = 0;
+        player.positionY = 480;
+        player.angle = 0;
+
+        Enemy enemy1 = new Enemy();
+        Enemy enemy2 = new Enemy();
+        Enemy enemy3 = new Enemy();
+        Enemy enemy4 = new Enemy();
+        Enemy enemy5 = new Enemy();
+        Enemy enemy6 = new Enemy();
+        Enemy enemy7 = new Enemy();
+        Enemy enemy8 = new Enemy();
+        Enemy enemy9 = new Enemy();
+        Enemy enemy10 = new Enemy();
+        Enemy enemy11 = new Enemy();
+        Enemy enemy12 = new Enemy();
+        Enemy enemy13 = new Enemy();
+        enemy1.positionX = 96;
+        enemy1.positionY = 0;
+        enemy1.angle = 270;
+        enemy2.positionX = 288;
+        enemy2.positionY = 0;
+        enemy2.angle = 180;
+        enemy3.positionX = 480;
+        enemy3.positionY = 32;
+        enemy3.angle = 180;
+        enemy4.positionX = 160;
+        enemy4.positionY = 64;
+        enemy4.angle = 270;
+        enemy5.positionX = 352;
+        enemy5.positionY = 96;
+        enemy5.angle = 0;
+        enemy6.positionX = 0;
+        enemy6.positionY = 128;
+        enemy6.angle = 180;
+        enemy7.positionX = 64;
+        enemy7.positionY = 192;
+        enemy7.angle = 90;
+        enemy8.positionX = 352;
+        enemy8.positionY = 224;
+        enemy8.angle = 270;
+        enemy9.positionX = 288;
+        enemy9.positionY = 288;
+        enemy9.angle = 180;
+        enemy10.positionX = 64;
+        enemy10.positionY = 320;
+        enemy10.angle = 270;
+        enemy11.positionX = 416;
+        enemy11.positionY = 352;
+        enemy11.angle = 180;
+        enemy12.positionX = 96;
+        enemy12.positionY = 480;
+        enemy12.angle = 0;
+        enemy13.positionX = 224;
+        enemy13.positionY = 480;
+        enemy13.angle = 0;
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
+        enemies.add(enemy4);
+        enemies.add(enemy5);
+        enemies.add(enemy6);
+        enemies.add(enemy7);
+        enemies.add(enemy8);
+        enemies.add(enemy9);
+        enemies.add(enemy10);
+        enemies.add(enemy11);
+        enemies.add(enemy12);
+        enemies.add(enemy13);
     }
 
     /**
@@ -141,6 +302,7 @@ public class Engine implements EngineInterface {
     private void handle(){
         physics.getBulletPhysics().handle();
         physics.getEnemyTanksPhysics().handle();
+        physics.getEnemyBulletPhysics().handle();
     }
 
     /**
@@ -149,6 +311,13 @@ public class Engine implements EngineInterface {
     private void render(){
         render.render();
         render.update();
+    }
+
+    private void nextLevel(){
+        if(map.code == 0) map.code = 1;
+        else if(map.code == 1) map.code = 2;
+        else if(map.code == 2) map.code = 0;
+        //map.layers[1].blocks[1][1].code
     }
 
     public Boolean isOnMap(MapObject object){

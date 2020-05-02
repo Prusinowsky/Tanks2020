@@ -1,6 +1,7 @@
 package app.engine;
 
 import app.engine.physics.BulletPhysics;
+import app.engine.physics.EnemyBulletPhysics;
 import app.engine.physics.EnemyTanksPhysics;
 import app.engine.physics.PlayerTankPhysics;
 
@@ -13,6 +14,7 @@ public class EnginePhysics {
     private PlayerTankPhysics playerTankPhysics;
     private EnemyTanksPhysics enemyTanksPhysics;
     private BulletPhysics bulletPhysics;
+    private EnemyBulletPhysics enemyBulletPhysics;
 
     /**
      * Konstruktor domyslny
@@ -23,6 +25,7 @@ public class EnginePhysics {
         playerTankPhysics = new PlayerTankPhysics(engine);
         enemyTanksPhysics = new EnemyTanksPhysics(engine);
         bulletPhysics = new BulletPhysics(engine);
+        enemyBulletPhysics = new EnemyBulletPhysics(engine);
     }
 
     /**
@@ -48,5 +51,11 @@ public class EnginePhysics {
     public BulletPhysics getBulletPhysics(){
         return bulletPhysics;
     }
+
+    /**
+     * Zwraca obiekt fiyzki kul wroga
+     * @return Fizyka kul wroga
+     */
+    public EnemyBulletPhysics getEnemyBulletPhysics() { return  enemyBulletPhysics; }
 
 }

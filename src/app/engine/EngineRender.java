@@ -64,6 +64,7 @@ public class EngineRender {
             }
             renderPlayer(g2d);
             renderBullets(g2d);
+            renderEnemyBullets(g2d);
             renderEnemies(g2d);
         }
         screen = offscreen;
@@ -137,6 +138,18 @@ public class EngineRender {
             bullet2d.rotate(Math.toRadians(engine.bullets.get(i).angle), bulletImg.getWidth(null) >> 1, bulletImg.getHeight(null) >> 1);
             bullet2d.drawImage(bulletImg, 0, 0, null);
             g2d.drawImage(bulletBuffored, engine.bullets.get(i).positionX, engine.bullets.get(i).positionY, null);
+        }
+    }
+
+    private void renderEnemyBullets(Graphics2D g2d){
+        Integer number = engine.enemyBullets.size();
+        for(Integer i=0; i<number; i++) {
+            Image enemyBulletImg = engine.enemyBullets.get(i).getTexture().image;
+            Image enemyBulletBuffored = new BufferedImage(enemyBulletImg.getWidth(null), enemyBulletImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D enemyBullet2d = ((BufferedImage) enemyBulletBuffored).createGraphics();
+            enemyBullet2d.rotate(Math.toRadians(engine.enemyBullets.get(i).angle), enemyBulletImg.getWidth(null) >> 1, enemyBulletImg.getHeight(null) >> 1);
+            enemyBullet2d.drawImage(enemyBulletImg,0,0,null);
+            g2d.drawImage(enemyBulletBuffored, engine.enemyBullets.get(i).positionX, engine.enemyBullets.get(i).positionY, null);
         }
     }
 

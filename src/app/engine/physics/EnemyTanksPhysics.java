@@ -3,6 +3,7 @@ package app.engine.physics;
 import app.engine.Engine;
 import app.engine.animations.MoveTankAnimation;
 import app.entities.map.objects.Bullet;
+import app.entities.map.objects.EnemyBullet;
 import app.entities.map.tanks.Enemy;
 
 import java.util.Random;
@@ -22,6 +23,7 @@ public class EnemyTanksPhysics {
     public void handle(){
         for(Integer i=0; i < engine.enemies.size(); i++){
             moveSingleTank(engine.enemies.get(i));
+            shoot(engine.enemies.get(i));
         }
     }
 
@@ -124,69 +126,64 @@ public class EnemyTanksPhysics {
     }
 
     public void shoot(Enemy enemy){
-        if(enemy.getCoordinateX() == engine.player.getCoordinateX() || enemy.getCoordinateY() == engine.player.getCoordinateY()){
-            singleShoot(enemy);
-        }
-        Integer enemyX = enemy.getCoordinateX();
-        Integer enemyY = enemy.getCoordinateY();
-        Integer playerX = engine.player.getCoordinateX();
-        Integer playerY = engine.player.getCoordinateY();
+        trackPlayer(enemy);
+    }
 
-        if(enemyX == playerX){
-            if(enemyY < playerY){
-                compareBeforeShootY(enemy,enemyY,playerY,enemyX);
+    public void trackPlayer(Enemy enemy){
+        if(enemy.getCoordinateX() == engine.player.getCoordinateX()){
+            if(enemy.getCoordinateY() > engine.player.getCoordinateY()){
+                if(checkObstaclesBetweenTanksX(engine.player.getCoordinateY(), enemy.getCoordinateY(), enemy.getCoordinateX())){
+                    enemy.angle = 0;
+                    singleShoot(enemy);
+                }
             }
-            else{
-                compareBeforeShootY(enemy,playerY,enemyY,enemyX);
+            else {
+                if(checkObstaclesBetweenTanksX(enemy.getCoordinateY(), engine.player.getCoordinateY(), enemy.getCoordinateX())){
+                    enemy.angle = 180;
+                    singleShoot(enemy);
+                }
             }
         }
-        else if(enemyY == playerY){
-            if(enemyX < playerX){
-                compareBeforeShootY(enemy,enemyX,playerX,enemyY);
+        if(enemy.getCoordinateY() == engine.player.getCoordinateY()){
+            if(enemy.getCoordinateX() > engine.player.getCoordinateX()){
+                if(checkObstaclesBetweenTanksY(engine.player.getCoordinateX(), enemy.getCoordinateX(), enemy.getCoordinateY())){
+                    enemy.angle = 270;
+                    singleShoot(enemy);
+                }
             }
-            else{
-                compareBeforeShootY(enemy,playerX,enemyX,enemyY);
+            else {
+                if(checkObstaclesBetweenTanksY(enemy.getCoordinateX(), engine.player.getCoordinateX(), enemy.getCoordinateY())){
+                    enemy.angle = 90;
+                    singleShoot(enemy);
+                }
             }
         }
     }
 
-    public void compareBeforeShootY(Enemy enemy, Integer a, Integer b, Integer c){
-        for(Integer i=a; i<b; i+=32){
-            if(engine.map.layers[1].blocks[c][i].isOpaque()) {
-                return;
-            }
+    public Boolean checkObstaclesBetweenTanksY(Integer from, Integer to, Integer constantY){
+        Integer checker=0;
+        for(Integer i=from; i<to; i+=1){
+            if(!engine.isEmptySpace(engine.map.layers[1],i,constantY)) checker+=1;
         }
-        singleShoot(enemy);
+        if(checker != 0) return false;
+        else return true;
     }
 
-    public void compareBeforeShootX(Enemy enemy, Integer a, Integer b, Integer c){
-        for(Integer i=a; i<b; i+=32){
-            if(engine.map.layers[1].blocks[i][c].isOpaque()) {
-                return;
-            }
+    public Boolean checkObstaclesBetweenTanksX(Integer from, Integer to, Integer constantX){
+        Integer checker=0;
+        for(Integer i=from; i<to; i+=1){
+            if(!engine.isEmptySpace(engine.map.layers[1],constantX,i)) checker+=1;
         }
-        singleShoot(enemy);
+        if(checker != 0) return false;
+        else return true;
     }
 
     public void singleShoot(Enemy enemy){
-        engine.bullets.add(new Bullet());
-        Integer number = engine.bullets.size();
-        engine.bullets.get(number-1).angle = enemy.angle;
-        if(engine.bullets.get(number-1).angle == 0){
-            engine.bullets.get(number-1).positionX = enemy.positionX;
-            engine.bullets.get(number-1).positionY = enemy.positionY - 32;
-        }
-        else if(engine.bullets.get(number-1).angle == 90){
-            engine.bullets.get(number-1).positionX = enemy.positionX + 32;
-            engine.bullets.get(number-1).positionY = enemy.positionY;
-        }
-        else if(engine.bullets.get(number-1).angle == 180){
-            engine.bullets.get(number-1).positionX = enemy.positionX;
-            engine.bullets.get(number-1).positionY = enemy.positionY + 32;
-        }
-        else if(engine.bullets.get(number-1).angle == 270){
-            engine.bullets.get(number-1).positionX = enemy.positionX - 32;
-            engine.bullets.get(number-1).positionY = enemy.positionY;
-        }
+        engine.enemyBullets.add(new EnemyBullet());
+        Integer number = engine.enemyBullets.size();
+        engine.enemyBullets.get(number-1).angle = enemy.angle;
+        engine.enemyBullets.get(number-1).positionX = enemy.positionX;
+        engine.enemyBullets.get(number-1).positionY = enemy.positionY;
+        //System.out.println("strzał "+number+" ("+enemy.positionX+","+enemy.positionY+")");
     }
 }
