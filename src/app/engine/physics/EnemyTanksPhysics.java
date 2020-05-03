@@ -7,6 +7,7 @@ import app.entities.map.objects.EnemyBullet;
 import app.entities.map.tanks.Enemy;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Obiekt odpowiedzialny za fizykę wrogów
@@ -20,6 +21,9 @@ public class EnemyTanksPhysics {
         this.engine = engine;
     }
 
+    /**
+     * Metoda odpowiadająca za obsługę wszystkich czołgów wroga
+     */
     public void handle(){
         for(Integer i=0; i < engine.enemies.size(); i++){
             moveSingleTank(engine.enemies.get(i));
@@ -27,6 +31,10 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoda odpowiadająca za obsługę pojedynczego czołgu wroga
+     * @param enemy
+     */
     public void moveSingleTank(Enemy enemy){
         if(enemy.inAnimation) return;
         if(enemy.getCoordinateX()+1 == engine.player.getCoordinateX() && enemy.getCoordinateY() == engine.player.getCoordinateY()){
@@ -49,6 +57,10 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoaa odpowiedzialna za poruszanie się w górę
+     * @param enemy
+     */
     public void moveUpSingleTank(Enemy enemy){
         if(enemy.getCoordinateY()-1>=0 && enemy.getCoordinateY()-1 < engine.map.height) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() - 1] == null) {
@@ -64,6 +76,10 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za poruszanie się w prawo
+     * @param enemy
+     */
     public void moveRightSingle(Enemy enemy){
         if(enemy.getCoordinateX()+1>=0 && enemy.getCoordinateX()+1 < engine.map.width) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX() + 1][enemy.getCoordinateY()] == null) {
@@ -79,6 +95,10 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za poruszanie się w dół
+     * @param enemy
+     */
     public void moveDownSingle(Enemy enemy){
         if(enemy.getCoordinateY()+1>=0 && enemy.getCoordinateY()+1 < engine.map.height) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX()][enemy.getCoordinateY() + 1] == null) {
@@ -94,6 +114,10 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za poruszanie się w lewo
+     * @param enemy
+     */
     public void moveLeftSingle(Enemy enemy){
         if(enemy.getCoordinateX()-1>=0 && enemy.getCoordinateX()-1 < engine.map.width) {
             if (engine.map.layers[1].blocks[enemy.getCoordinateX() - 1][enemy.getCoordinateY()] == null) {
@@ -109,6 +133,10 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za ustalenie losowego kierunku
+     * @param enemy
+     */
     public void randomDirection(Enemy enemy){
         Integer number = generator.nextInt(4);
         if(number == 0){
@@ -125,10 +153,18 @@ public class EnemyTanksPhysics {
         }
     }
 
-    public void shoot(Enemy enemy){
+    /**
+     * Metoda odpowiedzialna za wykonanie strzału
+     * @param enemy
+     */
+    public void shoot(Enemy enemy) {
         trackPlayer(enemy);
     }
 
+    /**
+     * Metoda odpowiedzialna za śledzenie gracza przez wroga
+     * @param enemy
+     */
     public void trackPlayer(Enemy enemy){
         if(enemy.getCoordinateX() == engine.player.getCoordinateX()){
             if(enemy.getCoordinateY() > engine.player.getCoordinateY()){
@@ -160,6 +196,13 @@ public class EnemyTanksPhysics {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za wyszukanie przeszkód między graczem, a wrogiem dla tej samej osi Y, w celu uniknięcia strzelania przez ścianę
+     * @param from współrzędna X gracza/wroga
+     * @param to współrzędna X wroga/gracza
+     * @param constantY wspólna współrzędna Y
+     * @return Boolean
+     */
     public Boolean checkObstaclesBetweenTanksY(Integer from, Integer to, Integer constantY){
         Integer checker=0;
         for(Integer i=from; i<to; i+=1){
@@ -169,6 +212,13 @@ public class EnemyTanksPhysics {
         else return true;
     }
 
+    /**
+     * Metoda odpowiedzialna za wyszukanie przeszkód między graczem, a wrogiem dla tej samej osi X, w celu uniknięcia strzelania przez ścianę
+     * @param from współrzędna Y gracza/wroga
+     * @param to współrzędna Y wroga/gracza
+     * @param constantX wspólna wspólrzędna X
+     * @return Boolean
+     */
     public Boolean checkObstaclesBetweenTanksX(Integer from, Integer to, Integer constantX){
         Integer checker=0;
         for(Integer i=from; i<to; i+=1){
@@ -178,12 +228,15 @@ public class EnemyTanksPhysics {
         else return true;
     }
 
+    /**
+     * Metoda odpowiedzialna za pojedynczy strzał
+     * @param enemy
+     */
     public void singleShoot(Enemy enemy){
         engine.enemyBullets.add(new EnemyBullet());
         Integer number = engine.enemyBullets.size();
         engine.enemyBullets.get(number-1).angle = enemy.angle;
         engine.enemyBullets.get(number-1).positionX = enemy.positionX;
         engine.enemyBullets.get(number-1).positionY = enemy.positionY;
-        //System.out.println("strzał "+number+" ("+enemy.positionX+","+enemy.positionY+")");
     }
 }
