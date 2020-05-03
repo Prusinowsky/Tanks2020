@@ -56,6 +56,7 @@ public class EnemyBulletPhysics {
             engine.enemyBullets.remove(enemyBullet);
             engine.lifes -= 1;
             engine.reloadMap();
+            if(engine.lifes == 0) engine.endGame();
         }
     }
 }

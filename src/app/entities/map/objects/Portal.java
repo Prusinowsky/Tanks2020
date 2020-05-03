@@ -13,6 +13,9 @@ public class Portal extends MapObject  {
     public Boolean isDestructible() { return false; }
 
     @Override
+    public Boolean isPortal() { return true; }
+
+    @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture("Portal");
     }

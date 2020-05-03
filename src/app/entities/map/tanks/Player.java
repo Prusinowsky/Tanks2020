@@ -12,6 +12,9 @@ public class Player extends AbstractTank {
     public Boolean isDestructible() { return true; }
 
     @Override
+    public Boolean isPortal() { return false; }
+
+    @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture("PlayerTank");
     }

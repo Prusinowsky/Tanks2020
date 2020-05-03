@@ -53,6 +53,12 @@ public abstract class MapObject {
     public abstract Boolean isDestructible();
 
     /**
+     * Metoda sprawdzająca czy obiekt jest portalem
+     * @return Boolean
+     */
+    public abstract Boolean isPortal();
+
+    /**
      * Zwraca teksturę obiektu
      * @return Encja tekstury
      */

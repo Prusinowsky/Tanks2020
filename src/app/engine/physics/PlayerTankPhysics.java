@@ -29,6 +29,9 @@ public class PlayerTankPhysics {
         if(!engine.isOpaqueObject(engine.map.layers[1], engine.player.getCoordinateX(), engine.player.getCoordinateY()-1)){
             new MoveTankAnimation(engine.player, 0, -32);
         }
+        if(engine.isPortalObject(engine.map.layers[1], engine.player.getCoordinateX(), engine.player.getCoordinateY()-1)){
+            engine.nextLevel();
+        }
         engine.player.angle = 0;
     }
 
@@ -41,6 +44,9 @@ public class PlayerTankPhysics {
             return;
         if(!engine.isOpaqueObject(engine.map.layers[1], engine.player.getCoordinateX(), engine.player.getCoordinateY()+1)){
             new MoveTankAnimation(engine.player, 0, 32);
+        }
+        if(engine.isPortalObject(engine.map.layers[1], engine.player.getCoordinateX(), engine.player.getCoordinateY()+1)){
+            engine.nextLevel();
         }
         engine.player.angle = 180;
     }
@@ -55,6 +61,9 @@ public class PlayerTankPhysics {
         if(!engine.isOpaqueObject(engine.map.layers[1], engine.player.getCoordinateX() + 1, engine.player.getCoordinateY())){
             new MoveTankAnimation(engine.player, 32, 0);
         }
+        if(engine.isPortalObject(engine.map.layers[1], engine.player.getCoordinateX() + 1, engine.player.getCoordinateY())){
+            engine.nextLevel();
+        }
         engine.player.angle = 90;
     }
 
@@ -68,6 +77,9 @@ public class PlayerTankPhysics {
             return;
         if(!engine.isOpaqueObject(engine.map.layers[1], engine.player.getCoordinateX() - 1, engine.player.getCoordinateY())){
             new MoveTankAnimation(engine.player, -32, 0);
+        }
+        if(engine.isPortalObject(engine.map.layers[1], engine.player.getCoordinateX() - 1, engine.player.getCoordinateY())){
+            engine.nextLevel();
         }
         engine.player.angle = 270;
     }

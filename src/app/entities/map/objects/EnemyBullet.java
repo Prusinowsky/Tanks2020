@@ -15,6 +15,9 @@ public class EnemyBullet extends MapObject {
     public Boolean isDestructible() { return false; }
 
     @Override
+    public Boolean isPortal() { return false; }
+
+    @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture("Bullet");
     }

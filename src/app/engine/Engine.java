@@ -340,11 +340,19 @@ public class Engine implements EngineInterface {
         render.update();
     }
 
-    private void nextLevel(){
-        if(map.code == 0) map.code = 1;
-        else if(map.code == 1) map.code = 2;
-        else if(map.code == 2) map.code = 0;
-        //map.layers[1].blocks[1][1].code
+    public void nextLevel(){
+        if(map.code == 0) {
+            map = Container.getInstance().provideMapLoader().getMap("Pustynia");
+            map2Tanks();
+        }
+        else if(map.code == 1) {
+            map = Container.getInstance().provideMapLoader().getMap("Wulkan");
+            map3Tanks();
+        }
+        else if(map.code == 2) {
+            map = Container.getInstance().provideMapLoader().getMap("Dolina");
+            map1Tanks();
+        }
     }
 
     public Boolean isOnMap(MapObject object){
@@ -360,6 +368,11 @@ public class Engine implements EngineInterface {
     public Boolean isEmptySpace(MapLayer layer, Integer coordinateX, Integer coordinateY){
         return isOnMap(coordinateX, coordinateY)
                 && layer.blocks[coordinateX][coordinateY] == null;
+    }
+
+    public Boolean isPortalObject(MapLayer layer, Integer coordinateX, Integer coordinateY){
+        return !isEmptySpace(layer, coordinateX, coordinateY)
+                && layer.blocks[coordinateX][coordinateY].isPortal();
     }
 
     public Boolean isOpaqueObject(MapLayer layer, Integer coordinateX, Integer coordinateY){

@@ -13,6 +13,9 @@ public class DestructibleObstacle extends MapObject {
     public Boolean isDestructible() { return true; }
 
     @Override
+    public Boolean isPortal() { return false; }
+
+    @Override
     public TextureEntity getTexture() {
         return Container.getInstance().provideTextureLoader().getTexture(
                 Container.getInstance().provideConfig().getProperty("map_destructible_" + mapCode)
