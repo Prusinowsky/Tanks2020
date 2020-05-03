@@ -80,6 +80,21 @@ public class Engine implements EngineInterface {
         renderWithFreq(60);
     }
 
+    public void reloadMap(){
+        if(map.code == 0) {
+            map = Container.getInstance().provideMapLoader().getMap("Dolina");
+            playerPosition1();
+        }
+        else if(map.code == 1) {
+            map = Container.getInstance().provideMapLoader().getMap("Pustynia");
+            playerPosition2();
+        }
+        else if(map.code == 2) {
+            map = Container.getInstance().provideMapLoader().getMap("Wulkan");
+            playerPosition3();
+        }
+    }
+
     public void loadTanks(){
         enemies.clear();
         if(map.code == 0) map1Tanks();
@@ -88,9 +103,7 @@ public class Engine implements EngineInterface {
     }
 
     public void map1Tanks(){
-        player.positionX = 0;
-        player.positionY = 288;
-        player.angle = 180;
+        playerPosition1();
 
         Enemy enemy1 = new Enemy();
         Enemy enemy2 = new Enemy();
@@ -135,9 +148,7 @@ public class Engine implements EngineInterface {
     }
 
     public void map2Tanks(){
-        player.positionX = 64;
-        player.positionY = 352;
-        player.angle = 270;
+        playerPosition2();
 
         Enemy enemy1 = new Enemy();
         Enemy enemy2 = new Enemy();
@@ -187,9 +198,7 @@ public class Engine implements EngineInterface {
     }
 
     public void map3Tanks(){
-        player.positionX = 0;
-        player.positionY = 480;
-        player.angle = 0;
+        playerPosition3();
 
         Enemy enemy1 = new Enemy();
         Enemy enemy2 = new Enemy();
@@ -256,6 +265,24 @@ public class Engine implements EngineInterface {
         enemies.add(enemy11);
         enemies.add(enemy12);
         enemies.add(enemy13);
+    }
+
+    public void playerPosition1(){
+        player.positionX = 0;
+        player.positionY = 288;
+        player.angle = 180;
+    }
+
+    public void playerPosition2(){
+        player.positionX = 64;
+        player.positionY = 352;
+        player.angle = 270;
+    }
+
+    public void playerPosition3(){
+        player.positionX = 0;
+        player.positionY = 480;
+        player.angle = 0;
     }
 
     /**

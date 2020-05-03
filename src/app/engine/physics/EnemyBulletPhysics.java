@@ -55,6 +55,7 @@ public class EnemyBulletPhysics {
         if(engine.player.isOnTheSameCoordinate(enemyBullet)){
             engine.enemyBullets.remove(enemyBullet);
             engine.lifes -= 1;
+            engine.reloadMap();
         }
     }
 }
