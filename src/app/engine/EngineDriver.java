@@ -1,9 +1,5 @@
 package app.engine;
 
-import app.engine.animations.MoveTankAnimation;
-import app.entities.map.objects.Bullet;
-
-
 
 /**
  * Obiekt odpowiedzialny za sterowanie gry
@@ -24,35 +20,35 @@ public class EngineDriver {
      * Porusza gracza w górę
      */
     public void moveUp(){
-        engine.getPhysics().getPlayerTankPhysics().moveUp();
+        engine.getPhysics().getPlayerPhysics().moveUp();
     }
 
     /**
      * Porusza gracza w dół
      */
     public void moveDown(){
-        engine.getPhysics().getPlayerTankPhysics().moveDown();
+        engine.getPhysics().getPlayerPhysics().moveDown();
     }
 
     /**
      * Porusza gracza w prawo
      */
     public void moveRight(){
-        engine.getPhysics().getPlayerTankPhysics().moveRight();
+        engine.getPhysics().getPlayerPhysics().moveRight();
     }
 
     /**
      * Porusza gracza w lewo
      */
     public void moveLeft(){
-        engine.getPhysics().getPlayerTankPhysics().moveLeft();
+        engine.getPhysics().getPlayerPhysics().moveLeft();
     }
 
     /**
      * Strzela
      */
     public void shoot() {
-        engine.getPhysics().getPlayerTankPhysics().shoot();
+        engine.getPhysics().getPlayerPhysics().shoot();
     }
 
 }

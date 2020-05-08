@@ -1,9 +1,7 @@
 package app.engine;
 
-import app.engine.physics.BulletPhysics;
-import app.engine.physics.EnemyBulletPhysics;
-import app.engine.physics.EnemyTanksPhysics;
-import app.engine.physics.PlayerTankPhysics;
+import app.engine.physics.*;
+import app.entities.map.objects.Portal;
 
 /**
  * Obiekt odpowiedzialny za fizyke gry
@@ -11,10 +9,11 @@ import app.engine.physics.PlayerTankPhysics;
 public class EnginePhysics {
 
     private Engine engine;
-    private PlayerTankPhysics playerTankPhysics;
-    private EnemyTanksPhysics enemyTanksPhysics;
-    private BulletPhysics bulletPhysics;
-    private EnemyBulletPhysics enemyBulletPhysics;
+    private PlayerPhysics playerPhysics;
+    private EnemiesPhysics enemiesPhysics;
+    private ObstaclesPhysics obstaclesPhysics;
+    private BulletsPhysics bulletsPhysics;
+    private PortalPhysics portalPhysics;
 
     /**
      * Konstruktor domyslny
@@ -22,40 +21,51 @@ public class EnginePhysics {
      */
     public EnginePhysics(Engine engine){
         this.engine = engine;
-        playerTankPhysics = new PlayerTankPhysics(engine);
-        enemyTanksPhysics = new EnemyTanksPhysics(engine);
-        bulletPhysics = new BulletPhysics(engine);
-        enemyBulletPhysics = new EnemyBulletPhysics(engine);
+        playerPhysics = new PlayerPhysics(engine);
+        enemiesPhysics = new EnemiesPhysics(engine);
+        obstaclesPhysics = new ObstaclesPhysics(engine);
+        bulletsPhysics = new BulletsPhysics(engine);
+        portalPhysics = new PortalPhysics(engine);
     }
 
     /**
      * Zwraca obiekt fiyzki gracza
      * @return Fizyka gracza
      */
-    public PlayerTankPhysics getPlayerTankPhysics(){
-        return playerTankPhysics;
+    public PlayerPhysics getPlayerPhysics(){
+        return playerPhysics;
     }
 
     /**
      * Zwraca obiekt fiyzki wrogów
      * @return Fizyka wroga
      */
-    public EnemyTanksPhysics getEnemyTanksPhysics(){
-        return enemyTanksPhysics;
+    public EnemiesPhysics getEnemiesPhysics(){
+        return enemiesPhysics;
+    }
+
+    /**
+     * Zwraca obiekt fiyzki przeszkód
+     * @return Fizyka wroga
+     */
+    public ObstaclesPhysics getObstaclesPhysics(){
+        return obstaclesPhysics;
     }
 
     /**
      * Zwraca obiekt fiyzki kul
      * @return Fizyka kul
      */
-    public BulletPhysics getBulletPhysics(){
-        return bulletPhysics;
+    public BulletsPhysics getBulletsPhysics(){
+        return bulletsPhysics;
     }
 
     /**
-     * Zwraca obiekt fiyzki kul wroga
-     * @return Fizyka kul wroga
+     * Zwraca obiekt fiyzki kul
+     * @return Fizyka kul
      */
-    public EnemyBulletPhysics getEnemyBulletPhysics() { return  enemyBulletPhysics; }
+    public PortalPhysics getPortalPhysics(){
+        return portalPhysics;
+    }
 
 }

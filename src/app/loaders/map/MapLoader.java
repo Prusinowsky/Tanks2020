@@ -8,6 +8,8 @@ import app.entities.map.MapObject;
 import app.entities.map.objects.Portal;
 import app.entities.map.obstacles.DestructibleObstacle;
 import app.entities.map.obstacles.IndestructibleObstacle;
+import app.entities.map.tanks.Enemy;
+import app.entities.map.tanks.Player;
 import app.entities.map.tiles.GroundTile;
 
 import java.io.File;
@@ -78,17 +80,21 @@ public class MapLoader implements MapLoaderInterface {
             map.width = Integer.parseInt(scanner.nextLine());
             map.height = Integer.parseInt(scanner.nextLine());
 
-            MapLayer[] mapLayers = new MapLayer[2];
+            MapLayer[] mapLayers = new MapLayer[map.numberOfLayers];
 
-            for(Integer l = 0; l < 2; l++){
+            for(Integer l = 0; l < map.numberOfLayers; l++){
                 scanner.nextLine();
+
                 mapLayers[l] = new MapLayer();
                 mapLayers[l].width = map.width;
                 mapLayers[l].height = map.height;
                 mapLayers[l].blocks = new MapObject[map.height][map.width];
 
                 for (Integer i = 0; i < map.height; i++) {
+
                     String line = scanner.nextLine();
+
+
                     for (Integer j = 0; j < map.width; j++) {
                         Integer code = Integer.parseInt(String.valueOf(line.charAt(j)));
                         MapObject mapObject = toMapObject(code);
@@ -96,6 +102,8 @@ public class MapLoader implements MapLoaderInterface {
                             mapObject.code = code;
                             mapObject.mapCode = mapCode;
                             mapObject.mapName = mapName;
+                            mapObject.positionX = j*32;
+                            mapObject.positionY = i*32;
                         }
                         mapLayers[l].blocks[j][i] = mapObject;
                     }
@@ -124,6 +132,8 @@ public class MapLoader implements MapLoaderInterface {
         pattern.put(2, new DestructibleObstacle());
         pattern.put(4, new IndestructibleObstacle());
         pattern.put(5, new Portal());
+        pattern.put(8, new Player());
+        pattern.put(9, new Enemy());
 
         return pattern;
     }

@@ -13,7 +13,6 @@ public class MoveTankAnimation extends AbstractAnimation {
     public MoveTankAnimation(AbstractTank tank, Integer x, Integer y){
         this.timer = new Timer();
         this.tank = tank;
-        this.tank.inAnimation = true;
         this.x = x;
         this.y = y;
         setAngle();

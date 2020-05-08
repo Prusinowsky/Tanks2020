@@ -64,7 +64,6 @@ public class EngineRender {
             }
             renderPlayer(g2d);
             renderBullets(g2d);
-            renderEnemyBullets(g2d);
             renderEnemies(g2d);
         }
         screen = offscreen;
@@ -141,18 +140,6 @@ public class EngineRender {
         }
     }
 
-    private void renderEnemyBullets(Graphics2D g2d){
-        Integer number = engine.enemyBullets.size();
-        for(Integer i=0; i<number; i++) {
-            Image enemyBulletImg = engine.enemyBullets.get(i).getTexture().image;
-            Image enemyBulletBuffored = new BufferedImage(enemyBulletImg.getWidth(null), enemyBulletImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D enemyBullet2d = ((BufferedImage) enemyBulletBuffored).createGraphics();
-            enemyBullet2d.rotate(Math.toRadians(engine.enemyBullets.get(i).angle), enemyBulletImg.getWidth(null) >> 1, enemyBulletImg.getHeight(null) >> 1);
-            enemyBullet2d.drawImage(enemyBulletImg,0,0,null);
-            g2d.drawImage(enemyBulletBuffored, engine.enemyBullets.get(i).positionX, engine.enemyBullets.get(i).positionY, null);
-        }
-    }
-
     /**
      * Renderowanie warstw mapy
      * @param g2d obiekt na którym ma wyrenderować mapę
@@ -161,7 +148,7 @@ public class EngineRender {
         for(Integer i = 0; i < layer.height; i++){
             for(Integer j = 0; j < layer.width; j++){
                 if(layer.blocks[i][j] != null)
-                    g2d.drawImage(layer.blocks[i][j].getTexture().image, i*32, j*32, null);
+                    g2d.drawImage(layer.blocks[i][j].getTexture().image, layer.blocks[i][j].positionX, layer.blocks[i][j].positionY, null);
             }
         }
     }

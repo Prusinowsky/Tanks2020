@@ -2,10 +2,7 @@ package app.engine;
 
 import app.Container;
 import app.engine.interfaces.EngineInterface;
-import app.entities.map.MapLayer;
-import app.entities.map.MapObject;
 import app.entities.map.objects.Bullet;
-import app.entities.map.objects.EnemyBullet;
 import app.entities.map.tanks.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.tanks.Player;
@@ -22,6 +19,8 @@ import java.util.TimerTask;
  */
 public class Engine implements EngineInterface {
 
+    public Integer level = 0;
+
     public EngineDriver driver;
     public EnginePhysics physics;
     public EngineRender render;
@@ -37,7 +36,6 @@ public class Engine implements EngineInterface {
     public Player player;
     public MapEntity map;
     public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    public ArrayList<EnemyBullet> enemyBullets = new ArrayList<EnemyBullet>();
     public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     private MapLoaderInterface mapLoader;
@@ -53,7 +51,6 @@ public class Engine implements EngineInterface {
      * Meotda inicjalizujaca silnik
      */
     private void init(){
-
         this.driver = new EngineDriver(this);
         this.physics = new EnginePhysics(this);
         this.render = new EngineRender(this);
@@ -66,223 +63,12 @@ public class Engine implements EngineInterface {
     public void startGame() {
         this.startTime = new Date().getTime();
         mapLoader = app.Container.getInstance().provideMapLoader();
-        map = mapLoader.getMap(app.Container.getInstance().provideOptions().mapName);
         playerName = !Container.getInstance().provideOptions().nickname.isEmpty() ? Container.getInstance().provideOptions().nickname : "Player Tank";
 
-        player = new Player();
-        player.positionX = 0;
-        player.positionY = 0;
-        player.angle = 0;
-
-        loadTanks();
+        reloadMap();
 
         timer = new Timer();
         renderWithFreq(60);
-    }
-
-    public void reloadMap(){
-        if(map.code == 0) {
-            map = Container.getInstance().provideMapLoader().getMap("Dolina");
-            playerPosition1();
-        }
-        else if(map.code == 1) {
-            map = Container.getInstance().provideMapLoader().getMap("Pustynia");
-            playerPosition2();
-        }
-        else if(map.code == 2) {
-            map = Container.getInstance().provideMapLoader().getMap("Wulkan");
-            playerPosition3();
-        }
-    }
-
-    public void loadTanks(){
-        enemies.clear();
-        if(map.code == 0) map1Tanks();
-        else if(map.code == 1) map2Tanks();
-        else if(map.code == 2) map3Tanks();
-    }
-
-    public void map1Tanks(){
-        playerPosition1();
-
-        Enemy enemy1 = new Enemy();
-        Enemy enemy2 = new Enemy();
-        Enemy enemy3 = new Enemy();
-        Enemy enemy4 = new Enemy();
-        Enemy enemy5 = new Enemy();
-        Enemy enemy6 = new Enemy();
-        Enemy enemy7 = new Enemy();
-        Enemy enemy8 = new Enemy();
-        enemy1.positionX = 0;
-        enemy1.positionY = 160;
-        enemy1.angle = 180;
-        enemy2.positionX = 128;
-        enemy2.positionY = 128;
-        enemy2.angle = 180;
-        enemy3.positionX = 192;
-        enemy3.positionY = 192;
-        enemy3.angle = 0;
-        enemy4.positionX = 352;
-        enemy4.positionY = 160;
-        enemy4.angle = 180;
-        enemy5.positionX = 480;
-        enemy5.positionY = 256;
-        enemy5.angle = 0;
-        enemy6.positionX = 352;
-        enemy6.positionY = 352;
-        enemy6.angle = 180;
-        enemy7.positionX = 288;
-        enemy7.positionY = 384;
-        enemy7.angle = 0;
-        enemy8.positionX = 192;
-        enemy8.positionY = 448;
-        enemy8.angle = 270;
-        enemies.add(enemy1);
-        enemies.add(enemy2);
-        enemies.add(enemy3);
-        enemies.add(enemy4);
-        enemies.add(enemy5);
-        enemies.add(enemy6);
-        enemies.add(enemy7);
-        enemies.add(enemy8);
-    }
-
-    public void map2Tanks(){
-        playerPosition2();
-
-        Enemy enemy1 = new Enemy();
-        Enemy enemy2 = new Enemy();
-        Enemy enemy3 = new Enemy();
-        Enemy enemy4 = new Enemy();
-        Enemy enemy5 = new Enemy();
-        Enemy enemy6 = new Enemy();
-        Enemy enemy7 = new Enemy();
-        Enemy enemy8 = new Enemy();
-        Enemy enemy9 = new Enemy();
-        enemy1.positionX = 96;
-        enemy1.positionY = 0;
-        enemy1.angle = 270;
-        enemy2.positionX = 480;
-        enemy2.positionY = 32;
-        enemy2.angle = 180;
-        enemy3.positionX = 288;
-        enemy3.positionY = 96;
-        enemy3.angle = 0;
-        enemy4.positionX = 288;
-        enemy4.positionY = 160;
-        enemy4.angle = 180;
-        enemy5.positionX = 32;
-        enemy5.positionY = 192;
-        enemy5.angle = 270;
-        enemy6.positionX = 384;
-        enemy6.positionY = 288;
-        enemy6.angle = 0;
-        enemy7.positionX = 320;
-        enemy7.positionY = 320;
-        enemy7.angle = 180;
-        enemy8.positionX = 448;
-        enemy8.positionY = 320;
-        enemy8.angle = 0;
-        enemy9.positionX = 224;
-        enemy9.positionY = 448;
-        enemy9.angle = 180;
-        enemies.add(enemy1);
-        enemies.add(enemy2);
-        enemies.add(enemy3);
-        enemies.add(enemy4);
-        enemies.add(enemy5);
-        enemies.add(enemy6);
-        enemies.add(enemy7);
-        enemies.add(enemy8);
-        enemies.add(enemy9);
-    }
-
-    public void map3Tanks(){
-        playerPosition3();
-
-        Enemy enemy1 = new Enemy();
-        Enemy enemy2 = new Enemy();
-        Enemy enemy3 = new Enemy();
-        Enemy enemy4 = new Enemy();
-        Enemy enemy5 = new Enemy();
-        Enemy enemy6 = new Enemy();
-        Enemy enemy7 = new Enemy();
-        Enemy enemy8 = new Enemy();
-        Enemy enemy9 = new Enemy();
-        Enemy enemy10 = new Enemy();
-        Enemy enemy11 = new Enemy();
-        Enemy enemy12 = new Enemy();
-        Enemy enemy13 = new Enemy();
-        enemy1.positionX = 96;
-        enemy1.positionY = 0;
-        enemy1.angle = 270;
-        enemy2.positionX = 288;
-        enemy2.positionY = 0;
-        enemy2.angle = 180;
-        enemy3.positionX = 480;
-        enemy3.positionY = 32;
-        enemy3.angle = 180;
-        enemy4.positionX = 160;
-        enemy4.positionY = 64;
-        enemy4.angle = 270;
-        enemy5.positionX = 352;
-        enemy5.positionY = 96;
-        enemy5.angle = 0;
-        enemy6.positionX = 0;
-        enemy6.positionY = 128;
-        enemy6.angle = 180;
-        enemy7.positionX = 64;
-        enemy7.positionY = 192;
-        enemy7.angle = 90;
-        enemy8.positionX = 352;
-        enemy8.positionY = 224;
-        enemy8.angle = 270;
-        enemy9.positionX = 288;
-        enemy9.positionY = 288;
-        enemy9.angle = 180;
-        enemy10.positionX = 64;
-        enemy10.positionY = 320;
-        enemy10.angle = 270;
-        enemy11.positionX = 416;
-        enemy11.positionY = 352;
-        enemy11.angle = 180;
-        enemy12.positionX = 96;
-        enemy12.positionY = 480;
-        enemy12.angle = 0;
-        enemy13.positionX = 224;
-        enemy13.positionY = 480;
-        enemy13.angle = 0;
-        enemies.add(enemy1);
-        enemies.add(enemy2);
-        enemies.add(enemy3);
-        enemies.add(enemy4);
-        enemies.add(enemy5);
-        enemies.add(enemy6);
-        enemies.add(enemy7);
-        enemies.add(enemy8);
-        enemies.add(enemy9);
-        enemies.add(enemy10);
-        enemies.add(enemy11);
-        enemies.add(enemy12);
-        enemies.add(enemy13);
-    }
-
-    public void playerPosition1(){
-        player.positionX = 0;
-        player.positionY = 288;
-        player.angle = 180;
-    }
-
-    public void playerPosition2(){
-        player.positionX = 64;
-        player.positionY = 352;
-        player.angle = 270;
-    }
-
-    public void playerPosition3(){
-        player.positionX = 0;
-        player.positionY = 480;
-        player.angle = 0;
     }
 
     /**
@@ -327,9 +113,9 @@ public class Engine implements EngineInterface {
      * Obsluga gry
      */
     private void handle(){
-        physics.getBulletPhysics().handle();
-        physics.getEnemyTanksPhysics().handle();
-        physics.getEnemyBulletPhysics().handle();
+        physics.getEnemiesPhysics().handle();
+        physics.getObstaclesPhysics().handle();
+        physics.getBulletsPhysics().handle();
     }
 
     /**
@@ -340,49 +126,86 @@ public class Engine implements EngineInterface {
         render.update();
     }
 
+    /**
+     * ładowanie pozycji gracza z pliku mapy
+     */
+    private void loadPlayerFromMap(){
+        if(map.layers[2].blocks == null) return;
+        for(Integer i = 0; i < map.layers[2].width; i++)
+            for(Integer j = 0; j < map.layers[2].height; j++) {
+                if(map.layers[2].blocks[j][i] instanceof Player) {
+                    this.player = (Player) map.layers[2].blocks[j][i];
+                    this.player.positionX = j*32;
+                    this.player.positionY = i*32;
+                    map.layers[2].blocks[j][i] = null;
+                    return;
+                }
+            }
+    }
+
+    /**
+     * ładowanie pozycji wrogów z pliku mapy
+     */
+    private void loadEnemyFromMap(){
+        if(map.layers[2].blocks == null) return;
+        for(Integer i = 0; i < map.layers[2].width; i++)
+            for(Integer j = 0; j < map.layers[2].height; j++) {
+                if(map.layers[2].blocks[j][i] instanceof Enemy) {
+                    Enemy enemy = (Enemy)map.layers[2].blocks[j][i];
+                    enemy.positionX = j*32;
+                    enemy.positionY = i*32;
+                    enemies.add(enemy);
+                    map.layers[2].blocks[j][i] = null;
+                }
+            }
+    }
+
+    /**
+     * Usuwanie z mapy poziomu 3ciego odpowiadajacego za ładowanie pozycji graczy
+     */
+    private void purgeMap(){
+        if(map.layers[2] == null) return;
+        map.layers[2] = null;
+        map.numberOfLayers -= 1;
+    }
+
+
+
+    /**
+     * Ladowanie kolejnego poziomu gry
+     */
     public void nextLevel(){
-        if(map.code == 0) {
-            map = Container.getInstance().provideMapLoader().getMap("Pustynia");
-            map2Tanks();
-        }
-        else if(map.code == 1) {
-            map = Container.getInstance().provideMapLoader().getMap("Wulkan");
-            map3Tanks();
-        }
-        else if(map.code == 2) {
-            map = Container.getInstance().provideMapLoader().getMap("Dolina");
-            map1Tanks();
-        }
+        if(++level >= 3) level = 0; // koniec gry
+        Container.getInstance().provideOptions().mapName = Container.getInstance().provideConfig().getProperty("map_name_" + level);
+        reloadMap();
     }
 
-    public Boolean isOnMap(MapObject object){
-        return object != null
-                && isOnMap(object.getCoordinateX(), object.getCoordinateY());
+    /**
+     * Przeładowanie mapy
+     */
+    public void reloadMap(){
+        map = mapLoader.getMap(Container.getInstance().provideOptions().mapName);
+
+        clearEngine();
+
+        loadPlayerFromMap();
+
+        loadEnemyFromMap();
+        getPhysics().getEnemiesPhysics().reinit();
+
+        getPhysics().getObstaclesPhysics().reinit();
+
+        //getPhysics().getBulletsPhysics().reinit();
+
+        //getPhysics().getPortalPhysics().reinit();
+
+        purgeMap();
+
     }
 
-    public Boolean isOnMap(Integer coordinateX, Integer coordinateY){
-        return coordinateX >= 0 && coordinateX < map.width
-                && coordinateY >= 0 && coordinateY < map.height;
-    }
-
-    public Boolean isEmptySpace(MapLayer layer, Integer coordinateX, Integer coordinateY){
-        return isOnMap(coordinateX, coordinateY)
-                && layer.blocks[coordinateX][coordinateY] == null;
-    }
-
-    public Boolean isPortalObject(MapLayer layer, Integer coordinateX, Integer coordinateY){
-        return !isEmptySpace(layer, coordinateX, coordinateY)
-                && layer.blocks[coordinateX][coordinateY].isPortal();
-    }
-
-    public Boolean isOpaqueObject(MapLayer layer, Integer coordinateX, Integer coordinateY){
-        return !isEmptySpace(layer, coordinateX, coordinateY)
-                && layer.blocks[coordinateX][coordinateY].isOpaque();
-    }
-
-    public Boolean isDestructibleObject(MapLayer layer, Integer coordinateX, Integer coordinateY){
-        return !isEmptySpace(layer, coordinateX, coordinateY)
-                && layer.blocks[coordinateX][coordinateY].isDestructible();
+    public void clearEngine(){
+        this.enemies.clear();
+        this.bullets.clear();
     }
 
     /**

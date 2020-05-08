@@ -29,6 +29,7 @@ public abstract class MapObject {
         return positionY/32;
     }
 
+
     /**
      * Sprawdza czy obiekty są na tej samej pozycji
      * @param object Obiekt
