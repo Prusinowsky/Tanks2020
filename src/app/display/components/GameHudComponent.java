@@ -105,9 +105,15 @@ public class GameHudComponent extends JPanel implements Renderable {
         lScore.setText(config.getProperty("score") + ": " + this.score);
 
         lLabelHeart.setBounds(10, 250, getWidth(), 30);
+        for (Integer i=0; i < 3; i++)
+        {
+            lHeart[i].setVisible(false);
+        }
+
         for (Integer i=0; i < lifes; i++)
         {
             lHeart[i].setBounds(  getWidth()/2 + 30*i - 45,280,30,30);
+            lHeart[i].setVisible(true);
         }
 
         Integer y = getHeight();

@@ -1,6 +1,8 @@
 package app.engine.physics;
 
 import app.engine.Engine;
+import app.entities.map.tanks.Enemy;
+
 import java.util.ArrayList;
 
 /**
@@ -27,16 +29,23 @@ public class EnemiesPhysics {
     public void reinit(){
         init();
     }
+
     /**
      * Metoda odpowiadająca za obsługę wszystkich czołgów wroga
      */
     public void handle(){
-        ArrayList<EnemyPhysics> toDelete = new ArrayList<EnemyPhysics>();
-        enemiesPhysics.forEach((enemy) -> {
-            if(enemy.canBeDelete()) toDelete.add(enemy);
-            enemy.handle();
-        });
-        enemiesPhysics.removeAll(toDelete);
+        for(Integer i = 0; i < enemiesPhysics.size(); i++){
+            EnemyPhysics enemyPhysics = enemiesPhysics.get(i);
+            enemyPhysics.handle();
+        }
+    }
+
+    public void remove(EnemyPhysics enemyPhysics){
+        enemiesPhysics.remove(enemyPhysics);
+    }
+
+    public Enemy[] getEnemies(){
+        return enemiesPhysics.stream().map(EnemyPhysics::getEnemy).toArray(Enemy[]::new);
     }
 
 }

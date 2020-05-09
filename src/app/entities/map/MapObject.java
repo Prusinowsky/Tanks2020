@@ -30,6 +30,7 @@ public abstract class MapObject {
     }
 
 
+
     /**
      * Sprawdza czy obiekty są na tej samej pozycji
      * @param object Obiekt

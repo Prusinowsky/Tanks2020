@@ -2,7 +2,6 @@ package app.engine.physics;
 
 import app.engine.Engine;
 import app.entities.map.MapObject;
-import app.entities.map.objects.Bullet;
 
 public class ObstaclePhysics {
 
@@ -15,21 +14,16 @@ public class ObstaclePhysics {
     }
 
     public void handle(){
-        destroy();
-    }
-
-    public void destroy(){
-        for(Bullet bullet : engine.bullets){
-            if(bullet.isOnTheSameCoordinate(object)){
-                if(object.isDestructible()) {
-
-                }
-                break;
+        BulletPhysics[] bulletsPhysics = engine.getPhysics().getBulletsPhysics().getBulletPhysics();
+        for(Integer i = 0; i < bulletsPhysics.length; i++)
+            if(bulletsPhysics[i].getBullet().isOnTheSameCoordinate(object)){
+                engine.getPhysics().getBulletsPhysics().remove(bulletsPhysics[i]);
+                if(object.isDestructible()) engine.getPhysics().getObstaclesPhysics().remove(this);
+                return;
             }
-        }
     }
 
-    public Boolean canBeDelete(){
-        return object == null;
+    public MapObject getObstacle(){
+        return object;
     }
 }

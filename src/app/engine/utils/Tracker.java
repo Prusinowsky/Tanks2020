@@ -3,9 +3,15 @@ package app.engine.utils;
 import app.engine.Engine;
 import app.entities.map.tanks.Enemy;
 
+import java.util.function.Function;
+
 public class Tracker {
 
     private Engine engine;
+
+    public Tracker(Engine engine) {
+        this.engine = engine;
+    }
 
     public void Tracker(Engine engine){
         this.engine = engine;
@@ -15,18 +21,18 @@ public class Tracker {
      * Metoda odpowiedzialna za śledzenie gracza przez wroga
      * @param enemy
      */
-    public void trackPlayer(Enemy enemy){
+    public Boolean trackPlayer(Enemy enemy){
         if(enemy.getCoordinateX() == engine.player.getCoordinateX()){
             if(enemy.getCoordinateY() > engine.player.getCoordinateY()){
                 if(checkObstaclesBetweenTanksX(engine.player.getCoordinateY(), enemy.getCoordinateY(), enemy.getCoordinateX())){
                     enemy.angle = 0;
-                    //singleShoot(enemy);
+                    return true;
                 }
             }
             else {
                 if(checkObstaclesBetweenTanksX(enemy.getCoordinateY(), engine.player.getCoordinateY(), enemy.getCoordinateX())){
                     enemy.angle = 180;
-                    //singleShoot(enemy);
+                    return true;
                 }
             }
         }
@@ -34,16 +40,17 @@ public class Tracker {
             if(enemy.getCoordinateX() > engine.player.getCoordinateX()){
                 if(checkObstaclesBetweenTanksY(engine.player.getCoordinateX(), enemy.getCoordinateX(), enemy.getCoordinateY())){
                     enemy.angle = 270;
-                    //singleShoot(enemy);
+                    return true;
                 }
             }
             else {
                 if(checkObstaclesBetweenTanksY(enemy.getCoordinateX(), engine.player.getCoordinateX(), enemy.getCoordinateY())){
                     enemy.angle = 90;
-                    //singleShoot(enemy);
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     /**
@@ -56,7 +63,7 @@ public class Tracker {
     public Boolean checkObstaclesBetweenTanksY(Integer from, Integer to, Integer constantY){
         Integer checker=0;
         for(Integer i=from; i<to; i+=1){
-            if(!MapHelper.isEmptySpace(engine.map.layers[1],i,constantY)) checker+=1;
+            if(!MapHelper.isEmptySpace(engine.getMap().layers[1],i,constantY)) checker+=1;
         }
         if(checker != 0) return false;
         else return true;
@@ -72,7 +79,7 @@ public class Tracker {
     public Boolean checkObstaclesBetweenTanksX(Integer from, Integer to, Integer constantX){
         Integer checker=0;
         for(Integer i=from; i<to; i+=1){
-            if(!MapHelper.isEmptySpace(engine.map.layers[1],constantX,i)) checker+=1;
+            if(!MapHelper.isEmptySpace(engine.getMap().layers[1],constantX,i)) checker+=1;
         }
         if(checker != 0) return false;
         else return true;

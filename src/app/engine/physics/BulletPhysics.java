@@ -22,27 +22,15 @@ public class BulletPhysics {
      */
     public void handle(){
         if(!MapHelper.isOnMap(engine.map, bullet)){
-            engine.getPhysics().getBulletsPhysics().destroy(this);
+            engine.getPhysics().getBulletsPhysics().remove(this);
             return;
         }
-        bullet.positionX += 4*getXDirection();
-        bullet.positionY += 4*getYDirection();
+        bullet.positionX += 4 * bullet.getDirectionX();
+        bullet.positionY += 4 * bullet.getDirectionY();
     }
 
-    private Integer getXDirection(){
-        if(bullet.angle == 90)
-            return 1;
-        if(bullet.angle == 270)
-            return -1;
-        return 0;
-    }
-
-    private Integer getYDirection(){
-        if(bullet.angle == 180)
-            return 1;
-        if(bullet.angle == 0)
-            return -1;
-        return 0;
+    public Bullet getBullet(){
+        return bullet;
     }
 
 }

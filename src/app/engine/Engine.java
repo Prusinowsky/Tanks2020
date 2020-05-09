@@ -113,9 +113,11 @@ public class Engine implements EngineInterface {
      * Obsluga gry
      */
     private void handle(){
+        physics.getPlayerPhysics().handle();
         physics.getEnemiesPhysics().handle();
         physics.getObstaclesPhysics().handle();
         physics.getBulletsPhysics().handle();
+        physics.getPortalPhysics().handle();
     }
 
     /**
@@ -161,17 +163,6 @@ public class Engine implements EngineInterface {
     }
 
     /**
-     * Usuwanie z mapy poziomu 3ciego odpowiadajacego za ładowanie pozycji graczy
-     */
-    private void purgeMap(){
-        if(map.layers[2] == null) return;
-        map.layers[2] = null;
-        map.numberOfLayers -= 1;
-    }
-
-
-
-    /**
      * Ladowanie kolejnego poziomu gry
      */
     public void nextLevel(){
@@ -184,6 +175,7 @@ public class Engine implements EngineInterface {
      * Przeładowanie mapy
      */
     public void reloadMap(){
+        mapLoader.load();
         map = mapLoader.getMap(Container.getInstance().provideOptions().mapName);
 
         clearEngine();
@@ -195,17 +187,47 @@ public class Engine implements EngineInterface {
 
         getPhysics().getObstaclesPhysics().reinit();
 
-        //getPhysics().getBulletsPhysics().reinit();
+        getPhysics().getPortalPhysics().reinit();
 
-        //getPhysics().getPortalPhysics().reinit();
+        clearEngine();
 
         purgeMap();
+    }
 
+    public void reloadByDeath(){
+        lifes -= 1;
+        getRender().update();
+        reloadMap();
+    }
+
+    /**
+     * Usuwanie z mapy poziomu 3ciego odpowiadajacego za ładowanie pozycji graczy
+     */
+    private void purgeMap(){
+        if(map.layers[2] == null) return;
+        map.layers[2] = null;
+        map.numberOfLayers -= 1;
     }
 
     public void clearEngine(){
-        this.enemies.clear();
         this.bullets.clear();
+        this.enemies.clear();
+    }
+
+    public MapEntity getMap(){
+        return getPhysics().getObstaclesPhysics().getMap();
+    }
+
+    public Player getPlayer(){
+        return getPhysics().getPlayerPhysics().getPlayer();
+    }
+
+    public Enemy[] getEnemies(){
+        return getPhysics().getEnemiesPhysics().getEnemies();
+    }
+
+    public Bullet[] getBullets(){
+        return getPhysics().getBulletsPhysics().getBullets();
     }
 
     /**
