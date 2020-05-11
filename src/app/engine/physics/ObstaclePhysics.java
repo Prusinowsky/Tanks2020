@@ -18,7 +18,10 @@ public class ObstaclePhysics {
         for(Integer i = 0; i < bulletsPhysics.length; i++)
             if(bulletsPhysics[i].getBullet().isOnTheSameCoordinate(object)){
                 engine.getPhysics().getBulletsPhysics().remove(bulletsPhysics[i]);
-                if(object.isDestructible()) engine.getPhysics().getObstaclesPhysics().remove(this);
+                if(object.isDestructible()){
+                    engine.getPhysics().getObstaclesPhysics().remove(this);
+                    engine.score -= 10;
+                }
                 return;
             }
     }

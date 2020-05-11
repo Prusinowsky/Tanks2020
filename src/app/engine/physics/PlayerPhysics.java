@@ -78,6 +78,7 @@ public class PlayerPhysics {
             if(bulletsPhysics[i].getBullet().isOnTheSameCoordinate(engine.getPlayer()) && bulletsPhysics[i].getBullet().team != engine.getPlayer().getClass()){
                 engine.getPhysics().getBulletsPhysics().remove(bulletsPhysics[i]);
                 engine.reloadByDeath();
+                engine.score += 50;
                 return;
             }
     }

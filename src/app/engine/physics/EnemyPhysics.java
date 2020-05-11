@@ -144,6 +144,7 @@ public class EnemyPhysics {
                 enemy.alive = false;
                 engine.getPhysics().getBulletsPhysics().remove(bulletsPhysics[i]);
                 engine.getPhysics().getEnemiesPhysics().remove(this);
+                engine.score += 50;
                 return;
             }
     }

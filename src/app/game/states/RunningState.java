@@ -1,5 +1,6 @@
 package app.game.states;
 
+import app.display.windows.EndGameWindow;
 import app.engine.interfaces.EngineInterface;
 import app.game.manager.GameStateManagerInterface;
 import app.display.windows.GameWindow;
@@ -15,6 +16,7 @@ public class RunningState implements StateInterface {
     private EngineInterface engine;
 
     private GameWindow game;
+    private EndGameWindow endGame;
     private GameRunningView runningView;
 
 

@@ -33,6 +33,7 @@ public class PortalPhysics {
     public void handle(){
         if(engine.getPlayer().isOnTheSameCoordinate(portal)){
             engine.nextLevel();
+            engine.score += engine.lifes*100;
         }
     }
 

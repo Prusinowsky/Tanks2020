@@ -27,7 +27,7 @@ public class Engine implements EngineInterface {
 
     public Timer timer;
 
-    public Integer score = 100;
+    public Integer score = 0;
     public Integer lifes = 3;
     public String playerName = "";
 
@@ -213,6 +213,7 @@ public class Engine implements EngineInterface {
         this.bullets.clear();
         this.enemies.clear();
     }
+
 
     public MapEntity getMap(){
         return getPhysics().getObstaclesPhysics().getMap();
