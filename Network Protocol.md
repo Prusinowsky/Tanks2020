@@ -11,10 +11,10 @@ Protokół jest typu tekstowego. Dane są przesyłane w jednej linii, a znak now
 
 ### **Działanie protokołu**
 Za każdym razem gdy klient chce wysłać żądanie do serwera następuje ustanowienie połączenia. Po otrzymaniu odpowiedzi na żądanie połączenie zostaje przerwane.
-* Klient prosi serwer o wysłanie wymiarów okna i ilości poziomów
+* Klient prosi serwer o wysłanie map
 C: getConfig => S
-* Serwer odpowiada wysyłając klientowi wymiary okna i ilość poziomów (wszystkie dane typu int)
-S: giveConfig WindowSizeX WIndowSizeY levels => C
+* Serwer odpowiada wysyłając klientowi mapy
+S: giveConfig maps => C
 * Klient wysyła serwerowi wynik uzyskany przez gracza (int) wraz z jego Nickiem (string)
 C: saveScore score nick => S
 * Serwer odpowiada czy wynik został zapisany na liście (boolean) i na jakiej pozycji (int) (jeśli nie został zapisany domyślnie zwróci 0)
@@ -24,6 +24,6 @@ C: getRanking place=> S
 * Serwer odpowiada klientowi wysyłając wynik (int) i nick gracza (string) na danej pozycji w rankingu.
 S: giveScore score nick => C
 * Klient prosi serwer o definicje wyglądu mapy o zadanym numerze
-C: getLevelConfig levelIndex => S
+C: getLevelConfig mapIndex => S
 * Serwer odpowiada wysyłając cztery linie tekstu(ciągi liczb odseparowane myślnikami na podstawie których program rysuje komponenty graficzne)
-S: giveLevelConfig xpoints ypoints type block => C
+S: giveMapConfig xpoints ypoints type block => C
