@@ -34,7 +34,6 @@ public class BulletsPhysics {
         Bullet bullet = new Bullet();
         bullet.angle = tank.angle;
         bullet.team = tank.getClass();
-        System.out.println();
         bullet.positionX = tank.positionX + tank.getDirectionX()*32;
         bullet.positionY = tank.positionY + tank.getDirectionY()*32;
         engine.bullets.add(bullet);

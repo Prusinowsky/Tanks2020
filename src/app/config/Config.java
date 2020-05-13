@@ -39,8 +39,6 @@ public class Config implements ConfigInterface {
     public void load() {
         try {
             props = new Properties();
-            System.out.println("Test");
-            System.out.println(getClass().getResource("/"));
             props.loadFromXML(getClass().getResourceAsStream("/config/app.xml"));
             props.loadFromXML(getClass().getResourceAsStream("/config/game.xml"));
             props.loadFromXML(getClass().getResourceAsStream("/config/lang.xml"));

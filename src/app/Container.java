@@ -28,7 +28,6 @@ public class Container {
     }
 
     public ConfigInterface provideConfig(){
-
         if(config == null){
             config = new Config();
             config.load();

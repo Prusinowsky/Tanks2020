@@ -2,38 +2,21 @@
 
 
 
-### Instrukcja 
+### Instrukcja
 
-1. ##### Generowanie dokumentacji 
+Wszystkie gotowe skrypty znajdują się w folderze `scripts`
 
-   Dokumentacja programuj znajduje się w folderze `docs`
+1. Generowanie dokumentacji - aby wygenerować dokumentację należy uruchomić plik `GenerateDocumentation.bat`
 
+2. Kompilowanie gry - aby wykompilować i uruchomić grę należy uruchomić plik `CompileRun.bat`
 
-```shell
-javadoc -sourcepath ./src -d ./docs -classpath ./src -subpackages . ./src/Bootstrap.java
-```
+3. Uruchamianie - gdy nasza gra została uprzednio wykompilowana możemy
 
+   1. Uruchomić ją za pomocą `Run.bat` w folderze `scripts`
 
+   2. Uruchomić ją za pomocą `Tanks2020.jar` znajdującego się w folderze `dist/`, ten plik jest plikiem samodzielnym i możliwy jest do udostępnienia innym osobom
 
-2. ##### Kompilowanie kodu źródłowego
-
-   Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`
-
-```shell
-javac -source 8 -sourcepath ./src -cp ./src/app -d ./dist ./src/Bootstrap.java
-```
-
-
-
-3. ##### Uruchamianie programu
-
-   Uruchamianie gry.
-
-```shell
-java -cp ./dist Bootstrap
-```
-
-
+      
 
 ### **Diagram klas**
 
@@ -56,15 +39,35 @@ Wraz z końcem gry wyskakuje okienko (6), na którym jest pokazany wynik gracza.
 
 Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od którego poziomu chcemy zacząć i Najlepsze wyniki, które ukazuje listę nicków i ich wyniki. Na liście będzie znajdować się tylko 5 lub 10 najlepszych wyników, które będą pobierane i zapisywane do pliku tekstowego. Opcja Koniec zamyka program. 
 
-
-
 ![](./mockup.png)
 
+### ~~Instrukcja~~
+
+1. ##### ~~Generowanie dokumentacji~~ 
+
+   ~~Dokumentacja programu znajduje się w folderze `docs`~~
+
+
+```shell
+javadoc -sourcepath ./src -d ./docs -classpath ./src -subpackages . ./src/Bootstrap.java
+```
 
 
 
+2. ##### ~~Kompilowanie kodu źródłowego~~
+
+   ~~Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`~~
+
+```shell
+javac -source 8 -sourcepath ./src -cp ./src/app -d ./dist ./src/Bootstrap.java
+```
 
 
 
+3. ##### ~~Uruchamianie programu~~
 
+   ~~Uruchamianie gry.~~
 
+```shell
+java -cp ./dist Bootstrap
+```

@@ -12,7 +12,6 @@ import app.entities.map.tanks.Enemy;
 import app.entities.map.tanks.Player;
 import app.entities.map.tiles.GroundTile;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 

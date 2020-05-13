@@ -29,7 +29,6 @@ public class RunningState implements StateInterface {
     @Override
     public void start() {
         runningView = new GameRunningView();
-
         runningView.addHudPauseActionListener(e -> {
             runningView.getGameHudComponent().hidePause();
             runningView.getGameHudComponent().showResume();

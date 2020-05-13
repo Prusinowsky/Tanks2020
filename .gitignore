@@ -4,6 +4,7 @@
 .idea/**
 
 # Java
+docs/**
 dist/**
 out/**
 **.iml

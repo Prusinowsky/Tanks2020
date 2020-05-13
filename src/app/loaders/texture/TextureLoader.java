@@ -55,7 +55,6 @@ public class TextureLoader implements TextureLoaderInterface {
     public void loadTexture(String name, String path) {
 
         try {
-            System.out.println(path);
             Image image = ImageIO.read(getClass().getResourceAsStream(path));
             collection.put(name, new TextureEntity(name, path, image));
         } catch (IOException e){
