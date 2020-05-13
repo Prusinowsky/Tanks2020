@@ -6,5 +6,5 @@
     <entry key="version">1.0.0</entry>
 
     <entry key="maps_path">assets/maps/</entry>
-    <entry key="textures_path">assets/textures/</entry>
+    <entry key="textures_path">assets/</entry>
 </properties>

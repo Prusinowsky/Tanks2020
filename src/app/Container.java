@@ -8,6 +8,8 @@ import app.loaders.map.MapLoaderInterface;
 import app.loaders.texture.TextureLoader;
 import app.loaders.texture.TextureLoaderInterface;
 
+import java.net.URL;
+
 public class Container {
 
     private static Container instance;
@@ -26,6 +28,7 @@ public class Container {
     }
 
     public ConfigInterface provideConfig(){
+
         if(config == null){
             config = new Config();
             config.load();

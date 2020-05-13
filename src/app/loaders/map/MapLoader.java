@@ -54,7 +54,7 @@ public class MapLoader implements MapLoaderInterface {
         String pathToMap = config.getProperty("maps_path");
         for(Integer i = 0; i < number; i++){
             String name = config.getProperty("map_name_" + i);
-            String path = pathToMap + config.getProperty("map_path_" + i);
+            String path = "/" + pathToMap + config.getProperty("map_path_" + i);
             MapEntity map = convertToMapEntity(i, name, path);
             map.code = i;
             maps.put(name, map);
@@ -73,8 +73,7 @@ public class MapLoader implements MapLoaderInterface {
             MapEntity map = new MapEntity();
             map.name = mapName;
 
-            File file = new File(path);
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(getClass().getResourceAsStream(path));
 
             map.numberOfLayers = Integer.parseInt(scanner.nextLine());
             map.width = Integer.parseInt(scanner.nextLine());

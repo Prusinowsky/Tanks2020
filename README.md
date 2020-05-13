@@ -20,7 +20,7 @@ javadoc -sourcepath ./src -d ./docs -classpath ./src -subpackages . ./src/Bootst
    Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`
 
 ```shell
-javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Bootstrap.java
+javac -source 8 -sourcepath ./src -cp ./src/app -d ./dist ./src/Bootstrap.java
 ```
 
 
@@ -30,7 +30,7 @@ javac -source 8 -sourcepath ./src -cp ./src/app -d ./out ./src/Bootstrap.java
    Uruchamianie gry.
 
 ```shell
-java -cp ./out Bootstrap
+java -cp ./dist Bootstrap
 ```
 
 

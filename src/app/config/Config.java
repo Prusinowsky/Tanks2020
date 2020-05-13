@@ -38,18 +38,18 @@ public class Config implements ConfigInterface {
      */
     public void load() {
         try {
-            FileInputStream reader;
             props = new Properties();
-            reader = new FileInputStream("config/app.xml");
-            props.loadFromXML(reader);
-            reader = new FileInputStream("config/game.xml");
-            props.loadFromXML(reader);
-            reader = new FileInputStream("config/lang.xml");
-            props.loadFromXML(reader);
-            reader.close();
+            System.out.println("Test");
+            System.out.println(getClass().getResource("/"));
+            props.loadFromXML(getClass().getResourceAsStream("/config/app.xml"));
+            props.loadFromXML(getClass().getResourceAsStream("/config/game.xml"));
+            props.loadFromXML(getClass().getResourceAsStream("/config/lang.xml"));
+
         } catch (FileNotFoundException e) {
+            System.out.println(e);
             // Do sth please
         } catch (IOException e){
+            System.out.println(e);
             // Do sth please
         }
     }

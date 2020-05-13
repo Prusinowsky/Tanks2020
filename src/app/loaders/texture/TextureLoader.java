@@ -41,7 +41,7 @@ public class TextureLoader implements TextureLoaderInterface {
         String texturePath = config.getProperty("textures_path");
         for(Integer i = 0; i < number; i++){
             String name = config.getProperty("texture_name_"+i);
-            String path = texturePath + config.getProperty("texture_path_"+i);
+            String path = "/" + texturePath + config.getProperty("texture_path_"+i);
             loadTexture(name, path);
         }
     }
@@ -55,8 +55,8 @@ public class TextureLoader implements TextureLoaderInterface {
     public void loadTexture(String name, String path) {
 
         try {
-            File pathToFile = new File(path);
-            Image image = ImageIO.read(pathToFile);
+            System.out.println(path);
+            Image image = ImageIO.read(getClass().getResourceAsStream(path));
             collection.put(name, new TextureEntity(name, path, image));
         } catch (IOException e){
             System.out.println("Error - " + e.getMessage());

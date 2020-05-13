@@ -6,7 +6,10 @@ app.display.components
 app.display.views
 app.display.windows
 app.engine
+app.engine.animations
 app.engine.interfaces
+app.engine.physics
+app.engine.utils
 app.entities
 app.entities.map
 app.entities.map.objects
