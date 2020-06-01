@@ -1,4 +1,4 @@
-# **PROZE Tanki 202 - Protokół Sieciowy**
+# **PROZE Tanki 2020 - Protokół Sieciowy**
 
 ### **Działanie serwera**
 Serwer jest niezależną aplikacją. Po uruchomieniu serwer wyświetla adres IP przez który można się połączyć oraz numer portu na którym działa. Poza tym serwer odczytuje pliki konfiguracyjne i na żądanie klienta wysyła dane z tych plików. Również na żądanie klienta serwer zapisuje wynik końcowy, który otrzymał od tego klienta wraz z aktualizowaną listą wyników. Serwer może obsługiwać wiele klientów naraz lecz na obsługę każdego klienta przypada jeden wątek.
