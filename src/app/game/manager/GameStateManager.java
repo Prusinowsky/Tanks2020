@@ -1,6 +1,7 @@
 package app.game.manager;
 
 import app.Container;
+import app.display.windows.Ranking.ScoreWindow;
 import app.engine.interfaces.EngineInterface;
 import app.display.windows.*;
 import app.game.states.RunningState;

@@ -1,0 +1,11 @@
+#Sat May 30 11:16:04 CEST 2020
+nick5=Magda
+score5=838
+nick4=Twoje imi\u0119
+score4=994
+nick3=Piotr
+score3=998
+score2=1032
+nick2=Aga
+score1=1268
+nick1=Mikolaj
