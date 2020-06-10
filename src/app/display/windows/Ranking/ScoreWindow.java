@@ -17,7 +17,7 @@ public class ScoreWindow extends AbstractWindow
     private ConfigInterface config;
     private GridBagConstraints gbc = new GridBagConstraints();
 
-    private JLabel[] lList;
+    private JLabel[] lList = new JLabel[5];
     private JLabel lTitle;
     private JButton bOk;
 
@@ -51,16 +51,16 @@ public class ScoreWindow extends AbstractWindow
      * Metoda dodająca opis gry
      */
     private void addScoreList(){
-        //Ranking.loadRanking();
+        Ranking.loadRanking();
         lTitle = new JLabel("Ranking");
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         add(lTitle, gbc);
-        /*for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 5; i++){
             lList[i] = new JLabel(((i+1) +". " + Ranking.getScore(i)));
             this.add(lList[i]);
-        }*/
+        }
     }
 
     /**

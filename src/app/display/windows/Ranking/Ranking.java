@@ -15,35 +15,50 @@ public class Ranking {
         return ranking.get(index).split("-")[0] + ": " + ranking.get(index).split("-")[1];
     }
 
-    static void SaveInFile() throws IOException {
-        InputStream propertiesFile = new FileInputStream("/config/Ranking.txt");
-        Properties properties = new Properties();
-        properties.load(propertiesFile);
-        for(int i=0;i<5;i++) {
-            properties.setProperty("nick" + (i+1), ranking.get(i).split("-")[0]);
-            properties.setProperty("score" + (i+1), ranking.get(i).split("-")[1]);
+    static void SaveInFile() {
+        try {
+            InputStream propertiesFile = new FileInputStream("config/Ranking.txt");
+            Properties properties = new Properties();
+            properties.load(propertiesFile);
+            for (int i = 0; i < 5; i++) {
+                properties.setProperty("nick" + (i + 1), ranking.get(i).split("-")[0]);
+                properties.setProperty("score" + (i + 1), ranking.get(i).split("-")[1]);
+            }
+            properties.store(new FileOutputStream("config/Ranking.txt"), null);
+            propertiesFile.close();
         }
-        properties.store(new FileOutputStream("/config/Ranking.txt"), null);
-        propertiesFile.close();
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public static void loadRanking() throws IOException {
-        InputStream propertiesFile = new FileInputStream("/config/Ranking.txt");
-        Properties properties = new Properties();
-        properties.load(propertiesFile);
-        ranking = new ArrayList<>();
-        for(int i = 1 ; i <= 5 ; i++){
-            ranking.add(properties.getProperty("nick"+i)+"-"+properties.getProperty("score"+i));
+    public static void loadRanking() {
+        try {
+            InputStream propertiesFile = new FileInputStream("config/Ranking.txt");
+            Properties properties = new Properties();
+            properties.load(propertiesFile);
+            ranking = new ArrayList<>();
+            for (int i = 1; i <= 5; i++) {
+                ranking.add(properties.getProperty("nick" + i) + "-" + properties.getProperty("score" + i));
+            }
+            propertiesFile.close();
+            ranking.sort(new MyComparator());
         }
-        propertiesFile.close();
-        ranking.sort(new MyComparator());
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    static void SaveScore(int score, String nick) throws IOException {
-        ranking.add(nick + "-" + score);
-        ranking.sort(new MyComparator());
-        ranking.remove(ranking.size()-1);
-        SaveInFile();
+    static void SaveScore(int score, String nick) {
+        try {
+            ranking.add(nick + "-" + score);
+            ranking.sort(new MyComparator());
+            ranking.remove(ranking.size() - 1);
+            SaveInFile();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     static class MyComparator implements Comparator<String> {
