@@ -1,2 +1,2 @@
-Main-Class: Bootstrap
+Main-Class: Main
 

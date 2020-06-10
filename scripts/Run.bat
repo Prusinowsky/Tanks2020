@@ -1,2 +1,2 @@
 cd ..
-java -cp ./dist Bootstrap
+java -cp ./dist Main

@@ -1,73 +1,113 @@
-# Gra Tanki (Dyna Blaster)
+# **PROZE Tanki 2020 - Protokół Sieciowy**
 
+### **Działanie serwera**
 
+Serwer jest niezależną aplikacją. Po uruchomieniu serwer wyświetla adres IP przez który można się połączyć oraz numer portu na którym działa. Poza tym serwer odczytuje pliki konfiguracyjne i na żądanie klienta wysyła dane z tych plików. Również na żądanie klienta serwer zapisuje wynik końcowy, który otrzymał od tego klienta wraz z aktualizowaną listą wyników. Serwer może obsługiwać wiele klientów naraz lecz na obsługę każdego klienta przypada jeden wątek.
 
-### Instrukcja
+### **Działanie klienta**
 
-Wszystkie gotowe skrypty znajdują się w folderze `scripts`
+Użytkownik uruchamiając klient ma do wyboru 2 opcje: działanie aplikacji z lokalnych plików bądź logowanie się przez podanie adresu hosta i numeru portu. Następnie klient wysyła żądanie do serwera aby otrzymać dane z plików konfiguracyjnych. Wraz z końcem gry klient wysyła żądanie serwerowi by zaktualizował listę wyników.
 
-1. Generowanie dokumentacji - aby wygenerować dokumentację należy uruchomić plik `GenerateDocumentation.bat`
+### **Podstawowe informacje o protokole**
 
-2. Kompilowanie gry - aby wykompilować i uruchomić grę należy uruchomić plik `CompileRun.bat`
+Protokół jest typu tekstowego. Dane są przesyłane w jednej linii, a znak nowe linii `\n` informuje o końcu przesyłanych danych. 
 
-3. Uruchamianie - gdy nasza gra została uprzednio wykompilowana możemy
+### **Działanie protokołu**
 
-   1. Uruchomić ją za pomocą `Run.bat` w folderze `scripts`
+Za każdym razem gdy klient chce wysłać żądanie do serwera następuje ustanowienie połączenia. Po otrzymaniu odpowiedzi na żądanie połączenie zostaje przerwane.
 
-   2. Uruchomić ją za pomocą `Tanks2020.jar` znajdującego się w folderze `dist/`, ten plik jest plikiem samodzielnym i możliwy jest do udostępnienia innym osobom
+* Klient prosi serwer o wysłanie map
 
-      
+  ```
+  C: getAmountOfMaps => S
+  ```
 
-### **Diagram klas**
+  
 
-Diagram klas programu. W kolejnym etapie pozmieniamy nazwy obiektów na bardziej odzwierciedlające zachowanie. Na ten moment podsyłam tylko takie coś. Staraliśmy się bardzo mocno, aby stworzyć taką architekturę gry, aby można było wykorzystać ją przy innych projektach, wymieniając jej tylko moduły. Przykładowo wymienić moduł `window` korzystający obecnie z AWT i Swinga na JavaFX, albo zmieniając `engine` stworzyć nową grę.
+* Serwer odpowiada wysyłając klientowi mapy
 
+  ```
+  S: giveAmountofMaps value(int) => C
+  ```
 
+  
 
-![](./diagram.png)
+* Klient wysyła serwerowi wynik uzyskany przez gracza (int) wraz z jego Nickiem (string)
 
+  ```
+  C: saveScore nick score => S
+  ```
 
+  
 
-### Opis gry
+* Serwer odpowiada czy wynik został zapisany na liście (boolean) i na jakiej pozycji (int) (jeśli nie został zapisany domyślnie zwróci 0)
 
-W oknie otwierającym aplikacji jest pasek menu (1). Opcje do wyboru to Gra (2), która jest rozsuwanym menu i Pomoc (7), która jest wyskakującym okienkiem z instrukcją jak grać. W menu Gra są do wyboru opcje: Start, Wybierz mapę (4) , Najlepsze wyniki (3) i Koniec. Start powoduje pojawienie się okienka Nick (5), które wymaga od gracza wpisania swojego nicku. Gdy nie będziemy chcieli wpisać nicku, gra wróci nas do ekranu startowego. Następnie otworzy się nowe okno z grą (8).
+  ```
+  S: score ifSaved id => C
+  ```
 
-W samej grze poruszamy się czołgiem po mapie-labiryncie, a głównym celem jest zniszczenie innych czołgów i znalezienie bazy przeciwnika. Część bloków labiryntu jest niezniszczalna, a część jest podatna na pociski czołgu. Niszcząc inne czołgi ułatwiamy wejście do bazy przeciwnika, a wejście skutkuje zmianą poziomu na następny. Gracz ma 3 życia domyślnie ustawione w pliku konfiguracyjnym. Czas przejścia poziomu jest ustawiony domyślnie w pliku konfiguracyjnym na 90 sekund. Punkty w grze będzie określał wzór zawierający czas przejścia mapy, ilość zniszczonych czołgów, ilość zniszczonych bloków i pozostałe życia. W razie przejścia wszystkich poziomów, gra zacznie się od nowa, ale punkty wciąż będą się dodawały do licznika. 
+  
 
-Wzór jest określony jako „50*k – 10*b + t*l”. ‘t’ jest czasem, który pozostał do końca mapy, ‘k’ oznacza ilość zniszczonych czołgów, ‘b’ to ilość zniszczonych bloków, a ‘l’ to liczba żyć.
-Wraz z końcem gry wyskakuje okienko (6), na którym jest pokazany wynik gracza. Opcja OK bądź zamknięcie powoduje przejście do ekranu startowego.
+* Klient prosi serwer o wysłanie wyniku na danej pozycji w rankingu
 
-Pozostałe opcje z menu Gra to Wybierz mapę, które daje nam opcję, od którego poziomu chcemy zacząć i Najlepsze wyniki, które ukazuje listę nicków i ich wyniki. Na liście będzie znajdować się tylko 5 lub 10 najlepszych wyników, które będą pobierane i zapisywane do pliku tekstowego. Opcja Koniec zamyka program. 
+  ```
+  C: getRanking id => S
+  ```
+  
+* Klient prosi serwer o wysłanie o ilości zapisanych rankingów
 
-![](./mockup.png)
+  ```
+  C: getRankingSize => S
+  ```
 
-### ~~Instrukcja~~
+  
 
-1. ##### ~~Generowanie dokumentacji~~ 
+* Serwer odpowiada klientowi wysyłając wynik (int) i nick gracza (string) na danej pozycji w rankingu.
 
-   ~~Dokumentacja programu znajduje się w folderze `docs`~~
+  ```
+  S: giveScore nick score => C
+  ```
 
+  
 
-```shell
-javadoc -sourcepath ./src -d ./docs -classpath ./src -subpackages . ./src/Bootstrap.java
-```
+* Klient prosi serwer o definicje wyglądu mapy o zadanym numerze
 
+  ```
+  C: getMapByIndex mapIndex => S
+  ```
 
+  
 
-2. ##### ~~Kompilowanie kodu źródłowego~~
+* Serwer odpowiada wysyłając cztery linie tekstu(ciągi liczb odseparowane myślnikami na podstawie których program rysuje komponenty graficzne)
 
-   ~~Pliki wykompilowanego kodu źródłowego znajdują się w folderze `out`~~
+  ```
+  S: giveMap => C
+  amountOfLayers
+  sizeX
+  sizeY
+  
+  ...
+  
+  0000042000000000
+  0040000400420040
+  0440444400422400
+  0002200004424000
+  0440444440000000
+  0042400004404440
+  0042404400404000
+  0440404000000400
+  0000042204040442
+  0004045244040402
+  4444044400042400
+  0204000044442400
+  0024444000002200
+  0040040044440440
+  0400040040400400
+  0000000000400000
+  
+  ...
+  ```
 
-```shell
-javac -source 8 -sourcepath ./src -cp ./src/app -d ./dist ./src/Bootstrap.java
-```
+  
 
-
-
-3. ##### ~~Uruchamianie programu~~
-
-   ~~Uruchamianie gry.~~
-
-```shell
-java -cp ./dist Bootstrap
-```
+  
