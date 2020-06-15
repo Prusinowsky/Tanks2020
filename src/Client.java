@@ -1,4 +1,3 @@
-package com.company;
 import java.io.*;
 import java.net.Socket;
 
@@ -10,12 +9,9 @@ public class Client {
     static Socket socket;
     /** informuje czy serwer jest osiagalny, true - nieaktwyny, false - aktywny */
     static boolean isOffline = true;
-    /**
-     * Wysyla do serwera zadanie o wyslanie danych konfiguracyjnych, w tym celu wywoluje metode connect z odpowiednim zapytaniem
-     * @return linia tekstu bedaca odpowiedzia od serwera
-     */
-    static String getConfig() throws IOException {
-        String respond = connect("getConfig");
+
+    static String getAmountOfMaps() throws IOException {
+        String respond = connect("getAmountOfMaps");
         socket.close();
         return respond;
     }
@@ -28,13 +24,19 @@ public class Client {
         socket.close();
         return respond;
     }
+
+    static String getRankingSize() throws IOException {
+        String respond = connect("getRankingSize");
+        socket.close();
+        return respond;
+    }
     /**
      * Wysyla do serwera zadanie o wyslanie danych konfiguracyjnych poziomu o zadanym indeksie, w tym celu wywoluje metode connect z odpowiednim zapytaniem
-     * @param index numer poziomu ktory chcemmy uzyskac
+     * @param mapIndex numer poziomu ktory chcemmy uzyskac
      * @return linia tekstu będąca odpowiedzia od serwera
      */
-    static String getLevel(int index) throws IOException {
-        String respond = connect("getLevel" + "-" + index);
+    static String getMapByIndex(int mapIndex) throws IOException {
+        String respond = connect("getMapByIndex" + "-" + mapIndex);
         socket.close();
         return respond;
     }
@@ -75,10 +77,10 @@ public class Client {
     }
     /**
      * Zapisuje wyniku na serwerze, w tym celu wywoluje metode connect z odpowiednim zapytaniem
-     * @param request nick gracza wraz z wynikiem odzielone znakiem "-"
+     * @param nick nick gracza wraz z wynikiem odzielone znakiem "-"
      */
-    public static void saveScore(String request) throws IOException {
-        connect("saveScore" + "-" + request);
+    public static void saveScore(String nick, int score) throws IOException {
+        connect("saveScore" + "-" + nick + "-" + score);
         socket.close();
     }
 }

@@ -1,4 +1,3 @@
-package com.company;
 import java.io.IOException;
 /**
  * Klasa odpwiedziana za wybor odpowiedzi serwera na zadanie klienta
@@ -11,16 +10,22 @@ public class ServerCommands {
      */
     public static String serverAction(String command) throws IOException {
         String serverMessage;
-        String[] commands = command.split("-");
+        String[] commands = command.split(" ");
         switch (commands[0]) {
-            case "getConfig":
-                serverMessage = PropertiesLoader.loadConfig();
+            case "getAmountOfMaps":
+                serverMessage = PropertiesLoader.giveAmountOfMap();
                 break;
-            case "getLevel":
-                serverMessage = PropertiesLoader.loadLevel(Integer.parseInt(commands[1]));
+            case "getMapByIndex":
+                serverMessage = PropertiesLoader.giveMap(Integer.parseInt(commands[1]));
                 break;
+            /*case "getMaps":
+                //serverMessage = PropertiesLoader.giveMap(Integer.parseInt(commands[1]));
+                break;*/
             case "getRanking":
                 serverMessage = Ranking.getRanking();
+                break;
+            case "getRankingSize":
+                serverMessage = Ranking.giveRankingSize();
                 break;
             case "saveScore":
                 Ranking.saveScore(commands[1],commands[2]);

@@ -1,4 +1,3 @@
-package com.company;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,7 +12,7 @@ public class Ranking {
      * Wczytuje ranking z pliku konfiguracyjnego i zapisuje go do listy. Na samym koncu lista jest sortowana
      */
     public static void loadRanking() throws IOException {
-        InputStream propertiesFile = new FileInputStream("Ranking.txt");
+        InputStream propertiesFile = new FileInputStream("config/Ranking.txt");
         Properties properties = new Properties();
         properties.load(propertiesFile);
         ranking = new ArrayList<>();
@@ -29,15 +28,24 @@ public class Ranking {
      * @return linia tekstu skladajaca się z nazw graczy i ich wynikow
      */
     static String getRanking() throws IOException {
-        InputStream propertiesFile = new FileInputStream("Ranking.txt");
+        InputStream propertiesFile = new FileInputStream("config/Ranking.txt");
         Properties properties = new Properties();
         properties.load(propertiesFile);
         String response = "";
-        for(int i = 0 ; i < 5 ; i++)
+        Integer rankingSize = Integer.parseInt(giveRankingSize());
+        for(int i = 0 ; i < rankingSize ; i++)
         {
             if(i<4) response+= ranking.get(i) + ", ";
             if(i==4) response+= ranking.get(i);
         }
+        return response;
+    }
+
+    static String giveRankingSize() throws IOException {
+        InputStream propertiesFile = new FileInputStream("config/network.xml");
+        Properties properties = new Properties();
+        properties.loadFromXML(propertiesFile);
+        String response  = String.valueOf(properties.getProperty("rankingSize"));
         return response;
     }
     /**
@@ -66,7 +74,7 @@ public class Ranking {
      * Zapisuje liste najlepszych wynikow do pliku.
      */
     static void SaveInFile() throws IOException {
-        InputStream propertiesFile = new FileInputStream("Ranking.txt");
+        InputStream propertiesFile = new FileInputStream("config/Ranking.txt");
         Properties properties = new Properties();
         properties.load(propertiesFile);
         for(int i=0;i<5;i++) {
