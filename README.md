@@ -108,6 +108,15 @@ Za każdym razem gdy klient chce wysłać żądanie do serwera następuje ustano
   ...
   ```
 
+* Serwer zwraca szczegóły wielu map
+
+  ```
+  C: getMapDetails => S
+  0 Dolina
+  1 Pustynia
+  2 Wulkan
+  ```
+
   
 
   

@@ -18,9 +18,9 @@ public class ServerCommands {
             case "getMapByIndex":
                 serverMessage = PropertiesLoader.giveMap(Integer.parseInt(commands[1]));
                 break;
-            /*case "getMaps":
-                //serverMessage = PropertiesLoader.giveMap(Integer.parseInt(commands[1]));
-                break;*/
+            case "getMaps":
+                serverMessage = PropertiesLoader.giveMapsDetails();
+                break;
             case "getRanking":
                 serverMessage = Ranking.getRanking();
                 break;

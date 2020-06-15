@@ -1,8 +1,5 @@
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.Scanner;
@@ -63,7 +60,18 @@ public class PropertiesLoader {
         return (Integer.toString(amountOfLayers) + "\n" + Integer.toString(sizeX) + "\n" + Integer.toString(sizeY) + "\n" + layers);
     }
 
-    /*static String giveMapsDetails(){
-
-    }*/
+    static String giveMapsDetails() throws IOException {
+        InputStream propertiesFile = new FileInputStream("config/game.xml");
+        Properties properties = new Properties();
+        properties.loadFromXML(propertiesFile);
+        Integer numberOfMaps = Integer.parseInt(properties.getProperty("map_numbers"));
+        String mapsDetails = "";
+        for(Integer i=0; i<numberOfMaps; i++){
+            mapsDetails += String.valueOf(i);
+            mapsDetails += " ";
+            mapsDetails += properties.getProperty("map_name_" + i);
+            mapsDetails += "\n";
+        }
+        return mapsDetails;
+    }
 }
