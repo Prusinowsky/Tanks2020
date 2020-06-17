@@ -1,11 +1,11 @@
-#Mon Jun 15 23:46:19 CEST 2020
-nick5=Piotr
-score5=998
-score4=1032
-nick4=Aga
-score3=1268
-nick3=Mikolaj
-score2=2137
-nick2=misioneos
-score1=42069
-nick1=prusinowsky
+#Wed Jun 17 22:24:43 CEST 2020
+nick5=anon
+score5=0
+score4=0
+nick4=anon
+score3=0
+nick3=anon
+score2=0
+nick2=anon
+nick1=anon
+score1=0

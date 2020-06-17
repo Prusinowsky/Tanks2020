@@ -41,9 +41,7 @@ public class PropertiesLoader {
         InputStream propertiesFile = new FileInputStream("config/game.xml");
         Properties properties = new Properties();
         properties.loadFromXML(propertiesFile);
-        for(Integer i=0; i<mapIndex; i++){
-            map = properties.getProperty("map_path_" + mapIndex);
-        }
+        map = properties.getProperty("map_path_" + mapIndex);
         Scanner scanner = new Scanner(new File("assets/maps/" + map));
         Integer amountOfLayers = Integer.parseInt(scanner.nextLine());
         Integer sizeX = Integer.parseInt(scanner.nextLine());
@@ -74,4 +72,5 @@ public class PropertiesLoader {
         }
         return mapsDetails;
     }
+
 }

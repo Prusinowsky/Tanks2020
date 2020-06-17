@@ -15,7 +15,7 @@ public class ServerCommands {
             case "getAmountOfMaps":
                 serverMessage = PropertiesLoader.giveAmountOfMap();
                 break;
-            case "getMapByIndex":
+            case "getMap":
                 serverMessage = PropertiesLoader.giveMap(Integer.parseInt(commands[1]));
                 break;
             case "getMaps":
@@ -37,3 +37,5 @@ public class ServerCommands {
         return serverMessage;
     }
 }
+
+//18.222.169.174
