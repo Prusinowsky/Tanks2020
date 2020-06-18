@@ -4,7 +4,9 @@ import app.Container;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Klasa osbługująca sieć
@@ -40,7 +42,7 @@ public class Network {
         pw.println(command);
         InputStream is = socket.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        return br.lines().map(String::new).map((String s) -> s + '\n').collect(Collectors.joining());
+        return br.readLine().replace(',', '\n');
     }
 
     /**

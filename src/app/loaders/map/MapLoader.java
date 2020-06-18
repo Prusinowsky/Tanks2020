@@ -77,7 +77,6 @@ public class MapLoader implements MapLoaderInterface {
             if(Container.getInstance().provideOptions().isOnline)
                 try{
                    String mapString = Network.getInstance().getMap(mapCode);
-                   System.out.println(mapString);
                    scanner = new Scanner(mapString);
                 } catch (Exception e){
                     System.out.println("Nie udało się załadować z serwera");
