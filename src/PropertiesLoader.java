@@ -49,13 +49,13 @@ public class PropertiesLoader {
         String layers = "";
         for(Integer i=0; i<amountOfLayers; i++){
             scanner.nextLine();
-            layers += "\n";
+            layers += ",";
             for(Integer j=0; j<sizeY; j++){
                 layers += scanner.nextLine();
-                layers += "\n";
+                layers += ",";
             }
         }
-        return (Integer.toString(amountOfLayers) + "\n" + Integer.toString(sizeX) + "\n" + Integer.toString(sizeY) + "\n" + layers);
+        return (Integer.toString(amountOfLayers) + "," + Integer.toString(sizeX) + "," + Integer.toString(sizeY) + "," + layers);
     }
 
     static String giveMapsDetails() throws IOException {
@@ -68,7 +68,7 @@ public class PropertiesLoader {
             mapsDetails += String.valueOf(i);
             mapsDetails += " ";
             mapsDetails += properties.getProperty("map_name_" + i);
-            mapsDetails += "\n";
+            mapsDetails += ",";
         }
         return mapsDetails;
     }
