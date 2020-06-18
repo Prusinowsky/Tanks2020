@@ -2,6 +2,7 @@ package app.display.windows;
 import app.Container;
 import app.config.ConfigInterface;
 import app.display.abstracts.AbstractWindow;
+import app.network.Network;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,11 +51,21 @@ public class ScoreWindow extends AbstractWindow
      * Metoda dodająca opis gry
      */
     private void addScoreList(){
-        lList = new JLabel("Tu będzie kiedyś lista wyników");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        add(lList, gbc);
+        try {
+            TextArea textarea = new TextArea();
+            textarea.setText(Network.getInstance().getRanking().replace(", ", "\n"));
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 2;
+            add(textarea, gbc);
+        } catch (Exception e){
+            TextArea textarea = new TextArea();
+            textarea.setText("Błąd łączenia z serwerem - spróbuj pownownie jutro.");
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 2;
+            add(textarea, gbc);
+        }
     }
 
     /**

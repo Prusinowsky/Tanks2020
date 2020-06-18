@@ -7,7 +7,9 @@ import app.entities.map.tanks.Enemy;
 import app.entities.map.MapEntity;
 import app.entities.map.tanks.Player;
 import app.loaders.map.MapLoaderInterface;
+import app.network.Network;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
@@ -63,7 +65,7 @@ public class Engine implements EngineInterface {
     public void startGame() {
         this.startTime = new Date().getTime();
         mapLoader = app.Container.getInstance().provideMapLoader();
-        playerName = !Container.getInstance().provideOptions().nickname.isEmpty() ? Container.getInstance().provideOptions().nickname : "Player Tank";
+        playerName = !Container.getInstance().provideOptions().nickname.isEmpty() ? Container.getInstance().provideOptions().nickname : "Anonymous";
 
         reloadMap();
 
@@ -195,7 +197,16 @@ public class Engine implements EngineInterface {
     }
 
     public void reloadByDeath(){
-        lifes -= 1;
+        if(--lifes <= 0){
+            try {
+                Network.getInstance().saveScore(playerName.replace(' ', '_'), score);
+                System.out.println("Zapisano wynik");
+            } catch (Exception e){
+                System.out.println("Nie udało się zapisać wyniku.");
+                e.printStackTrace();
+            }
+            resetEngine();
+        }
         getRender().update();
         reloadMap();
     }
@@ -214,6 +225,14 @@ public class Engine implements EngineInterface {
         this.enemies.clear();
     }
 
+    public void resetEngine(){
+        this.level = 0;
+        this.score = 0;
+        this.lifes = 3;
+        this.startTime = new Date().getTime();
+        this.enemies.clear();
+        this.bullets.clear();
+    }
 
     public MapEntity getMap(){
         return getPhysics().getObstaclesPhysics().getMap();

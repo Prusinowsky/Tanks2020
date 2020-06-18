@@ -42,6 +42,7 @@ public class Config implements ConfigInterface {
             props.loadFromXML(getClass().getResourceAsStream("/config/app.xml"));
             props.loadFromXML(getClass().getResourceAsStream("/config/game.xml"));
             props.loadFromXML(getClass().getResourceAsStream("/config/lang.xml"));
+            props.loadFromXML(getClass().getResourceAsStream("/config/network.xml"));
 
         } catch (FileNotFoundException e) {
             System.out.println(e);

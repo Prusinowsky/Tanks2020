@@ -11,6 +11,7 @@ import app.entities.map.obstacles.IndestructibleObstacle;
 import app.entities.map.tanks.Enemy;
 import app.entities.map.tanks.Player;
 import app.entities.map.tiles.GroundTile;
+import app.network.Network;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -73,6 +74,14 @@ public class MapLoader implements MapLoaderInterface {
             map.name = mapName;
 
             Scanner scanner = new Scanner(getClass().getResourceAsStream(path));
+            if(Container.getInstance().provideOptions().isOnline)
+                try{
+                   String mapString = Network.getInstance().getMap(mapCode);
+                   System.out.println(mapString);
+                   scanner = new Scanner(mapString);
+                } catch (Exception e){
+                    System.out.println("Nie udało się załadować z serwera");
+                }
 
             map.numberOfLayers = Integer.parseInt(scanner.nextLine());
             map.width = Integer.parseInt(scanner.nextLine());

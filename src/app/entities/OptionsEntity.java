@@ -19,4 +19,10 @@ public class OptionsEntity {
      * Liczba żyć
      */
     public Integer life = 3;
+
+    /**
+     * Czy online
+     */
+    public Boolean isOnline = false;
+
 }

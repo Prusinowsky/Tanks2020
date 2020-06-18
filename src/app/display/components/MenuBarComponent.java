@@ -1,8 +1,10 @@
 package app.display.components;
 
+import app.Container;
 import app.config.ConfigInterface;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
@@ -14,7 +16,7 @@ public class MenuBarComponent extends JMenuBar {
 
     private JMenuBar jmenuBar;
     private JMenu menuFile, menuHelp;
-    private JMenuItem mStart, mMap, mScore, mExit, mAbout;
+    private JMenuItem mStart, mMode, mMap, mScore, mExit, mAbout;
 
     /**
      * Kontruktor domyslny
@@ -27,6 +29,7 @@ public class MenuBarComponent extends JMenuBar {
         jmenuBar = new JMenuBar();
         menuFile = new JMenu(config.getProperty("game"));
         mStart = new JMenuItem(config.getProperty("start"));
+        mMode = new JMenuItem("Online");
         mMap = new JMenuItem(config.getProperty("choose_map"));
         mScore = new JMenuItem(config.getProperty("best_scores"));
         mExit = new JMenuItem(config.getProperty("exit"));
@@ -34,6 +37,7 @@ public class MenuBarComponent extends JMenuBar {
         jmenuBar.add(menuFile);
         jmenuBar.add(Box.createHorizontalGlue());
         menuFile.add(mStart);
+        menuFile.add(mMode);
         menuFile.add(mMap);
         menuFile.add(mScore);
         menuFile.add(mExit);
@@ -48,6 +52,10 @@ public class MenuBarComponent extends JMenuBar {
 
     public void addStartActionListener(ActionListener action){
         mStart.addActionListener(action);
+    }
+
+    public void addModeActionListener(ActionListener action){
+        mMode.addActionListener(action);
     }
 
     public void addMapChooseActionListener(ActionListener action){

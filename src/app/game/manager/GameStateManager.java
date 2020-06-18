@@ -57,6 +57,10 @@ public class GameStateManager implements GameStateManagerInterface {
                 changeStateTo("running-game");
             });
         });
+        game.addMenuModeActionListener(e -> {
+            Container.getInstance().provideOptions().isOnline = !Container.getInstance().provideOptions().isOnline;
+            ((JMenuItem)e.getSource()).setText(Container.getInstance().provideOptions().isOnline ? "Offline" : "Online");
+        });
         game.addMenuMapChooseActionListener(e -> {
             ChooseMapWindow map = new ChooseMapWindow();
             map.addChooseMapActionListener(event -> {

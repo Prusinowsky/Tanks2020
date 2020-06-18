@@ -43,6 +43,10 @@ public class GameWindow extends AbstractWindow
         menuBar.addStartActionListener(action);
     }
 
+    public void addMenuModeActionListener(ActionListener action){
+        menuBar.addModeActionListener(action);
+    }
+
     public void addMenuMapChooseActionListener(ActionListener action){
         menuBar.addMapChooseActionListener(action);
     }
